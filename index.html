@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>RoutingLab | Login Prototype</title>
+    <link rel="icon" href="assets/logo.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+    <main class="login-page">
+        <section class="login-visual">
+            <div><span class="badge">Prototype UTS Teknologi Pembelajaran</span>
+                <h1>RoutingLab</h1>
+                <p>Media pembelajaran web interaktif untuk memahami routing statis melalui materi, visualisasi alur
+                    paket, mini lab, troubleshooting, dan evaluasi.</p>
+                <div class="login-points">
+                    <div>✓ Materi routing statis bertahap</div>
+                    <div>✓ Visualisasi paket antardua LAN</div>
+                    <div>✓ Mini Lab dan Troubleshooting Challenge</div>
+                    <div>✓ Progress belajar tersimpan lokal</div>
+                </div>
+            </div>
+        </section>
+        <section class="login-form-wrap">
+            <div class="login-card">
+                <h2>Masuk ke RoutingLab</h2>
+                <p>Gunakan akun demo untuk mencoba alur prototype.</p>
+                <form id="loginForm">
+                    <div class="form-group"><label for="username">Username</label><input id="username"
+                            autocomplete="username" placeholder="siswa01 / guru01" required></div>
+                    <div class="form-group"><label for="password">Password</label><input id="password" type="password"
+                            autocomplete="current-password" placeholder="123456" required></div><button
+                        class="btn btn-primary" style="width:100%" type="submit">Login</button>
+                </form>
+                <div id="loginMessage" class="alert mt-2">Autentikasi prototype disimulasikan di sisi front-end.</div>
+                <div class="demo-box"><strong>Akun demo</strong><br>Siswa: <span class="code-chip">siswa01</span> /
+                    <span class="code-chip">123456</span><br>Guru/Admin: <span class="code-chip">guru01</span> / <span
+                        class="code-chip">123456</span>
+                    <div class="hero-actions"><button type="button" class="btn btn-outline" data-demo="siswa">Isi akun
+                            siswa</button><button type="button" class="btn btn-outline" data-demo="guru">Isi akun
+                            guru</button></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="js/auth.js"></script>
+    <script src="js/login.js"></script>
+</body>
+
+</html>

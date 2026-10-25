@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Progress Belajar | RoutingLab</title>
+    <link rel="icon" href="assets/logo.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+    <div class="shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-mark">RL</div>
+                <div>
+                    <h1>RoutingLab</h1><small>Prototype UTS</small>
+                </div>
+            </div>
+            <nav class="nav"><a href="dashboard-siswa.html">Dashboard</a><a href="materi.html">Materi</a><a
+                    href="visualisasi.html">Visualisasi</a><a href="mini-lab.html">Mini Lab</a><a
+                    href="troubleshooting.html">Troubleshooting</a><a href="evaluasi.html">Evaluasi</a><a
+                    href="progress.html">Progress</a><a href="tentang.html">Tentang</a></nav>
+            <div class="sidebar-footer">
+                <div class="user-chip"><strong data-user-name></strong><br><span data-user-role></span> · <span
+                        data-class-code></span></div><button class="btn btn-light" data-logout>Logout</button>
+            </div>
+        </aside>
+        <main class="main">
+            <header class="topbar">
+                <div>
+                    <h2>Progress Belajar</h2>
+                    <div class="meta">Rekap penyelesaian aktivitas pada browser ini</div>
+                </div><span class="badge">Frontend Prototype</span>
+            </header>
+            <div class="content">
+                <div class="grid grid-2">
+                    <div class="card stat"><span class="label">Progress keseluruhan</span><span id="totalProgress"
+                            class="value">0%</span>
+                        <p>Rata-rata dari lima aktivitas utama.</p>
+                    </div>
+                    <div class="card stat"><span class="label">Skor evaluasi terbaik</span><span id="bestScore"
+                            class="value">0/100</span>
+                        <p>Nilai tertinggi dari percobaan kuis pada browser ini.</p>
+                    </div>
+                </div>
+                <div class="section-title">
+                    <h3>Detail Aktivitas</h3>
+                </div>
+                <div class="card table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Aktivitas</th>
+                                <th>Progress</th>
+                                <th>Visual</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="progressRows"></tbody>
+                    </table>
+                </div>
+                <div class="hero-actions"><button id="resetProgress" type="button" class="btn btn-danger">Reset Progress
+                        Prototype</button></div>
+                <div class="footer-note">RoutingLab · Prototype UTS Teknologi Pembelajaran · Fatih Nur Faiq</div>
+            </div>
+        </main>
+    </div>
+    <script src="js/auth.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/progress.js"></script>
+</body>
+
+</html>

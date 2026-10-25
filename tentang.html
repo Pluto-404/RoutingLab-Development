@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Tentang Prototype | RoutingLab</title>
+    <link rel="icon" href="assets/logo.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+    <div class="shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-mark">RL</div>
+                <div>
+                    <h1>RoutingLab</h1><small>Prototype UTS</small>
+                </div>
+            </div>
+            <nav class="nav"><a href="dashboard-siswa.html">Dashboard</a><a href="materi.html">Materi</a><a
+                    href="visualisasi.html">Visualisasi</a><a href="mini-lab.html">Mini Lab</a><a
+                    href="troubleshooting.html">Troubleshooting</a><a href="evaluasi.html">Evaluasi</a><a
+                    href="progress.html">Progress</a><a href="tentang.html">Tentang</a></nav>
+            <div class="sidebar-footer">
+                <div class="user-chip"><strong data-user-name></strong><br><span data-user-role></span> · <span
+                        data-class-code></span></div><button class="btn btn-light" data-logout>Logout</button>
+            </div>
+        </aside>
+        <main class="main">
+            <header class="topbar">
+                <div>
+                    <h2>Tentang Prototype</h2>
+                    <div class="meta">Batasan prototype dan arah pengembangan</div>
+                </div><span class="badge">Frontend Prototype</span>
+            </header>
+            <div class="content">
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3>Tujuan Prototype</h3>
+                        <p>Prototype ini mendemonstrasikan alur utama RoutingLab: login demo, dashboard, materi,
+                            visualisasi, mini lab, troubleshooting, evaluasi, progress, dan monitoring guru.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Batasan</h3>
+                        <p>Autentikasi bukan autentikasi server. Password tersimpan di JavaScript dan hanya digunakan
+                            untuk demonstrasi. Progress memakai localStorage pada browser yang sama.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Versi Produksi</h3>
+                        <p>Rencana produksi menggunakan Node.js + Express, TiDB Cloud untuk basis data, Cloudinary untuk
+                            media, Render untuk hosting aplikasi, dan domain khusus.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Posisi Cisco Packet Tracer</h3>
+                        <p>RoutingLab tidak menggantikan Cisco Packet Tracer. Media ini menjadi pendamping untuk
+                            memahami konsep, latihan logika routing, dan troubleshooting sebelum praktik simulator
+                            sebenarnya.</p>
+                    </div>
+                </div>
+                <div class="alert warning mt-2"><strong>Catatan keamanan:</strong> Jangan gunakan akun/password
+                    sungguhan pada prototype statis GitHub Pages.</div>
+                <div class="footer-note">RoutingLab · Prototype UTS Teknologi Pembelajaran · Fatih Nur Faiq</div>
+            </div>
+        </main>
+    </div>
+    <script src="js/auth.js"></script>
+    <script src="js/common.js"></script>
+    <script>initCommon("siswa")</script>
+</body>
+
+</html>

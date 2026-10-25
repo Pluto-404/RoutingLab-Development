@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Visualisasi Routing | RoutingLab</title>
+    <link rel="icon" href="assets/logo.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+    <div class="shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-mark">RL</div>
+                <div>
+                    <h1>RoutingLab</h1><small>Prototype UTS</small>
+                </div>
+            </div>
+            <nav class="nav"><a href="dashboard-siswa.html">Dashboard</a><a href="materi.html">Materi</a><a
+                    href="visualisasi.html">Visualisasi</a><a href="mini-lab.html">Mini Lab</a><a
+                    href="troubleshooting.html">Troubleshooting</a><a href="evaluasi.html">Evaluasi</a><a
+                    href="progress.html">Progress</a><a href="tentang.html">Tentang</a></nav>
+            <div class="sidebar-footer">
+                <div class="user-chip"><strong data-user-name></strong><br><span data-user-role></span> · <span
+                        data-class-code></span></div><button class="btn btn-light" data-logout>Logout</button>
+            </div>
+        </aside>
+        <main class="main">
+            <header class="topbar">
+                <div>
+                    <h2>Visualisasi Routing</h2>
+                    <div class="meta">Simulasi sederhana perjalanan paket</div>
+                </div><span class="badge">Frontend Prototype</span>
+            </header>
+            <div class="content">
+                <div class="card">
+                    <h3>PC0 mengirim paket ke PC1</h3>
+                    <p>Klik tombol untuk melihat paket bergerak melewati dua router.</p>
+                    <div class="topology mt-2">
+                        <div class="link"></div>
+                        <div id="packet" class="packet" title="Paket data"></div>
+                        <div class="node">
+                            <div class="node-icon">🖥️</div><strong>PC0</strong><small>192.168.1.10</small>
+                        </div>
+                        <div class="node">
+                            <div class="node-icon">🔀</div><strong>Switch0</strong><small>LAN 1</small>
+                        </div>
+                        <div class="node">
+                            <div class="node-icon">📡</div><strong>R1</strong><small>cek route</small>
+                        </div>
+                        <div class="node">
+                            <div class="node-icon">📡</div><strong>R2</strong><small>cek route</small>
+                        </div>
+                        <div class="node">
+                            <div class="node-icon">🔀</div><strong>Switch1</strong><small>LAN 2</small>
+                        </div>
+                        <div class="node">
+                            <div class="node-icon">🖥️</div><strong>PC1</strong><small>192.168.2.10</small>
+                        </div>
+                    </div>
+                    <div class="hero-actions"><button id="sendPacket" class="btn btn-primary" type="button">Kirim
+                            Paket</button><a class="btn btn-outline" href="mini-lab.html">Lanjut Mini Lab</a></div>
+                    <div id="packetStatus" class="alert mt-2">Paket belum dikirim.</div>
+                </div>
+                <div class="section-title">
+                    <h3>Apa yang terjadi?</h3>
+                </div>
+                <div class="grid grid-3">
+                    <div class="card">
+                        <h3>R1</h3>
+                        <p>R1 melihat bahwa 192.168.2.10 bukan jaringan lokal. R1 membutuhkan route menuju
+                            192.168.2.0/24.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Next Hop</h3>
+                        <p>Rute pada R1 mengarahkan paket ke 10.10.10.2, yaitu interface R2 pada jaringan antarrouter.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3>R2</h3>
+                        <p>R2 mengetahui 192.168.2.0/24 terhubung langsung sehingga paket diteruskan menuju PC1.</p>
+                    </div>
+                </div>
+                <div class="footer-note">RoutingLab · Prototype UTS Teknologi Pembelajaran · Fatih Nur Faiq</div>
+            </div>
+        </main>
+    </div>
+    <script src="js/auth.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/visualisasi.js"></script>
+</body>
+
+</html>

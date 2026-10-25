@@ -1,0 +1,7 @@
+Kalimat yang disarankan untuk Bagian 5.4:
+
+"Pada tahap prototipe awal, autentikasi role dan penyimpanan progress disimulasikan pada sisi klien menggunakan JavaScript dan localStorage. Prototipe diterbitkan sebagai situs statis melalui GitHub Pages agar dapat diakses penilai melalui URL publik. Implementasi autentikasi sebenarnya, manajemen kelas multi-guru, penyimpanan progress terpusat, dan dashboard monitoring berbasis basis data direncanakan pada tahap produksi menggunakan Node.js/Express dan TiDB Cloud."
+
+Akun demo:
+Siswa      : siswa01 / 123456
+Guru/Admin : guru01 / 123456
