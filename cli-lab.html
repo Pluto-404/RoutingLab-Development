@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>CLI Lab — RoutingLab</title>
+    <link rel="stylesheet" href="css/cli-lab.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div>
+        <a href="dashboard-siswa.html" class="back">← Dashboard</a
+        ><strong> RoutingLab / Interactive CLI Lab</strong>
+      </div>
+      <span class="tag">Sprint 2 • Standalone</span>
+    </header>
+    <main>
+      <section class="left">
+        <div class="panel">
+          <div class="eyebrow">MISI 01 · GUIDED CLI LAB</div>
+          <h1>Hubungkan Dua Jaringan</h1>
+          <p>
+            Konfigurasi static route pada R1 dan R2 hingga PC0 bisa
+            berkomunikasi dengan PC1. Periksa status interface dan tabel routing
+            sebelum menguji koneksi.
+          </p>
+          <div class="steps">
+            <div>
+              ① Periksa interface menggunakan
+              <code>show ip interface brief</code>
+            </div>
+            <div>
+              ② Pada R1 tambahkan route menuju <code>192.168.2.0/24</code>
+            </div>
+            <div>
+              ③ Pada R2 tambahkan route balik menuju <code>192.168.1.0/24</code>
+            </div>
+            <div>④ Uji <code>ping 192.168.2.10</code> melalui R1</div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="heading">
+            <h2>Topologi Interaktif</h2>
+            <small>Klik router untuk berpindah console</small>
+          </div>
+          <svg
+            viewBox="0 0 690 205"
+            role="img"
+            aria-label="Topologi PC0 Switch0 R1 R2 Switch1 PC1"
+          >
+            <path d="M62 91H629" stroke="#87a9c9" stroke-width="4" />
+            <g class="node">
+              <rect x="18" y="67" width="84" height="48" rx="10" />
+              <text x="60" y="97">PC0</text>
+            </g>
+            <g class="node">
+              <rect x="120" y="67" width="84" height="48" rx="10" />
+              <text x="162" y="97">SW0</text>
+            </g>
+            <g
+              id="svgR1"
+              class="node router selected"
+              tabindex="0"
+              role="button"
+              aria-label="Pilih router R1"
+            >
+              <rect x="225" y="58" width="84" height="66" rx="12" />
+              <text x="267" y="96">R1</text>
+            </g>
+            <g
+              id="svgR2"
+              class="node router"
+              tabindex="0"
+              role="button"
+              aria-label="Pilih router R2"
+            >
+              <rect x="381" y="58" width="84" height="66" rx="12" />
+              <text x="423" y="96">R2</text>
+            </g>
+            <g class="node">
+              <rect x="486" y="67" width="84" height="48" rx="10" />
+              <text x="528" y="97">SW1</text>
+            </g>
+            <g class="node">
+              <rect x="590" y="67" width="84" height="48" rx="10" />
+              <text x="632" y="97">PC1</text>
+            </g>
+            <g class="sub">
+              <text x="65" y="155">192.168.1.0/24</text>
+              <text x="345" y="29" text-anchor="middle">10.10.10.0/30</text>
+              <text x="624" y="155" text-anchor="end">192.168.2.0/24</text>
+              <text x="267" y="151">.1</text>
+              <text x="423" y="151">.2</text>
+            </g>
+          </svg>
+          <div class="network" id="networkState" aria-live="polite">
+            Koneksi belum diuji
+          </div>
+        </div>
+        <div class="panel">
+          <h2>Petunjuk Alamat</h2>
+          <table>
+            <tr>
+              <th>Perangkat</th>
+              <th>Interface</th>
+              <th>IPv4</th>
+            </tr>
+            <tr>
+              <td>R1</td>
+              <td>g0/0 · LAN1</td>
+              <td>192.168.1.1/24</td>
+            </tr>
+            <tr>
+              <td>R1</td>
+              <td>g0/1 · WAN</td>
+              <td>10.10.10.1/30</td>
+            </tr>
+            <tr>
+              <td>R2</td>
+              <td>g0/0 · WAN</td>
+              <td>10.10.10.2/30</td>
+            </tr>
+            <tr>
+              <td>R2</td>
+              <td>g0/1 · LAN2</td>
+              <td>192.168.2.1/24</td>
+            </tr>
+          </table>
+          <button id="checkMission">Periksa Misi</button
+          ><button class="secondary" id="resetLab">Reset Lab</button>
+          <p id="feedback" aria-live="polite">Belum ada penilaian.</p>
+        </div>
+      </section>
+      <section class="right">
+        <div class="terminal">
+          <div class="termhead">
+            <div><span class="dot"></span><strong>CLI Console</strong></div>
+            <div class="switch">
+              <button id="selectR1" class="active">R1</button
+              ><button id="selectR2">R2</button>
+            </div>
+          </div>
+          <div id="output" class="output" role="log" aria-live="polite"></div>
+          <form id="commandForm" class="promptline" autocomplete="off">
+            <label for="command" id="prompt">R1&gt;</label
+            ><input
+              id="command"
+              name="command"
+              aria-label="Perintah Cisco IOS simulasi"
+              spellcheck="false"
+              autocapitalize="off"
+              autocomplete="off"
+              placeholder="ketik perintah, lalu Enter"
+            /><button type="submit">Enter</button>
+          </form>
+        </div>
+        <div class="hint">
+          <strong>Contoh konfigurasi</strong>
+          <pre>
+R1&gt; enable
+R1# configure terminal
+R1(config)# ip route 192.168.2.0 255.255.255.0 10.10.10.2
+R1(config)# end
+R1# show ip route</pre
+          >
+          <p>
+            Pada R2 gunakan network <code>192.168.1.0</code> dengan next hop
+            <code>10.10.10.1</code>. Ketik <code>?</code> untuk bantuan. Tidak
+            semua perintah Cisco didukung.
+          </p>
+        </div>
+      </section>
+    </main>
+    <footer>
+      RoutingLab · simulator edukatif terbatas, bukan emulator Cisco IOS · Data
+      belum tersimpan ke Supabase.
+    </footer>
+    <script src="js/cli-engine.js"></script>
+    <script src="js/cli-lab.js"></script>
+  </body>
+</html>
