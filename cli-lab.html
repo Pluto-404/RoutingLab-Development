@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>CLI Lab — RoutingLab</title>
-    <link rel="stylesheet" href="css/cli-lab.css" /><link rel="stylesheet" href="css/cli-sprint4a.css" />
+    <link rel="stylesheet" href="css/cli-lab.css" /><link rel="stylesheet" href="css/cli-sprint4a.css" /><link rel="stylesheet" href="css/cli-sprint4b.css" />
   </head>
   <body>
     <header class="top">
@@ -114,7 +114,21 @@
           <div class="network" id="networkState" aria-live="polite">
             Koneksi belum diuji
           </div>
-          <div class="statusgrid" aria-label="Status konektivitas">
+          <section class="s4b-tools" aria-label="Simulasi paket dan skenario">
+              <label for="scenarioSelect"><strong>Skenario praktikum</strong></label>
+              <select id="scenarioSelect">
+                <option value="empty">Mulai dari route kosong</option>
+                <option value="missing-return">Gangguan: route balik hilang</option>
+                <option value="wan-down">Gangguan: WAN shutdown</option>
+                <option value="wrong-next-hop">Gangguan: next hop salah</option>
+              </select>
+              <button type="button" id="loadScenario" class="secondary">Muat skenario</button>
+              <button type="button" id="sendPacket">Kirim Paket PC0 → PC1</button>
+              <button type="button" id="sendReverse" class="secondary">Kirim Balik PC1 → PC0</button>
+              <div id="packetTrack" class="packet-track" aria-label="Jalur paket" aria-live="polite"></div>
+              <p id="packetDiagnosis" class="packet-diagnosis" aria-live="polite">Gunakan tombol Kirim Paket untuk melacak perjalanan paket.</p>
+            </section>
+            <div class="statusgrid" aria-label="Status konektivitas">
             <div id="statusWAN">
               <span class="statusdot"></span>Link antarrouter
             </div>

@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict');const {create}=require('../js/cli-engine.js');
+const lab=create();let t=lab.trace('PC0','192.168.2.10');assert.equal(t.ok,false);assert.match(t.reason,/tidak ada route/);
+lab.run('enable');lab.run('conf t');lab.run('ip route 192.168.2.0 255.255.255.0 10.10.10.2');
+assert.equal(lab.trace('PC0','192.168.2.10').ok,true);assert.equal(lab.reachable().ok,false);
+lab.select('R2');lab.run('enable');lab.run('conf t');lab.run('ip route 192.168.1.0 255.255.255.0 10.10.10.1');assert.equal(lab.reachable().ok,true);
+assert.deepEqual(lab.trace('PC0','192.168.2.10').path,['PC0','SW0','R1','R2','SW1','PC1']);
+lab.preset('wan-down');assert.equal(lab.reachable().ok,false);assert.match(lab.trace('PC0','192.168.2.10').reason,/next hop|tetangga/);
+lab.preset('wrong-next-hop');assert.equal(lab.reachable().ok,false);assert.match(lab.trace('PC0','192.168.2.10').reason,/next hop/);
+lab.preset('missing-return');assert.equal(lab.trace('PC0','192.168.2.10').ok,true);assert.equal(lab.trace('PC1','192.168.1.10').ok,false);
+lab.preset('empty');assert.equal(lab.reachable().ok,false);
+console.log('PASS Sprint 4B: path, forward/reverse, missing route, WAN-down, wrong next-hop, reset');

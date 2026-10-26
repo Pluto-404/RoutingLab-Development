@@ -117,40 +117,75 @@
         mode = "user";
         iface = null;
       },
-      reachable() {
-        const r1 = state.R1,
-          r2 = state.R2;
-        const a = r1.interfaces["g0/0"],
-          b = r1.interfaces["g0/1"],
-          c = r2.interfaces["g0/0"],
-          d = r2.interfaces["g0/1"];
-        const links =
-          a.up &&
-          b.up &&
-          c.up &&
-          d.up &&
-          contains(a.ip, "192.168.1.0", "255.255.255.0") &&
-          contains(d.ip, "192.168.2.0", "255.255.255.0") &&
-          contains(b.ip, c.ip, c.mask) &&
-          contains(c.ip, b.ip, b.mask);
-        const fwd = r1.routes.some(
-          (r) =>
-            r.net === "192.168.2.0" &&
-            r.mask === "255.255.255.0" &&
-            r.hop === c.ip,
-        );
-        const back = r2.routes.some(
-          (r) =>
-            r.net === "192.168.1.0" &&
-            r.mask === "255.255.255.0" &&
-            r.hop === b.ip,
-        );
-        return {
-          ok: !!(links && fwd && back),
-          links: !!links,
-          forward: fwd,
-          returnRoute: back,
+      // Deterministic, pedagogical forwarding model for the fixed PC0-R1-R2-PC1 topology.
+      // Does not implement ARP, dynamic routing, or an actual IOS data plane.
+      trace(source = "PC0", target = "192.168.2.10") {
+        const hosts = {
+          PC0: { ip: "192.168.1.10", mask: "255.255.255.0", gateway: "192.168.1.1", router: "R1", lan: "LAN1" },
+          PC1: { ip: "192.168.2.10", mask: "255.255.255.0", gateway: "192.168.2.1", router: "R2", lan: "LAN2" }
         };
+        const src = hosts[source];
+        if (!src || !isIPv4(target)) return { ok:false, path:[], reason:"Sumber atau alamat tujuan tidak valid." };
+        const destination = Object.entries(hosts).find(([, h]) => h.ip === target);
+        if (!destination) return { ok:false, path:[source], reason:"Alamat tujuan di luar skenario pembelajaran." };
+        const [destName, dst] = destination;
+        const path = [source];
+        if (source === destName) return { ok:true, path, reason:"Alamat lokal." };
+        const routerInLan = (routerId, lan) => Object.entries(state[routerId].interfaces).find(([,v]) => v.link === lan);
+        const srcIface = routerInLan(src.router, src.lan);
+        if (!srcIface || !srcIface[1].up || srcIface[1].ip !== src.gateway || !contains(src.ip,srcIface[1].ip,src.mask))
+          return {ok:false,path,reason:"Gateway LAN asal tidak tersedia atau interface shutdown."};
+        path.push(source === "PC0" ? "SW0" : "SW1",src.router);
+        let current = src.router;
+        const visited = new Set();
+        for(let ttl=0;ttl<5;ttl++){
+          if(visited.has(current))return {ok:false,path,reason:"Routing loop terdeteksi."};
+          visited.add(current);
+          const r=state[current];
+          const directly = Object.entries(r.interfaces).find(([,v])=>v.up && v.ip && validMask(v.mask) && contains(target,v.ip,v.mask));
+          if(directly && current===dst.router && directly[1].link===dst.lan){
+            path.push(destName === "PC0" ? "SW0" : "SW1",destName);
+            return {ok:true,path,reason:"Paket mencapai host tujuan."};
+          }
+          const routes = [];
+          for(const [name,v] of Object.entries(r.interfaces)){
+            if(v.up && v.ip && validMask(v.mask) && contains(target,v.ip,v.mask)) routes.push({type:"connected",len:prefix(v.mask),out:name});
+          }
+          for(const route of r.routes){
+            if(contains(target,route.net,route.mask)) routes.push({type:"static",len:prefix(route.mask),hop:route.hop});
+          }
+          routes.sort((x,y)=>y.len-x.len || (x.type==="connected"?-1:1));
+          const choice=routes[0];
+          if(!choice) return {ok:false,path,reason:`${current}: tidak ada route menuju ${target}.`};
+          if(choice.type==="connected") return {ok:false,path,reason:`${current}: alamat tujuan tidak tersedia pada link terhubung.`};
+          const outgoing=Object.entries(r.interfaces).find(([,v])=>v.up && v.ip && validMask(v.mask) && contains(choice.hop,v.ip,v.mask));
+          if(!outgoing) return {ok:false,path,reason:`${current}: next hop ${choice.hop} tidak dapat dijangkau melalui interface aktif.`};
+          const [outName,outIf]=outgoing;
+          const peerId=current==="R1"?"R2":"R1";
+          const peer=Object.entries(state[peerId].interfaces).find(([,v])=>v.link===outIf.link && v.up && v.ip===choice.hop && contains(v.ip,outIf.ip,outIf.mask) && contains(outIf.ip,v.ip,v.mask));
+          if(!peer) return {ok:false,path,reason:`${current}: tidak ada tetangga aktif dengan alamat next hop ${choice.hop}.`};
+          path.push(peerId);
+          current=peerId;
+        }
+        return {ok:false,path,reason:"TTL habis."};
+      },
+      reachable() {
+        const forward=this.trace("PC0","192.168.2.10");
+        const reverse=this.trace("PC1","192.168.1.10");
+        const a=state.R1.interfaces["g0/1"],b=state.R2.interfaces["g0/0"];
+        const links=!!(a.up && b.up && a.ip && b.ip && contains(a.ip,b.ip,b.mask) && contains(b.ip,a.ip,a.mask));
+        return {ok:forward.ok && reverse.ok,links,forward:forward.ok,returnRoute:reverse.ok,forwardTrace:forward,returnTrace:reverse};
+      },
+      preset(kind) {
+        this.reset();
+        if(kind === "missing-return" || kind === "wan-down" || kind === "wrong-next-hop"){
+          state.R1.routes.push({net:"192.168.2.0",mask:"255.255.255.0",hop:"10.10.10.2"});
+          state.R2.routes.push({net:"192.168.1.0",mask:"255.255.255.0",hop:"10.10.10.1"});
+          if(kind === "missing-return")state.R2.routes=[];
+          if(kind === "wan-down")state.R1.interfaces["g0/1"].up=false;
+          if(kind === "wrong-next-hop")state.R1.routes[0].hop="10.10.10.6";
+        }
+        return this.reachable();
       },
       run(raw) {
         const input = String(raw || "").trim();

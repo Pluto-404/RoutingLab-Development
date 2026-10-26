@@ -147,6 +147,31 @@
     renderStatus();
     write("Lab direset. Klik R1 atau R2 lalu ketik enable.", "system");
   });
+  const track=document.getElementById("packetTrack"),diagnosis=document.getElementById("packetDiagnosis");
+  function showTrace(source,target){
+    const result=app.trace(source,target);
+    track.textContent="";
+    result.path.forEach((name,index)=>{
+      const item=document.createElement("span");item.className="packet-node";item.textContent=name;
+      item.style.animationDelay=`${index*0.3}s`;track.appendChild(item);
+      if(index<result.path.length-1){const arrow=document.createElement("span");arrow.textContent="→";arrow.className="packet-arrow";track.appendChild(arrow);}
+    });
+    diagnosis.textContent=(result.ok?"✓ Paket sampai. ":"✕ Paket berhenti. ")+result.reason;
+    diagnosis.className="packet-diagnosis "+(result.ok?"packet-ok":"packet-fail");
+    return result;
+  }
+  document.getElementById("sendPacket").addEventListener("click",()=>showTrace("PC0","192.168.2.10"));
+  document.getElementById("sendReverse").addEventListener("click",()=>showTrace("PC1","192.168.1.10"));
+  document.getElementById("loadScenario").addEventListener("click",()=>{
+    const kind=document.getElementById("scenarioSelect").value;
+    if(!confirm("Memuat skenario akan mereset konfigurasi lab. Lanjutkan?"))return;
+    app.preset(kind);out.textContent="";track.textContent="";
+    diagnosis.textContent="Skenario siap. Periksa interface, routing table, lalu uji paket.";
+    diagnosis.className="packet-diagnosis";
+    document.getElementById("feedback").textContent="Skenario baru dimuat. Silakan lakukan diagnosis.";
+    document.getElementById("feedback").className="";
+    sync();renderStatus();write("Skenario dimuat: "+kind,"system");
+  });
   sync();
   renderStatus();
   applyViewport();
