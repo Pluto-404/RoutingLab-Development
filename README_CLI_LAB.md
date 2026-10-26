@@ -1,27 +1,28 @@
-# RoutingLab UAS — CLI Lab Foundation v0.1
+# RoutingLab Sprint 3 — Responsive CLI Lab
 
-## Memasang
-1. Commit cadangan proyek lokal Anda.
-2. Ekstrak isi ZIP **langsung ke dalam** folder `RoutingLab-Development/` (jangan membuat subfolder tambahan).
-3. Buka `cli-lab.html` melalui VS Code Live Server. Jangan membuka file secara langsung jika browser memblokir sumber lokal.
-4. Dari R1: `enable` → `configure terminal` → `ip route 192.168.2.0 255.255.255.0 10.10.10.2` → `end`.
-5. Pilih R2, lalu `enable` → `configure terminal` → `ip route 192.168.1.0 255.255.255.0 10.10.10.1` → `end`.
-6. Uji `ping 192.168.1.10` di R2 atau `ping 192.168.2.10` di R1, kemudian klik **Periksa Misi**.
+## Instalasi (langsung replace)
+1. Simpan versi sebelumnya dengan `git add . && git commit -m "backup before sprint3"` (jika ada perubahan).
+2. Ekstrak seluruh isi ZIP **langsung ke folder root** `RoutingLab-Development`. ZIP tidak memiliki folder pembungkus.
+3. Setujui penggantian hanya untuk `cli-lab.html`, `css/cli-lab.css`, `js/cli-lab.js`, dan `js/cli-engine.js`.
+4. Buka `cli-lab.html` menggunakan Live Server, lalu reload dengan Ctrl+Shift+R.
 
-## File ditambahkan (file lama tidak diubah)
-- `cli-lab.html`
-- `css/cli-lab.css`
-- `js/cli-engine.js`
-- `js/cli-lab.js`
-- `tests/cli-engine.test.js`
+## Yang baru
+- Responsif laptop (dua kolom fleksibel) / tablet / mobile (tab Topologi & Misi ↔ Terminal CLI).
+- Klik R1/R2 dari topologi langsung pindah ke tab Terminal pada mobile.
+- Status WAN, route pergi, dan route balik terbarui setelah perintah.
+- Pemeriksaan konektivitas juga memerlukan IP antarmuka LAN yang sesuai skenario.
+- Fokus keyboard dan aksesibilitas diperbaiki; terminal masih simulator edukatif terbatas.
 
-## Pengujian opsional
-`node tests/cli-engine.test.js`
+## Uji
+- Desktop: lebar 1366px/1920px; tablet: 768px; mobile: 390px/320px.
+- Di R1: `enable` → `conf t` → `ip route 192.168.2.0 255.255.255.0 10.10.10.2` → `end`.
+- Klik R2: `enable` → `conf t` → `ip route 192.168.1.0 255.255.255.0 10.10.10.1` → `end`.
+- Periksa Misi harus sukses, ubah `shutdown` pada interface maka status WAN menjadi gagal.
+- Unit test: `node tests/cli-engine.test.js`.
 
-## Batasan penting
-- Tidak ada integrasi login, Supabase atau nilai resmi pada paket ini.
-- Engine hanya menjalankan subset perintah Cisco dan satu skenario dua-router.
-- Topologi terbatas, belum emulasi ARP/L2, IPv4 routing dinamis, packet timing, dan Cisco IOS sepenuhnya.
-- `ping` hanya dinilai untuk tujuan PC jarak jauh yang disebut dalam skenario. Jangan menganggap setiap alamat ping didukung.
-- Router state tersimpan di memori browser selama halaman aktif; reload mengembalikan konfigurasi ke awal.
-- Tombol dashboard mengarah ke `dashboard-siswa.html`, sesuai struktur proyek terdahulu.
+## Menu sidebar situs lama
+**Belum diubah**, karena versi file dashboard/sidebar terbaru belum tersedia dalam paket yang telah diunggah.
+Masukkan tautan `<a href="cli-lab.html">CLI Lab</a>` ke sidebar yang benar setelah mengecek kode repo aktual. File lama sengaja tidak ditimpa agar tidak merusak navigasi.
+
+## Belum tersedia
+- Database Supabase, autentikasi, penyimpanan nilai, multiple challenge, validasi server.
