@@ -5,7 +5,7 @@ const items = [
   ["Visualisasi", p.visualisasi],
   ["Mini Lab", p.miniLab],
   ["Troubleshooting", p.troubleshooting],
-  ["Evaluasi", p.evaluasi]
+  ["Evaluasi", p.evaluasi],
 ];
 
 const totalEl = document.getElementById("totalProgress");
@@ -31,7 +31,8 @@ if (tbody) {
     const statusCell = document.createElement("td");
     const status = document.createElement("span");
     status.className = value === 100 ? "badge success" : "badge warning";
-    status.textContent = value === 100 ? "Selesai" : value > 0 ? "Berlangsung" : "Belum";
+    status.textContent =
+      value === 100 ? "Selesai" : value > 0 ? "Berlangsung" : "Belum";
     statusCell.appendChild(status);
     tr.append(nameCell, percentage, barCell, statusCell);
     tbody.appendChild(tr);
@@ -41,7 +42,12 @@ if (tbody) {
 const resetBtn = document.getElementById("resetProgress");
 if (resetBtn) {
   resetBtn.addEventListener("click", () => {
-    if (!confirm("Hapus progress DEMO akun ini pada browser ini? Data akun demo lain tidak dihapus.")) return;
+    if (
+      !confirm(
+        "Hapus progress DEMO akun ini pada browser ini? Data akun demo lain tidak dihapus.",
+      )
+    )
+      return;
     localStorage.removeItem(getProgressStorageKey());
     location.reload();
   });

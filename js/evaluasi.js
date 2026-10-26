@@ -4,9 +4,15 @@ initCommon("siswa");
 const questions = [
   {
     q: "Perintah untuk melihat tabel routing pada Cisco IOS adalah...",
-    options: ["show vlan", "show ip route", "show interfaces trunk", "show mac address-table"],
+    options: [
+      "show vlan",
+      "show ip route",
+      "show interfaces trunk",
+      "show mac address-table",
+    ],
     a: 1,
-    reason: "show ip route menampilkan entri routing yang diketahui router, termasuk connected dan static route."
+    reason:
+      "show ip route menampilkan entri routing yang diketahui router, termasuk connected dan static route.",
   },
   {
     q: "R1 ingin mencapai jaringan 192.168.2.0/24 melalui next hop R2 10.10.10.2. Static route yang benar adalah...",
@@ -14,29 +20,43 @@ const questions = [
       "ip route 192.168.2.0 255.255.255.0 10.10.10.2",
       "ip route 10.10.10.2 255.255.255.0 192.168.2.0",
       "route add 192.168.2.0 via 10.10.10.2",
-      "ip default-gateway 10.10.10.2"
+      "ip default-gateway 10.10.10.2",
     ],
     a: 0,
-    reason: "Formatnya ip route <destination-network> <subnet-mask> <next-hop>. Next hop harus terjangkau dari router."
+    reason:
+      "Formatnya ip route <destination-network> <subnet-mask> <next-hop>. Next hop harus terjangkau dari router.",
   },
   {
     q: "PC dapat ping gateway lokal tetapi gagal ping host pada LAN lain. Pemeriksaan paling logis berikutnya adalah...",
-    options: ["Mengganti nama PC", "Memeriksa tabel routing dan route balik", "Menghapus subnet mask", "Mengganti kabel PC ke console"],
+    options: [
+      "Mengganti nama PC",
+      "Memeriksa tabel routing dan route balik",
+      "Menghapus subnet mask",
+      "Mengganti kabel PC ke console",
+    ],
     a: 1,
-    reason: "Ping gateway lokal menunjukkan koneksi lokal mungkin berfungsi. Jalur ke LAN jauh dan jalur balik perlu diperiksa, bersama konfigurasi host tujuan."
+    reason:
+      "Ping gateway lokal menunjukkan koneksi lokal mungkin berfungsi. Jalur ke LAN jauh dan jalur balik perlu diperiksa, bersama konfigurasi host tujuan.",
   },
   {
     q: "Kelebihan utama static routing pada jaringan kecil dan stabil adalah...",
-    options: ["Rute berubah otomatis", "Konfigurasi selalu tanpa administrator", "Sederhana dan overhead protokol rendah", "Tidak membutuhkan IP address"],
+    options: [
+      "Rute berubah otomatis",
+      "Konfigurasi selalu tanpa administrator",
+      "Sederhana dan overhead protokol rendah",
+      "Tidak membutuhkan IP address",
+    ],
     a: 2,
-    reason: "Static routing diatur manual sehingga cocok untuk topologi kecil/stabil dengan overhead routing protocol rendah; perubahan rute tidak otomatis."
+    reason:
+      "Static routing diatur manual sehingga cocok untuk topologi kecil/stabil dengan overhead routing protocol rendah; perubahan rute tidak otomatis.",
   },
   {
     q: "Jika interface router masih administratively down, tindakan konfigurasi yang tepat adalah...",
     options: ["reload", "no shutdown", "erase startup-config", "show vlan"],
     a: 1,
-    reason: "Perintah no shutdown pada mode konfigurasi interface mengaktifkan interface secara administratif. Status up/up tetap bergantung pada kondisi koneksi."
-  }
+    reason:
+      "Perintah no shutdown pada mode konfigurasi interface mengaktifkan interface secara administratif. Status up/up tetap bergantung pada kondisi koneksi.",
+  },
 ];
 
 const form = document.getElementById("quizForm");
@@ -44,7 +64,9 @@ const submitButton = document.getElementById("submitQuiz");
 const result = document.getElementById("quizResult");
 
 if (!form || !submitButton || !result) {
-  console.error("Elemen kuis tidak ditemukan. Diperlukan #quizForm, #submitQuiz, dan #quizResult.");
+  console.error(
+    "Elemen kuis tidak ditemukan. Diperlukan #quizForm, #submitQuiz, dan #quizResult.",
+  );
 } else {
   questions.forEach((item, idx) => {
     const wrap = document.createElement("fieldset");
@@ -71,8 +93,10 @@ if (!form || !submitButton || !result) {
 
   result.setAttribute("aria-live", "polite");
   submitButton.addEventListener("click", () => {
-    const choices = questions.map((_, idx) => document.querySelector(`input[name="q${idx}"]:checked`));
-    const unanswered = choices.findIndex(choice => !choice);
+    const choices = questions.map((_, idx) =>
+      document.querySelector(`input[name="q${idx}"]:checked`),
+    );
+    const unanswered = choices.findIndex((choice) => !choice);
     if (unanswered !== -1) {
       result.className = "alert warning";
       result.textContent = `Jawab semua soal terlebih dahulu. Nomor ${unanswered + 1} belum dijawab.`;
@@ -81,15 +105,19 @@ if (!form || !submitButton || !result) {
       return;
     }
 
-    const correct = choices.reduce((total, choice, index) => total + (Number(choice.value) === questions[index].a ? 1 : 0), 0);
-    const score = Math.round(correct / questions.length * 100);
+    const correct = choices.reduce(
+      (total, choice, index) =>
+        total + (Number(choice.value) === questions[index].a ? 1 : 0),
+      0,
+    );
+    const score = Math.round((correct / questions.length) * 100);
     const passed = score >= 80;
     const p = loadProgress();
     p.evaluationAttempts = (p.evaluationAttempts || 0) + 1;
     p.lastQuizScore = score;
     p.bestScore = Math.max(p.bestScore || 0, score);
     // 50% = attempted all questions but not yet mastered; 100% = reached threshold.
-    p.evaluasi = (passed || p.evaluationMastered) ? 100 : 50;
+    p.evaluasi = passed || p.evaluationMastered ? 100 : 50;
     p.evaluationMastered = p.evaluasi === 100;
     const saved = saveProgress(p);
 
