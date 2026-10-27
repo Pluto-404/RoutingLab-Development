@@ -1,0 +1,28 @@
+/* Sprint 7 | classroom reporting and activity history */
+.rl7-toolbar{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:14px 0 16px}
+.rl7-filter{display:flex;flex-direction:column;gap:6px;min-width:min(300px,100%)}
+.rl7-filter label{font-size:13px;font-weight:700;color:#34546a}
+.rl7-filter select{min-height:44px;width:100%;border:1px solid #cbdce9;border-radius:11px;background:white;padding:9px 12px;color:#17384c;font-size:14px}
+.rl7-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.rl7-actions button{min-height:42px}
+.rl7-actions button:disabled{opacity:.5;cursor:not-allowed}
+.rl7-status{margin:0 0 16px;color:#627a8c;font-size:12px;line-height:1.55}
+.rl7-error{color:#a72539!important}
+.rl7-meter{width:110px;max-width:100%;height:6px;background:#e5edf5;border-radius:100px;overflow:hidden;margin-top:7px}
+.rl7-meter span{display:block;height:100%;background:linear-gradient(90deg,#1477a0,#22a897);border-radius:100px}
+.rl7-empty{padding:24px 18px!important;color:#657e90;font-size:14px;text-align:center}
+.rl7-table{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.rl7-table table{min-width:800px;width:100%;border-collapse:collapse}
+.rl7-table th{white-space:nowrap}
+.rl7-table td{vertical-align:middle;min-width:80px}
+.rl7-note{border:1px solid #d8e7ef;background:#f7fbfe;border-radius:12px;padding:12px 15px;font-size:13px;color:#49697d;line-height:1.65}
+.rl7-activity-list{width:100%;min-width:540px}
+.rl7-activity-list td{font-size:13px}
+@media(max-width:650px){
+  .rl7-toolbar{align-items:stretch}
+  .rl7-filter{width:100%;min-width:0}
+  .rl7-actions{width:100%;display:grid;grid-template-columns:1fr 1fr}
+  .rl7-actions .btn{padding:11px 7px;text-align:center;font-size:12px}
+  .rl7-table{border-radius:12px}
+  .rl7-status{font-size:12px}
+}

@@ -8,7 +8,7 @@
     <link rel="icon" href="assets/logo.svg">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css"><link rel="stylesheet" href="css/sprint4a.css">
-<link rel="stylesheet" href="css/sprint6.css"></head>
+<link rel="stylesheet" href="css/sprint6.css"><link rel="stylesheet" href="css/sprint7.css"></head>
 
 <body data-required-role="guru" data-page-script="guru">
     <div class="shell">
@@ -37,34 +37,29 @@
                     <h2>Dashboard Guru/Admin</h2>
                     <p>Data kelas dan progres latihan berasal dari Supabase. Data progres merupakan aktivitas latihan siswa, bukan nilai ujian resmi.</p>
                 </section>
-                <div class="section-title">
-                    <h3>Ringkasan Kelas</h3>
+                <div class="section-title"><h3>Monitoring Kelas</h3><p>Hanya kelas yang kamu kelola</p></div>
+                <section class="card" aria-label="Filter laporan kelas">
+                    <div class="rl7-toolbar">
+                      <div class="rl7-filter"><label for="classFilter">Pilih kelas</label><select id="classFilter"><option value="">Memuat kelas…</option></select></div>
+                      <div class="rl7-actions"><button id="refreshClassReport" class="btn btn-outline" type="button">↻ Perbarui</button><button id="exportClassCsv" class="btn" type="button" disabled>↓ Ekspor CSV</button></div>
+                    </div>
+                    <p id="teacherReportStatus" class="rl7-status" role="status" aria-live="polite">Menghubungkan ke Supabase…</p>
+                    <div class="grid grid-3">
+                      <div class="card stat"><span class="label">Kelas dikelola</span><span id="classCount" class="value">—</span></div>
+                      <div class="card stat"><span class="label">Siswa terdaftar</span><span id="studentCount" class="value">—</span></div>
+                      <div class="card stat"><span class="label">Rata-rata progres</span><span id="avgProgress" class="value">—</span></div>
+                    </div>
+                    <p class="rl7-note" style="margin-top:14px">Progres dihitung dari lima aktivitas utama: materi, visualisasi, Mini Lab, troubleshooting, dan evaluasi. CLI Lab dipantau terpisah. Nilai latihan belum diverifikasi oleh server sebagai nilai ujian resmi.</p>
+                </section>
+                <div class="section-title"><h3>Progres Setiap Siswa</h3><p>Berdasarkan kelas yang dipilih</p></div>
+                <div class="card table-wrap rl7-table">
+                  <table><thead><tr><th>Siswa</th><th>Kelas</th><th>Progres</th><th>Selesai</th><th>CLI Lab</th><th>Aktivitas</th><th>Terakhir Aktif</th></tr></thead>
+                  <tbody id="studentRows"><tr><td colspan="7">Memuat data…</td></tr></tbody></table>
                 </div>
-                <div class="grid grid-3">
-                    <div class="card stat"><span class="label">Kode kelas</span><span data-class-code
-                            class="value">–</span></div>
-                    <div class="card stat"><span class="label">Siswa terdaftar</span><span id="studentCount"
-                            class="value">0</span></div>
-                    <div class="card stat"><span class="label">Rata-rata progress</span><span id="avgProgress"
-                            class="value">0%</span></div>
-                </div>
-                <div class="section-title">
-                    <h3>Monitoring Progress</h3>
-                    <p>Data diambil dari kelas yang dikelola guru ini</p>
-                </div>
-                <div class="card table-wrap">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nama</th>
-                                <th>Kelas</th>
-                                <th>Progress</th>
-                                <th>Keterangan</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="studentRows"></tbody>
-                    </table>
+                <div class="section-title"><h3>Aktivitas Latihan Terbaru</h3><p>Riwayat aktivitas formatif dari akun siswa</p></div>
+                <div class="card table-wrap rl7-table">
+                  <table class="rl7-activity-list"><thead><tr><th>Waktu</th><th>Siswa</th><th>Aktivitas</th><th>Hasil</th><th>Skor latihan</th></tr></thead>
+                  <tbody id="recentActivityRows"><tr><td colspan="5">Memuat riwayat…</td></tr></tbody></table>
                 </div>
                 <div class="section-title">
                     <h3>Arsitektur Pembelajaran</h3>

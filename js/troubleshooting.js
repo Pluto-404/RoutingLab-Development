@@ -9,6 +9,7 @@ form.addEventListener("submit", (e) => {
     feedback.textContent = "Pilih dugaan penyebab terlebih dahulu.";
     return;
   }
+  if (typeof RoutingActivity !== 'undefined') RoutingActivity.record('troubleshooting', answer.value==='route-r2'?'passed':'retry', null, 'Identifikasi penyebab route balik');
   if (answer.value === "route-r2") {
     feedback.className = "alert success";
     feedback.innerHTML =

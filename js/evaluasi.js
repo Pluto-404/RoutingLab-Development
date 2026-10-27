@@ -120,6 +120,7 @@ if (!form || !submitButton || !result) {
     p.evaluasi = passed || p.evaluationMastered ? 100 : 50;
     p.evaluationMastered = p.evaluasi === 100;
     const saved = saveProgress(p);
+    if (typeof RoutingActivity !== 'undefined') RoutingActivity.record('evaluasi', passed?'passed':'retry', score, 'Kuis formatif 5 soal (skor dari browser)');
 
     result.className = passed ? "alert success" : "alert warning";
     result.replaceChildren();

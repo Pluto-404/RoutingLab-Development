@@ -10,6 +10,7 @@ form.addEventListener("submit", (e) => {
     destination === "192.168.2.0" &&
     mask === "255.255.255.0" &&
     nextHop === "10.10.10.2";
+  if (typeof RoutingActivity !== 'undefined') RoutingActivity.record('miniLab', correct?'passed':'retry', null, 'Validasi parameter static route');
   if (correct) {
     feedback.className = "alert success";
     feedback.innerHTML =

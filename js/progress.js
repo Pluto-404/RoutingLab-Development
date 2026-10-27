@@ -45,7 +45,7 @@ if (resetBtn) {
   resetBtn.addEventListener("click", () => {
     if (
       !confirm(
-        "Setel progres latihan akun ini menjadi 0% di Supabase? Tindakan ini tidak menghapus akun atau kelas.",
+        "Setel persentase progres akun ini menjadi 0%? Riwayat latihan sebelumnya tetap tersimpan di Supabase. Tindakan ini tidak menghapus akun atau kelas.",
       )
     )
       return;
@@ -54,3 +54,22 @@ if (resetBtn) {
     RoutingProgress.whenSynced().then(()=>location.reload()).catch(()=>alert('Sinkronisasi belum berhasil. Periksa koneksi kemudian coba lagi.'));
   });
 }
+
+// Sprint 7: display recent student-reported practice events; teacher data is never loaded here.
+(async function renderMyPracticeHistory(){
+  const tbody=document.getElementById('myPracticeRows');
+  if(!tbody || typeof RoutingActivity==='undefined')return;
+  const labels={materi:'Materi',visualisasi:'Visualisasi',miniLab:'Mini Lab',troubleshooting:'Troubleshooting',evaluasi:'Evaluasi',cliLab:'CLI Lab'};
+  const show=(value)=>{const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=4;td.className='rl7-empty';td.textContent=value;tr.append(td);tbody.replaceChildren(tr);};
+  try {
+    const {data,error}=await RoutingActivity.recent(20);
+    if(error){show('Riwayat belum bisa dimuat: '+error.message+'. Pastikan migrasi Sprint 7 sudah dijalankan.');return;}
+    if(!data?.length){show('Belum ada riwayat. Coba kerjakan latihan atau validasi CLI Lab.');return;}
+    tbody.replaceChildren();
+    for(const e of data){
+      const tr=document.createElement('tr'),date=new Date(e.created_at);
+      const cells=[Number.isNaN(date.getTime())?'–':date.toLocaleString('id-ID',{dateStyle:'medium',timeStyle:'short'}),labels[e.activity]||e.activity,e.outcome==='passed'?'Berhasil':e.outcome==='completed'?'Selesai':'Perlu coba lagi',e.score==null?'–':e.score+'/100'];
+      cells.forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.append(td);});tbody.append(tr);
+    }
+  }catch(err){show('Riwayat gagal dimuat: '+err.message);}
+})();

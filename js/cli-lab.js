@@ -135,6 +135,7 @@
       status.textContent = "✕ Koneksi end-to-end belum tersedia";
       status.className = "network error";
     }
+    if (typeof RoutingActivity !== 'undefined') RoutingActivity.record('cliLab', r.ok?'passed':'retry', null, r.ok?'Jalur dua arah berhasil':'Validasi misi belum berhasil');
     renderStatus();
   });
   document.getElementById("resetLab").addEventListener("click", () => {

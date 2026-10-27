@@ -21,7 +21,10 @@
     if(role!==session.role){location.replace(RoutingAuth.home(session.role));return;}
     await addScript('js/common.js');
     // Read central data before rendering progress widgets; account scope comes from auth.uid().
-    if(role==='siswa') await RoutingProgress.hydrate(RoutingAuth.getClient(), session.id);
+    if(role==='siswa') {
+      await RoutingProgress.hydrate(RoutingAuth.getClient(), session.id);
+      await addScript('js/activity.js');
+    }
     const page=document.body.dataset.pageScript;
     if(page==='cli-lab'){
       await addScript('js/cli-engine.js');await addScript('js/cli-lab.js');

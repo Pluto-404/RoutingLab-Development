@@ -46,6 +46,7 @@ function setupMaterialCompletion() {
         "Penyimpanan gagal. Pastikan browser mengizinkan penyimpanan browser.";
       return;
     }
+    if (typeof RoutingActivity !== 'undefined') RoutingActivity.record('materi','completed',null,'Materi ditandai selesai oleh siswa');
     refresh();
   });
 

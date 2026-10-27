@@ -21,3 +21,8 @@ Frontend **HTML / CSS / JavaScript**, backend **Supabase Auth + PostgreSQL + RLS
 **JANGAN** meletakkan `service_role`, `sb_secret_`, token privat, atau password database di frontend. Semua progres adalah **latihan formatif**; skor evaluasi lokal belum penilaian resmi yang diverifikasi di server.
 
 Lihat [README_SPRINT6.md](README_SPRINT6.md) untuk urutan upgrade, pengujian role guru, backup, keamanan Git, dan deployment.
+
+
+## Sprint 7: Monitoring latihan
+
+Lihat `README_SPRINT7.md` untuk migrasi SQL `20261027_sprint7.sql`, riwayat praktik formatif per siswa, laporan kelas yang difilter berdasarkan guru, ekspor CSV, dan langkah pengujiannya.

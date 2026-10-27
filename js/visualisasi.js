@@ -15,5 +15,6 @@ btn.addEventListener("click", () => {
     const p = loadProgress();
     p.visualisasi = 100;
     saveProgress(p);
+    if (typeof RoutingActivity !== 'undefined') RoutingActivity.record('visualisasi','completed',null,'Animasi perjalanan paket dijalankan');
   }, 4100);
 });
