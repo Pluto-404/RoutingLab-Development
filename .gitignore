@@ -1,6 +1,15 @@
+
 .env
 .env.*
 !.env.example
+*.pem
+*.key
+*.p12
 node_modules/
 .DS_Store
-Thumbs.db
+.vscode/settings.json
+supabase/.branches/
+supabase/.temp/
+
+# Konfigurasi Supabase lokal
+/js/supabase-config.js
