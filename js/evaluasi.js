@@ -131,7 +131,7 @@ if (!form || !submitButton || !result) {
       : "Target evaluasi 80 belum tercapai. Pelajari pembahasan, lalu coba lagi.";
     const persistNote = document.createElement("p");
     persistNote.textContent = saved
-      ? `Percobaan ke-${p.evaluationAttempts}. Skor terbaik: ${p.bestScore}/100. Progres tersimpan di browser.`
+      ? `Percobaan ke-${p.evaluationAttempts}. Skor terbaik: ${p.bestScore}/100. Skor latihan lokal; progres sedang disinkronkan ke Supabase.`
       : "Progres gagal disimpan. Periksa pengaturan penyimpanan browser.";
     const review = document.createElement("ol");
     questions.forEach((q, idx) => {

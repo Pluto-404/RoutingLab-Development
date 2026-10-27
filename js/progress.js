@@ -6,6 +6,7 @@ const items = [
   ["Mini Lab", p.miniLab],
   ["Troubleshooting", p.troubleshooting],
   ["Evaluasi", p.evaluasi],
+  ["CLI Lab", p.cliLab],
 ];
 
 const totalEl = document.getElementById("totalProgress");
@@ -44,11 +45,12 @@ if (resetBtn) {
   resetBtn.addEventListener("click", () => {
     if (
       !confirm(
-        "Hapus progress DEMO akun ini pada browser ini? Data akun demo lain tidak dihapus.",
+        "Setel progres latihan akun ini menjadi 0% di Supabase? Tindakan ini tidak menghapus akun atau kelas.",
       )
     )
       return;
-    localStorage.removeItem(getProgressStorageKey());
-    location.reload();
+    const empty=createEmptyProgress();
+    if(!saveProgress(empty)){alert('Gagal memperbarui progres lokal.');return;}
+    RoutingProgress.whenSynced().then(()=>location.reload()).catch(()=>alert('Sinkronisasi belum berhasil. Periksa koneksi kemudian coba lagi.'));
   });
 }

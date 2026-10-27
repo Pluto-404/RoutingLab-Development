@@ -1,7 +1,4 @@
-/* RoutingLab Sprint 1: helpers for the STATIC UTS DEMO only.
- * These browser values are NOT secure or authoritative. Replace with a backend
- * before using real students, class records, grades, or authentication.
- */
+/* RoutingLab Sprint 6: progress cache per Supabase user; percentages synchronize to PostgreSQL. */
 const ROUTINGLAB_PROGRESS_VERSION = 2;
 const ROUTINGLAB_PROGRESS_FIELDS = [
   "materi",
@@ -37,9 +34,10 @@ function getProgressStorageKey() {
   const session = RoutingAuth.getSession();
   // Separate demo accounts in one browser; DO NOT treat username as a security boundary.
   const username =
-    session && typeof session.username === "string" && session.username
-      ? session.username
-      : "anonymous-demo";
+    session && typeof session.id === "string" && session.id
+      ? session.id
+      : session && typeof session.username === "string" && session.username
+      ? session.username : "anonymous";
   return `routinglab_progress_v${ROUTINGLAB_PROGRESS_VERSION}:${encodeURIComponent(username)}`;
 }
 
@@ -50,6 +48,7 @@ function createEmptyProgress() {
     miniLab: 0,
     troubleshooting: 0,
     evaluasi: 0,
+    cliLab: 0,
     bestScore: 0,
     evaluationAttempts: 0,
     lastQuizScore: null,
@@ -62,7 +61,7 @@ function normalizeProgress(value) {
   const output = createEmptyProgress();
   if (!value || typeof value !== "object" || Array.isArray(value))
     return output;
-  for (const field of [...ROUTINGLAB_PROGRESS_FIELDS, "bestScore"]) {
+  for (const field of [...ROUTINGLAB_PROGRESS_FIELDS, "cliLab", "bestScore"]) {
     const n = Number(value[field]);
     output[field] = Number.isFinite(n)
       ? Math.min(100, Math.max(0, Math.round(n)))
@@ -104,6 +103,8 @@ function saveProgress(next) {
     console.error("Progres demo gagal disimpan ke browser.", err);
     return false;
   }
+  // Optimistic local cache; remote save status is reported separately, never a trusted grade.
+  if (typeof RoutingProgress !== 'undefined') RoutingProgress.enqueue(clean);
   return true;
 }
 
@@ -114,3 +115,43 @@ function totalProgress() {
       ROUTINGLAB_PROGRESS_FIELDS.length,
   );
 }
+
+
+/* A single queued write at a time prevents stale requests overwriting recent progress. */
+const RoutingProgress = (() => {
+  const fields = [...ROUTINGLAB_PROGRESS_FIELDS, 'cliLab'];
+  let api=null, userId=null, tail=Promise.resolve(), previous={},hydrated=false;
+  function status(msg,bad=false){
+    let el=document.getElementById('progressSyncStatus');
+    if(!el){el=document.createElement('div');el.id='progressSyncStatus';el.className='sync-indicator';document.body.append(el);}
+    el.textContent=msg;el.classList.toggle('sync-error',bad);
+    window.dispatchEvent(new CustomEvent('routinglab:sync',{detail:{message:msg,error:bad}}));
+  }
+  async function hydrate(client,id){
+    api=client;userId=id;
+    const {data,error}=await api.from('user_progress').select('activity,percent').eq('user_id',id);
+    if(error){status('Progres belum tersinkron: '+error.message,true);return;}
+    const p=loadProgress();
+    for(const f of fields) p[f]=0;
+    for(const row of data||[]) if(fields.includes(row.activity)) p[row.activity]=row.percent;
+    previous=Object.fromEntries(fields.map(k=>[k,p[k]]));
+    try{localStorage.setItem(getProgressStorageKey(),JSON.stringify(p));}catch(e){console.warn(e);}
+    hydrated=true;
+    status('Progres dimuat dari Supabase');
+  }
+  function enqueue(snapshot){
+    if(!api || !userId || !hydrated)return;
+    const copy=structuredClone(snapshot);
+    tail=tail.catch(()=>{}).then(async()=>{
+      const changed=fields.filter(f=>copy[f]!==previous[f]);
+      if(!changed.length)return;
+      status('Menyinkronkan progres...');
+      const rows=changed.map(activity=>({user_id:userId,activity,percent:copy[activity]}));
+      const {error}=await api.from('user_progress').upsert(rows,{onConflict:'user_id,activity'});
+      if(error){status('Gagal menyinkronkan progres: '+error.message,true);throw Error(error.message);}
+      for(const f of changed) previous[f]=copy[f];
+      status('Progres berhasil tersimpan di Supabase');
+    });
+  }
+  return {hydrate,enqueue,whenSynced:()=>tail};
+})();

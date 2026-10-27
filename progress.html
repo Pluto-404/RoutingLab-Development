@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="id">
+<html lang="id" class="auth-pending">
 
 <head>
     <meta charset="utf-8">
@@ -8,9 +8,9 @@
     <link rel="icon" href="assets/logo.svg">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css"><link rel="stylesheet" href="css/sprint4a.css">
-</head>
+<link rel="stylesheet" href="css/sprint6.css"></head>
 
-<body>
+<body data-required-role="siswa" data-page-script="progress">
     <div class="shell">
         <button class="mobile-menu-button" type="button" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="appSidebar">☰ <span>Menu RoutingLab</span></button><div class="sidebar-scrim" hidden></div><aside class="sidebar" id="appSidebar">
             <div class="brand">
@@ -20,20 +20,20 @@
                 </div>
             </div>
             <nav class="nav"><a href="dashboard-siswa.html">Dashboard</a><a href="materi.html">Materi</a><a
-                    href="visualisasi.html">Visualisasi</a><a href="mini-lab.html">Mini Lab</a><a href="cli-lab.html" class="nav-lab">⌘ CLI Lab <span class="nav-new">BARU</span></a><a
+                    href="visualisasi.html">Visualisasi</a><a href="mini-lab.html">Mini Lab</a><a href="cli-lab.html" class="nav-lab">⌘ CLI Lab </a><a
                     href="troubleshooting.html">Troubleshooting</a><a href="evaluasi.html">Evaluasi</a><a
-                    href="progress.html">Progress</a><a href="tentang.html">Tentang</a></nav>
+                    href="progress.html">Progress</a><a href="akun.html">Akun & Kelas</a><a href="tentang.html">Tentang</a></nav>
             <div class="sidebar-footer">
                 <div class="user-chip"><strong data-user-name></strong><br><span data-user-role></span> · <span
-                        data-class-code></span></div><button class="btn btn-light" data-logout>Logout</button>
+                        data-class-code></span></div><button class="btn btn-light" data-logout>Keluar</button>
             </div>
         </aside>
         <main class="main">
             <header class="topbar">
                 <div>
                     <h2>Progress Belajar</h2>
-                    <div class="meta">Rekap penyelesaian aktivitas pada browser ini</div>
-                </div><span class="badge">Frontend Prototype</span>
+                    <div class="meta">Rekap progres latihan tersimpan di Supabase</div>
+                </div><span class="badge">Supabase Connected</span>
             </header>
             <div class="content">
                 <div class="grid grid-2">
@@ -41,7 +41,7 @@
                             class="value">0%</span>
                         <p>Rata-rata dari lima aktivitas utama.</p>
                     </div>
-                    <div class="card stat"><span class="label">Skor evaluasi terbaik</span><span id="bestScore"
+                    <div class="card stat"><span class="label">Skor latihan terbaik</span><span id="bestScore"
                             class="value">0/100</span>
                         <p>Nilai tertinggi dari percobaan kuis pada browser ini.</p>
                     </div>
@@ -62,16 +62,14 @@
                         <tbody id="progressRows"></tbody>
                     </table>
                 </div>
-                <div class="hero-actions"><button id="resetProgress" type="button" class="btn btn-danger">Reset Progress
-                        Prototype</button></div>
-                <div class="footer-note">RoutingLab · Prototype UTS Teknologi Pembelajaran · Fatih Nur Faiq</div>
+                <div class="hero-actions"><button id="resetProgress" type="button" class="btn btn-danger">Reset progres latihan</button></div>
+                <div class="footer-note">RoutingLab · Teknologi Pendidikan · Fatih Nur Faiq</div>
             </div>
         </main>
     </div>
-    <script src="js/auth.js"></script>
-    <script src="js/common.js"></script>
-    <script src="js/progress.js"></script>
-<script src="js/sprint4a.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/auth.js"></script><script src="js/bootstrap.js"></script>
 </body>
 
 </html>

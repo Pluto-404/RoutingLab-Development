@@ -1,33 +1,23 @@
-# RoutingLab — Prototype UTS Teknologi Pembelajaran
+# RoutingLab — Interactive Network Learning Platform
 
-Prototype front-end statis untuk media pembelajaran routing statis.
+Media pembelajaran interaktif routing statis dan troubleshooting untuk siswa X TJKT.
+Frontend **HTML / CSS / JavaScript**, backend **Supabase Auth + PostgreSQL + RLS**, hosting yang direncanakan **Cloudflare Pages**.
 
-## Akun demo
-- Siswa: `siswa01` / `123456`
-- Guru/Admin: `guru01` / `123456`
+## Fitur
+- Satu login email/password melalui Supabase, dengan dua role `siswa` dan `guru`.
+- Daftar siswa (verifikasi email), gabung kelas dengan kode, akun guru melalui admin SQL.
+- Materi, visualisasi, Mini Lab, CLI Lab, troubleshooting, evaluasi formatif.
+- Progres latihan disinkronkan per akun ke Supabase.
+- Dashboard guru membaca ringkasan kelas miliknya menggunakan RPC terproteksi.
+- Layout desktop dan mobile responsif; scroll hanya bila ada konten yang memerlukannya.
 
-## Fitur yang berfungsi
-- Login demo berbasis JavaScript
-- Dashboard siswa
-- Materi routing statis
-- Visualisasi alur paket
-- Mini Lab static route
-- Troubleshooting satu kasus
-- Evaluasi 5 soal + skor
-- Progress localStorage
-- Dashboard Guru/Admin sederhana
+## Menjalankan lokal
+1. Jalankan migrasi SQL Sprint 5 yang telah disediakan dan sudah berhasil diuji.
+2. Tambahkan migrasi baru `supabase/migrations/20261027_sprint6.sql` lewat Supabase SQL Editor.
+3. Salin `js/supabase-config.example.js` menjadi **`js/supabase-config.js`** dan isi `url` (tanpa `/rest/v1/`) serta **publishable key**. File lokal ini diabaikan oleh Git.
+4. Buka `index.html` menggunakan Live Server (bukan `file://`).
+5. Masuk menggunakan **email dan password Supabase**, bukan kredensial demo UTS.
 
-## Penting
-Prototype ini **bukan sistem autentikasi produksi**. Password ada di JavaScript dan data progress hanya tersimpan di browser melalui `localStorage`.
+**JANGAN** meletakkan `service_role`, `sb_secret_`, token privat, atau password database di frontend. Semua progres adalah **latihan formatif**; skor evaluasi lokal belum penilaian resmi yang diverifikasi di server.
 
-## Deploy ke GitHub Pages
-1. Ekstrak ZIP.
-2. Buat repository GitHub baru.
-3. Upload **isi folder `RoutingLab_Prototype_GitHubPages`** ke root repository. Pastikan `index.html` berada di root repo.
-4. Commit & push.
-5. Buka `Settings` → `Pages`.
-6. Pada `Build and deployment`, pilih `Deploy from a branch`.
-7. Pilih branch `main` dan folder `/ (root)`, lalu Save.
-8. Tunggu GitHub menampilkan URL publik.
-
-Tidak perlu build command, Node.js, atau server.
+Lihat [README_SPRINT6.md](README_SPRINT6.md) untuk urutan upgrade, pengujian role guru, backup, keamanan Git, dan deployment.

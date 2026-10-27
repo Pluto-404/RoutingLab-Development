@@ -43,7 +43,7 @@ function setupMaterialCompletion() {
     progress.materi = 100;
     if (!saveProgress(progress)) {
       status.textContent =
-        "Penyimpanan gagal. Pastikan browser mengizinkan penyimpanan lokal.";
+        "Penyimpanan gagal. Pastikan browser mengizinkan penyimpanan browser.";
       return;
     }
     refresh();

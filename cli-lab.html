@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="id">
+<html lang="id" class="auth-pending">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>CLI Lab — RoutingLab</title>
     <link rel="stylesheet" href="css/cli-lab.css" /><link rel="stylesheet" href="css/cli-sprint4a.css" /><link rel="stylesheet" href="css/cli-sprint4b.css" />
-  </head>
-  <body>
+  <link rel="stylesheet" href="css/sprint6-cli.css" /></head>
+  <body data-required-role="siswa" data-page-script="cli-lab">
     <header class="top">
       <div>
         <a href="dashboard-siswa.html" class="back">← Dashboard</a
@@ -225,10 +225,10 @@ R1# show ip route</pre
       </section>
     </main>
     <footer>
-      RoutingLab · simulator edukatif terbatas, bukan emulator Cisco IOS · Data
-      belum tersimpan ke Supabase.
+      RoutingLab · simulator edukatif terbatas, bukan emulator Cisco IOS · Progres penyelesaian latihan disinkronkan ke Supabase.
     </footer>
-    <script src="js/cli-engine.js"></script>
-    <script src="js/cli-lab.js"></script>
-  </body>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/auth.js"></script><script src="js/bootstrap.js"></script>
+</body>
 </html>

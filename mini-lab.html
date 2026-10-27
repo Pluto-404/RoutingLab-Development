@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="id">
+<html lang="id" class="auth-pending">
 
 <head>
     <meta charset="utf-8">
@@ -8,9 +8,9 @@
     <link rel="icon" href="assets/logo.svg">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css"><link rel="stylesheet" href="css/sprint4a.css">
-</head>
+<link rel="stylesheet" href="css/sprint6.css"></head>
 
-<body>
+<body data-required-role="siswa" data-page-script="mini-lab">
     <div class="shell">
         <button class="mobile-menu-button" type="button" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="appSidebar">☰ <span>Menu RoutingLab</span></button><div class="sidebar-scrim" hidden></div><aside class="sidebar" id="appSidebar">
             <div class="brand">
@@ -20,12 +20,12 @@
                 </div>
             </div>
             <nav class="nav"><a href="dashboard-siswa.html">Dashboard</a><a href="materi.html">Materi</a><a
-                    href="visualisasi.html">Visualisasi</a><a href="mini-lab.html">Mini Lab</a><a href="cli-lab.html" class="nav-lab">⌘ CLI Lab <span class="nav-new">BARU</span></a><a
+                    href="visualisasi.html">Visualisasi</a><a href="mini-lab.html">Mini Lab</a><a href="cli-lab.html" class="nav-lab">⌘ CLI Lab </a><a
                     href="troubleshooting.html">Troubleshooting</a><a href="evaluasi.html">Evaluasi</a><a
-                    href="progress.html">Progress</a><a href="tentang.html">Tentang</a></nav>
+                    href="progress.html">Progress</a><a href="akun.html">Akun & Kelas</a><a href="tentang.html">Tentang</a></nav>
             <div class="sidebar-footer">
                 <div class="user-chip"><strong data-user-name></strong><br><span data-user-role></span> · <span
-                        data-class-code></span></div><button class="btn btn-light" data-logout>Logout</button>
+                        data-class-code></span></div><button class="btn btn-light" data-logout>Keluar</button>
             </div>
         </aside>
         <main class="main">
@@ -33,7 +33,7 @@
                 <div>
                     <h2>Mini Lab</h2>
                     <div class="meta">Latihan satu kasus static route yang berfungsi penuh</div>
-                </div><span class="badge">Frontend Prototype</span>
+                </div><span class="badge">Supabase Connected</span>
             </header>
             <div class="content">
                 <div class="grid grid-2">
@@ -73,14 +73,13 @@
                         <div class="terminal mt-2">R1(config)# ip route [DESTINATION] [MASK] [NEXT-HOP]</div>
                     </div>
                 </div>
-                <div class="footer-note">RoutingLab · Prototype UTS Teknologi Pembelajaran · Fatih Nur Faiq</div>
+                <div class="footer-note">RoutingLab · Teknologi Pendidikan · Fatih Nur Faiq</div>
             </div>
         </main>
     </div>
-    <script src="js/auth.js"></script>
-    <script src="js/common.js"></script>
-    <script src="js/mini-lab.js"></script>
-<script src="js/sprint4a.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/auth.js"></script><script src="js/bootstrap.js"></script>
 </body>
 
 </html>

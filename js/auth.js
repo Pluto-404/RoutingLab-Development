@@ -1,55 +1,48 @@
+/* RoutingLab Sprint 6 — auth Supabase; never trust a browser-created role. */
 const RoutingAuth = (() => {
-  const USERS = {
-    siswa01: {
-      password: "123456",
-      role: "siswa",
-      name: "Siswa Demo",
-      classCode: "X-TJKT-A",
-    },
-    guru01: {
-      password: "123456",
-      role: "guru",
-      name: "Guru Demo",
-      classCode: "X-TJKT-A",
-    },
-  };
-  function login(username, password) {
-    const user = USERS[username];
-    if (!user || user.password !== password)
-      return { ok: false, message: "Username atau password salah." };
-    const session = {
-      username,
-      role: user.role,
-      name: user.name,
-      classCode: user.classCode,
-      loginAt: Date.now(),
-    };
-    localStorage.setItem("routinglab_session", JSON.stringify(session));
-    return { ok: true, session };
+  let client = null, current = null;
+  const home = role => role === 'guru' ? 'dashboard-guru.html' : 'dashboard-siswa.html';
+  function getClient() {
+    if (client) return client;
+    const cfg = window.ROUTINGLAB_SUPABASE;
+    if (!cfg || !/^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i.test(cfg.url || '') || !cfg.publishableKey || cfg.publishableKey.includes('YOUR_'))
+      throw Error('Konfigurasi Supabase belum tersedia. Periksa js/supabase-config.js dan README_SPRINT6.md.');
+    if (!window.supabase?.createClient) throw Error('Library Supabase tidak termuat. Periksa koneksi internet.');
+    client = window.supabase.createClient(cfg.url.replace(/\/$/, ''),cfg.publishableKey);
+    return client;
   }
-  function getSession() {
+  async function verify() {
+    const api = getClient();
+    const { data: { user }, error: authError } = await api.auth.getUser();
+    if (authError || !user) { current=null; return null; }
+    const { data: profile, error } = await api.from('profiles').select('full_name,role').eq('id',user.id).single();
+    if (error) throw Error('Gagal membaca profil: ' + error.message);
+    if (!profile || !['siswa','guru'].includes(profile.role)) throw Error('Role akun tidak valid. Hubungi pengelola.');
+    let classCode = '-';
     try {
-      return JSON.parse(localStorage.getItem("routinglab_session")) || null;
-    } catch {
-      return null;
-    }
+      if (profile.role === 'guru') {
+        const {data} = await api.from('classes').select('code').order('created_at',{ascending:false}).limit(1);
+        classCode=data?.[0]?.code || '-';
+      } else {
+        const {data} = await api.from('class_memberships').select('classes(code)').limit(1);
+        classCode = data?.[0]?.classes?.code || '-';
+      }
+    } catch (err) { console.warn('Kode kelas tidak termuat',err); }
+    current = { id:user.id, username:user.id, role:profile.role, name:profile.full_name || 'Pengguna',classCode,email:user.email };
+    return current;
   }
-  function logout() {
-    localStorage.removeItem("routinglab_session");
-    location.href = "index.html";
+  async function signIn(email,password) {
+    const { error } = await getClient().auth.signInWithPassword({email,password});
+    if (error) throw Error(error.message);
+    return await verify();
+  }
+  async function logout() {
+    try { await getClient().auth.signOut(); } catch(e){console.warn(e);}
+    current=null; location.replace('index.html');
   }
   function requireRole(role) {
-    const s = getSession();
-    if (!s) {
-      location.href = "index.html";
-      return null;
-    }
-    if (role && s.role !== role) {
-      location.href =
-        s.role === "guru" ? "dashboard-guru.html" : "dashboard-siswa.html";
-      return null;
-    }
-    return s;
+    if (!current || (role && current.role !== role)) return null;
+    return current;
   }
-  return { login, getSession, logout, requireRole };
+  return {getClient,verify,signIn,logout,requireRole,getSession:()=>current,home};
 })();

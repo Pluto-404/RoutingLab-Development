@@ -121,6 +121,9 @@
     if (r.ok) {
       el.textContent =
         "Misi berhasil! Kedua static route dan jalur antarrouter telah dikonfigurasi dengan benar.";
+      // Progress here is formative practice and not a trusted grade.
+      const state = loadProgress();
+      if (state.cliLab !== 100) { state.cliLab = 100; saveProgress(state); }
       status.textContent = "✓ Koneksi PC0 ↔ PC1 tersedia";
       status.className = "network success";
     } else {
