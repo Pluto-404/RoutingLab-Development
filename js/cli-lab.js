@@ -33,6 +33,9 @@
     ]) {
       const el = document.getElementById(id);
       if (el) el.className = ok ? "ok" : "bad";
+      // Mirror network lights beside the CLI; the topology is hidden in the mobile terminal tab.
+      const mirror = document.getElementById({statusWAN:'termStatusWAN',statusForward:'termStatusForward',statusReturn:'termStatusReturn'}[id]);
+      if (mirror) mirror.className = ok ? 'ok' : 'bad';
     }
     const status = document.getElementById("networkState");
     if (status) {
@@ -184,5 +187,5 @@
     "Pilih R1 / R2. Ketik enable lalu configure terminal untuk mengonfigurasi.",
     "system",
   );
-  input.focus();
+  if (!mq.matches) input.focus();
 })();
