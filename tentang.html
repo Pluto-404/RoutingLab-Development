@@ -1,70 +1,115 @@
 <!doctype html>
 <html lang="id" class="auth-pending">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Tentang RoutingLab</title>
-    <link rel="icon" href="assets/logo.svg">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css"><link rel="stylesheet" href="css/sprint4a.css">
-<link rel="stylesheet" href="css/sprint6.css"><link rel="stylesheet" href="css/ui-polish.css">
-</head>
+    <link rel="icon" href="assets/logo.svg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/sprint4a.css" />
+    <link rel="stylesheet" href="css/sprint6.css" />
+    <link rel="stylesheet" href="css/ui-polish.css" />
+    <link rel="stylesheet" href="css/bootstrap-blue.css" />
+  </head>
 
-<body data-required-role="siswa" data-page-script="none">
+  <body data-required-role="siswa" data-page-script="none">
     <div class="shell">
-        <button class="mobile-menu-button" type="button" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="appSidebar">☰ <span>Menu RoutingLab</span></button><div class="sidebar-scrim" hidden></div><aside class="sidebar" id="appSidebar">
-            <div class="brand">
-                <div class="brand-mark">RL</div>
-                <div>
-                    <h1>RoutingLab</h1><small>Interactive Learning</small>
-                </div>
+      <button
+        class="mobile-menu-button"
+        type="button"
+        aria-label="Buka menu navigasi"
+        aria-expanded="false"
+        aria-controls="appSidebar"
+      >
+        ☰ <span>Menu RoutingLab</span>
+      </button>
+      <div class="sidebar-scrim" hidden></div>
+      <aside class="sidebar" id="appSidebar">
+        <div class="brand">
+          <div class="brand-mark">RL</div>
+          <div>
+            <h1>RoutingLab</h1>
+            <small>Interactive Learning</small>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="dashboard-siswa.html">Dashboard</a
+          ><a href="materi.html">Materi</a
+          ><a href="visualisasi.html">Visualisasi</a
+          ><a href="mini-lab.html">Mini Lab</a
+          ><a href="cli-lab.html" class="nav-lab">⌘ CLI Lab </a
+          ><a href="troubleshooting.html">Troubleshooting</a
+          ><a href="evaluasi.html">Evaluasi</a
+          ><a href="progress.html">Progress</a
+          ><a href="akun.html">Akun & Kelas</a
+          ><a href="tentang.html">Tentang</a>
+        </nav>
+        <div class="sidebar-footer">
+          <div class="user-chip">
+            <strong data-user-name></strong><br /><span data-user-role></span> ·
+            <span data-class-code></span>
+          </div>
+          <button class="btn btn-light" data-logout>Keluar</button>
+        </div>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h2>Tentang RoutingLab</h2>
+            <div class="meta">Arsitektur dan batas penggunaan pembelajaran</div>
+          </div>
+          <span class="badge">Supabase Connected</span>
+        </header>
+        <div class="content">
+          <div class="grid grid-2">
+            <div class="card">
+              <h3>Tujuan Pembelajaran</h3>
+              <p>
+                RoutingLab menyediakan materi, visualisasi, CLI Lab,
+                troubleshooting, dan evaluasi formatif untuk melatih pemahaman
+                static routing.
+              </p>
             </div>
-            <nav class="nav"><a href="dashboard-siswa.html">Dashboard</a><a href="materi.html">Materi</a><a
-                    href="visualisasi.html">Visualisasi</a><a href="mini-lab.html">Mini Lab</a><a href="cli-lab.html" class="nav-lab">⌘ CLI Lab </a><a
-                    href="troubleshooting.html">Troubleshooting</a><a href="evaluasi.html">Evaluasi</a><a
-                    href="progress.html">Progress</a><a href="akun.html">Akun & Kelas</a><a href="tentang.html">Tentang</a></nav>
-            <div class="sidebar-footer">
-                <div class="user-chip"><strong data-user-name></strong><br><span data-user-role></span> · <span
-                        data-class-code></span></div><button class="btn btn-light" data-logout>Keluar</button>
+            <div class="card">
+              <h3>Batasan</h3>
+              <p>
+                Login menggunakan Supabase Auth. Persentase latihan disimpan di
+                database dengan RLS, tetapi belum merupakan nilai resmi yang
+                diverifikasi server. Skor kuis tertinggi masih lokal.
+              </p>
             </div>
-        </aside>
-        <main class="main">
-            <header class="topbar">
-                <div>
-                    <h2>Tentang RoutingLab</h2>
-                    <div class="meta">Arsitektur dan batas penggunaan pembelajaran</div>
-                </div><span class="badge">Supabase Connected</span>
-            </header>
-            <div class="content">
-                <div class="grid grid-2">
-                    <div class="card">
-                        <h3>Tujuan Pembelajaran</h3>
-                        <p>RoutingLab menyediakan materi, visualisasi, CLI Lab, troubleshooting, dan evaluasi formatif untuk melatih pemahaman static routing.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Batasan</h3>
-                        <p>Login menggunakan Supabase Auth. Persentase latihan disimpan di database dengan RLS, tetapi belum merupakan nilai resmi yang diverifikasi server. Skor kuis tertinggi masih lokal.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Teknologi</h3>
-                        <p>Frontend HTML/CSS/JavaScript, Supabase Auth + PostgreSQL untuk akun dan progres, serta rencana hosting Cloudflare Pages.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Posisi Cisco Packet Tracer</h3>
-                        <p>RoutingLab tidak menggantikan Cisco Packet Tracer. Media ini menjadi pendamping untuk
-                            memahami konsep, latihan logika routing, dan troubleshooting sebelum praktik simulator
-                            sebenarnya.</p>
-                    </div>
-                </div>
-                <div class="alert warning mt-2"><strong>Catatan keamanan:</strong> Gunakan akun yang terverifikasi; jangan memasukkan secret key atau password database ke dalam file frontend.</div>
-                <div class="footer-note">RoutingLab · Teknologi Pendidikan · Fatih Nur Faiq</div>
+            <div class="card">
+              <h3>Teknologi</h3>
+              <p>
+                Frontend HTML/CSS/JavaScript, Supabase Auth + PostgreSQL untuk
+                akun dan progres, serta rencana hosting Cloudflare Pages.
+              </p>
             </div>
-        </main>
+            <div class="card">
+              <h3>Posisi Cisco Packet Tracer</h3>
+              <p>
+                RoutingLab tidak menggantikan Cisco Packet Tracer. Media ini
+                menjadi pendamping untuk memahami konsep, latihan logika
+                routing, dan troubleshooting sebelum praktik simulator
+                sebenarnya.
+              </p>
+            </div>
+          </div>
+          <div class="alert warning mt-2">
+            <strong>Catatan keamanan:</strong> Gunakan akun yang terverifikasi;
+            jangan memasukkan secret key atau password database ke dalam file
+            frontend.
+          </div>
+          <div class="footer-note">
+            RoutingLab · Teknologi Pendidikan · Fatih Nur Faiq
+          </div>
+        </div>
+      </main>
     </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js"></script>
-<script src="js/auth.js"></script><script src="js/bootstrap.js"></script>
-</body>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/bootstrap.js"></script>
+  </body>
 </html>

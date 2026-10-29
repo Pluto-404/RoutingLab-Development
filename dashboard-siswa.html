@@ -1,97 +1,168 @@
 <!doctype html>
 <html lang="id" class="auth-pending">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Dashboard Siswa | RoutingLab</title>
-    <link rel="icon" href="assets/logo.svg">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css"><link rel="stylesheet" href="css/sprint4a.css">
-<link rel="stylesheet" href="css/sprint6.css"><link rel="stylesheet" href="css/ui-polish.css">
-</head>
+    <link rel="icon" href="assets/logo.svg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/sprint4a.css" />
+    <link rel="stylesheet" href="css/sprint6.css" />
+    <link rel="stylesheet" href="css/ui-polish.css" />
+    <link rel="stylesheet" href="css/bootstrap-blue.css" />
+  </head>
 
-<body data-required-role="siswa" data-page-script="dashboard">
+  <body data-required-role="siswa" data-page-script="dashboard">
     <div class="shell">
-        <button class="mobile-menu-button" type="button" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="appSidebar">☰ <span>Menu RoutingLab</span></button><div class="sidebar-scrim" hidden></div><aside class="sidebar" id="appSidebar">
-            <div class="brand">
-                <div class="brand-mark">RL</div>
-                <div>
-                    <h1>RoutingLab</h1><small>Interactive Learning</small>
-                </div>
+      <button
+        class="mobile-menu-button"
+        type="button"
+        aria-label="Buka menu navigasi"
+        aria-expanded="false"
+        aria-controls="appSidebar"
+      >
+        ☰ <span>Menu RoutingLab</span>
+      </button>
+      <div class="sidebar-scrim" hidden></div>
+      <aside class="sidebar" id="appSidebar">
+        <div class="brand">
+          <div class="brand-mark">RL</div>
+          <div>
+            <h1>RoutingLab</h1>
+            <small>Interactive Learning</small>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="dashboard-siswa.html">Dashboard</a
+          ><a href="materi.html">Materi</a
+          ><a href="visualisasi.html">Visualisasi</a
+          ><a href="mini-lab.html">Mini Lab</a
+          ><a href="cli-lab.html" class="nav-lab">⌘ CLI Lab </a
+          ><a href="troubleshooting.html">Troubleshooting</a
+          ><a href="evaluasi.html">Evaluasi</a
+          ><a href="progress.html">Progress</a
+          ><a href="akun.html">Akun & Kelas</a
+          ><a href="tentang.html">Tentang</a>
+        </nav>
+        <div class="sidebar-footer">
+          <div class="user-chip">
+            <strong data-user-name></strong><br /><span data-user-role></span> ·
+            <span data-class-code></span>
+          </div>
+          <button class="btn btn-light" data-logout>Keluar</button>
+        </div>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h2>Dashboard Siswa</h2>
+            <div class="meta">Ringkasan pembelajaran routing statis</div>
+          </div>
+          <span class="badge">Supabase Connected</span>
+        </header>
+        <div class="content">
+          <section class="hero">
+            <span class="badge">Kelas <span data-class-code></span></span>
+            <h2>Halo, <span data-user-name></span> 👋</h2>
+            <p>
+              Lanjutkan pembelajaran routing statis. Mulai dari materi, amati
+              perjalanan paket, lalu uji kemampuan pada Mini Lab dan
+              Troubleshooting.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-light" href="materi.html">Mulai Materi</a
+              ><a
+                class="btn btn-outline"
+                style="color: white; border-color: rgba(255, 255, 255, 0.45)"
+                href="troubleshooting.html"
+                >Coba Troubleshooting</a
+              >
             </div>
-            <nav class="nav"><a href="dashboard-siswa.html">Dashboard</a><a href="materi.html">Materi</a><a
-                    href="visualisasi.html">Visualisasi</a><a href="mini-lab.html">Mini Lab</a><a href="cli-lab.html" class="nav-lab">⌘ CLI Lab </a><a
-                    href="troubleshooting.html">Troubleshooting</a><a href="evaluasi.html">Evaluasi</a><a
-                    href="progress.html">Progress</a><a href="akun.html">Akun & Kelas</a><a href="tentang.html">Tentang</a></nav>
-            <div class="sidebar-footer">
-                <div class="user-chip"><strong data-user-name></strong><br><span data-user-role></span> · <span
-                        data-class-code></span></div><button class="btn btn-light" data-logout>Keluar</button>
+          </section>
+          <section class="feature-banner">
+            <div>
+              <span class="feature-kicker">LAB INTERAKTIF</span>
+              <h3>Praktik Cisco IOS langsung di browser</h3>
+              <p>
+                Konfigurasi R1/R2, jalankan ping, dan uji static route pada
+                topologi dua LAN.
+              </p>
             </div>
-        </aside>
-        <main class="main">
-            <header class="topbar">
-                <div>
-                    <h2>Dashboard Siswa</h2>
-                    <div class="meta">Ringkasan pembelajaran routing statis</div>
-                </div><span class="badge">Supabase Connected</span>
-            </header>
-            <div class="content">
-                <section class="hero"><span class="badge">Kelas <span data-class-code></span></span>
-                    <h2>Halo, <span data-user-name></span> 👋</h2>
-                    <p>Lanjutkan pembelajaran routing statis. Mulai dari materi, amati perjalanan paket, lalu uji
-                        kemampuan pada Mini Lab dan Troubleshooting.</p>
-                    <div class="hero-actions"><a class="btn btn-light" href="materi.html">Mulai Materi</a><a
-                            class="btn btn-outline" style="color:white;border-color:rgba(255,255,255,.45)"
-                            href="troubleshooting.html">Coba Troubleshooting</a></div>
-                </section>
-                <section class="feature-banner"><div><span class="feature-kicker">LAB INTERAKTIF</span><h3>Praktik Cisco IOS langsung di browser</h3><p>Konfigurasi R1/R2, jalankan ping, dan uji static route pada topologi dua LAN.</p></div><a class="feature-action" href="cli-lab.html">Buka CLI Lab →</a></section><div class="section-title">
-                    <h3>Ringkasan Progress</h3>
-                    <p>tersinkron ke Supabase</p>
-                </div>
-                <div class="grid grid-3">
-                    <div class="card stat"><span class="label">Progress keseluruhan</span><span id="progressText"
-                            class="value">0%</span>
-                        <div class="progress"><span id="progressBar"></span></div>
-                    </div>
-                    <div class="card stat"><span class="label">Aktivitas selesai</span><span id="completedCount"
-                            class="value">0/5</span>
-                        <p>Materi, visualisasi, mini lab, troubleshooting, evaluasi.</p>
-                    </div>
-                    <div class="card stat"><span class="label">Skor evaluasi terbaik</span><span id="bestScore"
-                            class="value">0</span>
-                        <p>Skor kuis latihan hanya pada perangkat ini.</p>
-                    </div>
-                </div>
-                <div class="section-title">
-                    <h3>Alur Belajar</h3>
-                </div>
-                <div class="grid grid-3"><a class="card" href="materi.html"><span class="badge">01</span>
-                        <h3>Pelajari Konsep</h3>
-                        <p>Router, routing table, static route, next hop, dan perintah verifikasi.</p>
-                    </a><a class="card" href="visualisasi.html"><span class="badge">02</span>
-                        <h3>Amati Paket</h3>
-                        <p>Lihat alur paket PC0 → R1 → R2 → PC1 pada topologi dua LAN.</p>
-                    </a><a class="card" href="mini-lab.html"><span class="badge">03</span>
-                        <h3>Latihan Konfigurasi</h3>
-                        <p>Lengkapi parameter static route dan terima feedback otomatis.</p>
-                    </a><a class="card" href="troubleshooting.html"><span class="badge">04</span>
-                        <h3>Diagnosis Masalah</h3>
-                        <p>Analisis gejala ping dan tabel routing untuk menemukan kesalahan.</p>
-                    </a><a class="card" href="evaluasi.html"><span class="badge">05</span>
-                        <h3>Evaluasi</h3>
-                        <p>Kerjakan kuis konsep dan kasus sederhana, lalu lihat skor.</p>
-                    </a><a class="card" href="progress.html"><span class="badge">06</span>
-                        <h3>Lihat Progress</h3>
-                        <p>Periksa aktivitas yang sudah selesai dan skor terbaik.</p>
-                    </a></div>
-                <div class="footer-note">RoutingLab · Teknologi Pendidikan · Fatih Nur Faiq</div>
+            <a class="feature-action" href="cli-lab.html">Buka CLI Lab →</a>
+          </section>
+          <div class="section-title">
+            <h3>Ringkasan Progress</h3>
+            <p>tersinkron ke Supabase</p>
+          </div>
+          <div class="grid grid-3">
+            <div class="card stat">
+              <span class="label">Progress keseluruhan</span
+              ><span id="progressText" class="value">0%</span>
+              <div class="progress"><span id="progressBar"></span></div>
             </div>
-        </main>
+            <div class="card stat">
+              <span class="label">Aktivitas selesai</span
+              ><span id="completedCount" class="value">0/5</span>
+              <p>Materi, visualisasi, mini lab, troubleshooting, evaluasi.</p>
+            </div>
+            <div class="card stat">
+              <span class="label">Skor evaluasi terbaik</span
+              ><span id="bestScore" class="value">0</span>
+              <p>Skor kuis latihan hanya pada perangkat ini.</p>
+            </div>
+          </div>
+          <div class="section-title">
+            <h3>Alur Belajar</h3>
+          </div>
+          <div class="grid grid-3">
+            <a class="card" href="materi.html"
+              ><span class="badge">01</span>
+              <h3>Pelajari Konsep</h3>
+              <p>
+                Router, routing table, static route, next hop, dan perintah
+                verifikasi.
+              </p> </a
+            ><a class="card" href="visualisasi.html"
+              ><span class="badge">02</span>
+              <h3>Amati Paket</h3>
+              <p>
+                Lihat alur paket PC0 → R1 → R2 → PC1 pada topologi dua LAN.
+              </p> </a
+            ><a class="card" href="mini-lab.html"
+              ><span class="badge">03</span>
+              <h3>Latihan Konfigurasi</h3>
+              <p>
+                Lengkapi parameter static route dan terima feedback otomatis.
+              </p> </a
+            ><a class="card" href="troubleshooting.html"
+              ><span class="badge">04</span>
+              <h3>Diagnosis Masalah</h3>
+              <p>
+                Analisis gejala ping dan tabel routing untuk menemukan
+                kesalahan.
+              </p> </a
+            ><a class="card" href="evaluasi.html"
+              ><span class="badge">05</span>
+              <h3>Evaluasi</h3>
+              <p>
+                Kerjakan kuis konsep dan kasus sederhana, lalu lihat skor.
+              </p> </a
+            ><a class="card" href="progress.html"
+              ><span class="badge">06</span>
+              <h3>Lihat Progress</h3>
+              <p>Periksa aktivitas yang sudah selesai dan skor terbaik.</p>
+            </a>
+          </div>
+          <div class="footer-note">
+            RoutingLab · Teknologi Pendidikan · Fatih Nur Faiq
+          </div>
+        </div>
+      </main>
     </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js"></script>
-<script src="js/auth.js"></script><script src="js/bootstrap.js"></script>
-</body>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/bootstrap.js"></script>
+  </body>
 </html>

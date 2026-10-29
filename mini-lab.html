@@ -1,86 +1,141 @@
 <!doctype html>
 <html lang="id" class="auth-pending">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Mini Lab | RoutingLab</title>
-    <link rel="icon" href="assets/logo.svg">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css"><link rel="stylesheet" href="css/sprint4a.css">
-<link rel="stylesheet" href="css/sprint6.css"><link rel="stylesheet" href="css/ui-polish.css">
-</head>
+    <link rel="icon" href="assets/logo.svg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/sprint4a.css" />
+    <link rel="stylesheet" href="css/sprint6.css" />
+    <link rel="stylesheet" href="css/ui-polish.css" />
+    <link rel="stylesheet" href="css/bootstrap-blue.css" />
+  </head>
 
-<body data-required-role="siswa" data-page-script="mini-lab">
+  <body data-required-role="siswa" data-page-script="mini-lab">
     <div class="shell">
-        <button class="mobile-menu-button" type="button" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="appSidebar">☰ <span>Menu RoutingLab</span></button><div class="sidebar-scrim" hidden></div><aside class="sidebar" id="appSidebar">
-            <div class="brand">
-                <div class="brand-mark">RL</div>
-                <div>
-                    <h1>RoutingLab</h1><small>Interactive Learning</small>
+      <button
+        class="mobile-menu-button"
+        type="button"
+        aria-label="Buka menu navigasi"
+        aria-expanded="false"
+        aria-controls="appSidebar"
+      >
+        ☰ <span>Menu RoutingLab</span>
+      </button>
+      <div class="sidebar-scrim" hidden></div>
+      <aside class="sidebar" id="appSidebar">
+        <div class="brand">
+          <div class="brand-mark">RL</div>
+          <div>
+            <h1>RoutingLab</h1>
+            <small>Interactive Learning</small>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="dashboard-siswa.html">Dashboard</a
+          ><a href="materi.html">Materi</a
+          ><a href="visualisasi.html">Visualisasi</a
+          ><a href="mini-lab.html">Mini Lab</a
+          ><a href="cli-lab.html" class="nav-lab">⌘ CLI Lab </a
+          ><a href="troubleshooting.html">Troubleshooting</a
+          ><a href="evaluasi.html">Evaluasi</a
+          ><a href="progress.html">Progress</a
+          ><a href="akun.html">Akun & Kelas</a
+          ><a href="tentang.html">Tentang</a>
+        </nav>
+        <div class="sidebar-footer">
+          <div class="user-chip">
+            <strong data-user-name></strong><br /><span data-user-role></span> ·
+            <span data-class-code></span>
+          </div>
+          <button class="btn btn-light" data-logout>Keluar</button>
+        </div>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h2>Mini Lab</h2>
+            <div class="meta">
+              Latihan satu kasus static route yang berfungsi penuh
+            </div>
+          </div>
+          <span class="badge">Supabase Connected</span>
+        </header>
+        <div class="content">
+          <div class="grid grid-2">
+            <div class="card">
+              <span class="badge">Skenario 01</span>
+              <h3>Lengkapi static route pada R1</h3>
+              <p>
+                R1 sudah terhubung ke LAN 1 dan R2. Agar dapat mencapai LAN 2,
+                lengkapi tiga parameter berikut.
+              </p>
+              <form id="miniLabForm" class="mt-2">
+                <div class="form-group">
+                  <label for="destination">Destination Network</label
+                  ><input id="destination" placeholder="contoh: 192.168.x.0" />
                 </div>
+                <div class="form-group">
+                  <label for="mask">Subnet Mask</label
+                  ><input id="mask" placeholder="255.255.255.0" />
+                </div>
+                <div class="form-group">
+                  <label for="nextHop">Next Hop</label
+                  ><input id="nextHop" placeholder="10.10.10.x" />
+                </div>
+                <div class="hero-actions">
+                  <button class="btn btn-primary" type="submit">
+                    Validasi Route</button
+                  ><button
+                    class="btn btn-outline"
+                    type="button"
+                    id="fillExample"
+                  >
+                    Isi contoh benar
+                  </button>
+                </div>
+              </form>
+              <div id="miniLabFeedback" class="alert mt-2">
+                Masukkan konfigurasi lalu klik Validasi Route.
+              </div>
             </div>
-            <nav class="nav"><a href="dashboard-siswa.html">Dashboard</a><a href="materi.html">Materi</a><a
-                    href="visualisasi.html">Visualisasi</a><a href="mini-lab.html">Mini Lab</a><a href="cli-lab.html" class="nav-lab">⌘ CLI Lab </a><a
-                    href="troubleshooting.html">Troubleshooting</a><a href="evaluasi.html">Evaluasi</a><a
-                    href="progress.html">Progress</a><a href="akun.html">Akun & Kelas</a><a href="tentang.html">Tentang</a></nav>
-            <div class="sidebar-footer">
-                <div class="user-chip"><strong data-user-name></strong><br><span data-user-role></span> · <span
-                        data-class-code></span></div><button class="btn btn-light" data-logout>Keluar</button>
-            </div>
-        </aside>
-        <main class="main">
-            <header class="topbar">
-                <div>
-                    <h2>Mini Lab</h2>
-                    <div class="meta">Latihan satu kasus static route yang berfungsi penuh</div>
-                </div><span class="badge">Supabase Connected</span>
-            </header>
-            <div class="content">
-                <div class="grid grid-2">
-                    <div class="card"><span class="badge">Skenario 01</span>
-                        <h3>Lengkapi static route pada R1</h3>
-                        <p>R1 sudah terhubung ke LAN 1 dan R2. Agar dapat mencapai LAN 2, lengkapi tiga parameter
-                            berikut.</p>
-                        <form id="miniLabForm" class="mt-2">
-                            <div class="form-group"><label for="destination">Destination Network</label><input
-                                    id="destination" placeholder="contoh: 192.168.x.0"></div>
-                            <div class="form-group"><label for="mask">Subnet Mask</label><input id="mask"
-                                    placeholder="255.255.255.0"></div>
-                            <div class="form-group"><label for="nextHop">Next Hop</label><input id="nextHop"
-                                    placeholder="10.10.10.x"></div>
-                            <div class="hero-actions"><button class="btn btn-primary" type="submit">Validasi
-                                    Route</button><button class="btn btn-outline" type="button" id="fillExample">Isi
-                                    contoh benar</button></div>
-                        </form>
-                        <div id="miniLabFeedback" class="alert mt-2">Masukkan konfigurasi lalu klik Validasi Route.
-                        </div>
-                    </div>
+            <div>
+              <div class="card">
+                <h3>Informasi Topologi</h3>
+                <ul class="list">
+                  <li>
+                    <span class="check">1</span>
+                    <div><strong>LAN 1</strong><br />192.168.1.0/24</div>
+                  </li>
+                  <li>
+                    <span class="check">2</span>
                     <div>
-                        <div class="card">
-                            <h3>Informasi Topologi</h3>
-                            <ul class="list">
-                                <li><span class="check">1</span>
-                                    <div><strong>LAN 1</strong><br>192.168.1.0/24</div>
-                                </li>
-                                <li><span class="check">2</span>
-                                    <div><strong>Antarrouter</strong><br>R1 10.10.10.1/30 — R2 10.10.10.2/30</div>
-                                </li>
-                                <li><span class="check">3</span>
-                                    <div><strong>LAN 2</strong><br>192.168.2.0/24</div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="terminal mt-2">R1(config)# ip route [DESTINATION] [MASK] [NEXT-HOP]</div>
+                      <strong>Antarrouter</strong><br />R1 10.10.10.1/30 — R2
+                      10.10.10.2/30
                     </div>
-                </div>
-                <div class="footer-note">RoutingLab · Teknologi Pendidikan · Fatih Nur Faiq</div>
+                  </li>
+                  <li>
+                    <span class="check">3</span>
+                    <div><strong>LAN 2</strong><br />192.168.2.0/24</div>
+                  </li>
+                </ul>
+              </div>
+              <div class="terminal mt-2">
+                R1(config)# ip route [DESTINATION] [MASK] [NEXT-HOP]
+              </div>
             </div>
-        </main>
+          </div>
+          <div class="footer-note">
+            RoutingLab · Teknologi Pendidikan · Fatih Nur Faiq
+          </div>
+        </div>
+      </main>
     </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js"></script>
-<script src="js/auth.js"></script><script src="js/bootstrap.js"></script>
-</body>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/bootstrap.js"></script>
+  </body>
 </html>

@@ -70,12 +70,11 @@ if (!form || !submitButton || !result) {
 } else {
   questions.forEach((item, idx) => {
     const wrap = document.createElement("fieldset");
-    wrap.className = "card";
+    wrap.className = "card quiz-card";
     wrap.style.border = "1px solid #d7e2ef";
     wrap.style.marginBottom = "1rem";
     const legend = document.createElement("legend");
-    legend.style.fontWeight = "600";
-    legend.style.padding = "0 0.4rem";
+    legend.className = "quiz-legend";
     legend.textContent = `${idx + 1}. ${item.q}`;
     wrap.appendChild(legend);
     item.options.forEach((option, optionIndex) => {
@@ -85,7 +84,13 @@ if (!form || !submitButton || !result) {
       radio.type = "radio";
       radio.name = `q${idx}`;
       radio.value = String(optionIndex);
-      label.append(radio, document.createTextNode(` ${option}`));
+      const badge = document.createElement("span");
+      badge.className = "quiz-choice-badge";
+      badge.textContent = String.fromCharCode(65 + optionIndex);
+      const optionText = document.createElement("span");
+      optionText.className = "quiz-option-text";
+      optionText.textContent = option;
+      label.append(radio, badge, optionText);
       wrap.appendChild(label);
     });
     form.appendChild(wrap);

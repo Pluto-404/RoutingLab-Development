@@ -1,89 +1,130 @@
 <!doctype html>
 <html lang="id" class="auth-pending">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Troubleshooting Lab | RoutingLab</title>
-    <link rel="icon" href="assets/logo.svg">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css"><link rel="stylesheet" href="css/sprint4a.css">
-<link rel="stylesheet" href="css/sprint6.css"><link rel="stylesheet" href="css/ui-polish.css">
-</head>
+    <link rel="icon" href="assets/logo.svg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/sprint4a.css" />
+    <link rel="stylesheet" href="css/sprint6.css" />
+    <link rel="stylesheet" href="css/ui-polish.css" />
+    <link rel="stylesheet" href="css/bootstrap-blue.css" />
+  </head>
 
-<body data-required-role="siswa" data-page-script="troubleshooting">
+  <body data-required-role="siswa" data-page-script="troubleshooting">
     <div class="shell">
-        <button class="mobile-menu-button" type="button" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="appSidebar">☰ <span>Menu RoutingLab</span></button><div class="sidebar-scrim" hidden></div><aside class="sidebar" id="appSidebar">
-            <div class="brand">
-                <div class="brand-mark">RL</div>
-                <div>
-                    <h1>RoutingLab</h1><small>Interactive Learning</small>
-                </div>
+      <button
+        class="mobile-menu-button"
+        type="button"
+        aria-label="Buka menu navigasi"
+        aria-expanded="false"
+        aria-controls="appSidebar"
+      >
+        ☰ <span>Menu RoutingLab</span>
+      </button>
+      <div class="sidebar-scrim" hidden></div>
+      <aside class="sidebar" id="appSidebar">
+        <div class="brand">
+          <div class="brand-mark">RL</div>
+          <div>
+            <h1>RoutingLab</h1>
+            <small>Interactive Learning</small>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="dashboard-siswa.html">Dashboard</a
+          ><a href="materi.html">Materi</a
+          ><a href="visualisasi.html">Visualisasi</a
+          ><a href="mini-lab.html">Mini Lab</a
+          ><a href="cli-lab.html" class="nav-lab">⌘ CLI Lab </a
+          ><a href="troubleshooting.html">Troubleshooting</a
+          ><a href="evaluasi.html">Evaluasi</a
+          ><a href="progress.html">Progress</a
+          ><a href="akun.html">Akun & Kelas</a
+          ><a href="tentang.html">Tentang</a>
+        </nav>
+        <div class="sidebar-footer">
+          <div class="user-chip">
+            <strong data-user-name></strong><br /><span data-user-role></span> ·
+            <span data-class-code></span>
+          </div>
+          <button class="btn btn-light" data-logout>Keluar</button>
+        </div>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h2>Troubleshooting Lab</h2>
+            <div class="meta">Analisis gejala sebelum memilih tindakan</div>
+          </div>
+          <span class="badge">Supabase Connected</span>
+        </header>
+        <div class="content">
+          <div class="grid grid-2">
+            <div class="card">
+              <span class="badge danger">Kasus Gangguan</span>
+              <h3>PC0 gagal ping PC1</h3>
+              <p>Gejala yang diketahui:</p>
+              <ul class="list mt-2">
+                <li>
+                  <span class="check">✓</span>
+                  <div>PC0 dapat ping gateway 192.168.1.1</div>
+                </li>
+                <li>
+                  <span class="check">✓</span>
+                  <div>Link R1–R2 berstatus up/up</div>
+                </li>
+                <li>
+                  <span class="check">✓</span>
+                  <div>R1 memiliki route menuju 192.168.2.0/24</div>
+                </li>
+                <li>
+                  <span class="check">!</span>
+                  <div>Ping PC0 → PC1 timeout</div>
+                </li>
+              </ul>
+              <div class="terminal mt-2">
+                R1# show ip route S 192.168.2.0/24 [1/0] via 10.10.10.2 R2# show
+                ip route C 192.168.2.0/24 is directly connected C 10.10.10.0/30
+                is directly connected [tidak ada route ke 192.168.1.0/24]
+              </div>
             </div>
-            <nav class="nav"><a href="dashboard-siswa.html">Dashboard</a><a href="materi.html">Materi</a><a
-                    href="visualisasi.html">Visualisasi</a><a href="mini-lab.html">Mini Lab</a><a href="cli-lab.html" class="nav-lab">⌘ CLI Lab </a><a
-                    href="troubleshooting.html">Troubleshooting</a><a href="evaluasi.html">Evaluasi</a><a
-                    href="progress.html">Progress</a><a href="akun.html">Akun & Kelas</a><a href="tentang.html">Tentang</a></nav>
-            <div class="sidebar-footer">
-                <div class="user-chip"><strong data-user-name></strong><br><span data-user-role></span> · <span
-                        data-class-code></span></div><button class="btn btn-light" data-logout>Keluar</button>
+            <div class="card">
+              <h3>Apa penyebab paling mungkin?</h3>
+              <form id="tsForm">
+                <label class="quiz-option"
+                  ><input type="radio" name="cause" value="cable" /> Kabel PC0
+                  harus crossover.</label
+                ><label class="quiz-option"
+                  ><input type="radio" name="cause" value="ip-pc0" /> Nama PC0
+                  salah.</label
+                ><label class="quiz-option"
+                  ><input type="radio" name="cause" value="route-r2" /> R2 belum
+                  memiliki route kembali menuju LAN 1.</label
+                ><label class="quiz-option"
+                  ><input type="radio" name="cause" value="reload" /> Router
+                  harus di-reload sebelum routing bekerja.</label
+                ><button class="btn btn-primary" type="submit">
+                  Periksa Jawaban
+                </button>
+              </form>
+              <div id="tsFeedback" class="alert mt-2">
+                Gunakan data yang tersedia. Jangan menebak tanpa membaca routing
+                table.
+              </div>
             </div>
-        </aside>
-        <main class="main">
-            <header class="topbar">
-                <div>
-                    <h2>Troubleshooting Lab</h2>
-                    <div class="meta">Analisis gejala sebelum memilih tindakan</div>
-                </div><span class="badge">Supabase Connected</span>
-            </header>
-            <div class="content">
-                <div class="grid grid-2">
-                    <div class="card"><span class="badge danger">Kasus Gangguan</span>
-                        <h3>PC0 gagal ping PC1</h3>
-                        <p>Gejala yang diketahui:</p>
-                        <ul class="list mt-2">
-                            <li><span class="check">✓</span>
-                                <div>PC0 dapat ping gateway 192.168.1.1</div>
-                            </li>
-                            <li><span class="check">✓</span>
-                                <div>Link R1–R2 berstatus up/up</div>
-                            </li>
-                            <li><span class="check">✓</span>
-                                <div>R1 memiliki route menuju 192.168.2.0/24</div>
-                            </li>
-                            <li><span class="check">!</span>
-                                <div>Ping PC0 → PC1 timeout</div>
-                            </li>
-                        </ul>
-                        <div class="terminal mt-2">R1# show ip route
-                            S 192.168.2.0/24 [1/0] via 10.10.10.2
-
-                            R2# show ip route
-                            C 192.168.2.0/24 is directly connected
-                            C 10.10.10.0/30 is directly connected
-                            [tidak ada route ke 192.168.1.0/24]</div>
-                    </div>
-                    <div class="card">
-                        <h3>Apa penyebab paling mungkin?</h3>
-                        <form id="tsForm"><label class="quiz-option"><input type="radio" name="cause" value="cable">
-                                Kabel PC0 harus crossover.</label><label class="quiz-option"><input type="radio"
-                                    name="cause" value="ip-pc0"> Nama PC0 salah.</label><label
-                                class="quiz-option"><input type="radio" name="cause" value="route-r2"> R2 belum memiliki
-                                route kembali menuju LAN 1.</label><label class="quiz-option"><input type="radio"
-                                    name="cause" value="reload"> Router harus di-reload sebelum routing
-                                bekerja.</label><button class="btn btn-primary" type="submit">Periksa Jawaban</button>
-                        </form>
-                        <div id="tsFeedback" class="alert mt-2">Gunakan data yang tersedia. Jangan menebak tanpa membaca
-                            routing table.</div>
-                    </div>
-                </div>
-                <div class="footer-note">RoutingLab · Teknologi Pendidikan · Fatih Nur Faiq</div>
-            </div>
-        </main>
+          </div>
+          <div class="footer-note">
+            RoutingLab · Teknologi Pendidikan · Fatih Nur Faiq
+          </div>
+        </div>
+      </main>
     </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js"></script>
-<script src="js/auth.js"></script><script src="js/bootstrap.js"></script>
-</body>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/bootstrap.js"></script>
+  </body>
 </html>

@@ -1,26 +1,168 @@
-<!doctype html><html lang="id"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Akun & Kelas | RoutingLab</title><link rel="icon" href="assets/logo.svg">
-<link rel="stylesheet" href="css/supabase-portal.css">
-<link rel="stylesheet" href="css/portal-polish.css">
-</head><body class="account-page">
-<main class="layout">
-<header class="head"><a class="back-link" href="index.html">← Kembali ke RoutingLab</a><div class="head-line"><div><span class="eyebrow">ROUTINGLAB / AKUN</span><h1>Akun <span>& Kelas</span></h1><p>Kelola akun, kelas, dan progres pembelajaran di satu tempat.</p></div><span class="head-pill">SUPABASE CONNECTED</span></div></header>
-<div id="portalMessage" class="portal-message" role="status" aria-live="polite"></div>
-<section id="authArea" class="columns">
-<article class="panel login-panel"><span class="eyebrow">SUDAH MEMILIKI AKUN?</span><h2>Masuk</h2><p>Gunakan email yang terdaftar.</p>
-<form id="loginForm"><label>Email<input id="loginEmail" type="email" autocomplete="email" placeholder="email@contoh.com" required></label><label>Password<input id="loginPassword" type="password" autocomplete="current-password" placeholder="Masukkan password" required></label><button type="submit">Masuk ke akun →</button></form></article>
-<article class="panel register-panel" id="daftar"><span class="eyebrow">BELUM PUNYA AKUN?</span><h2>Daftar Siswa</h2><p>Guru didaftarkan melalui proses khusus, bukan formulir publik.</p>
-<form id="registerForm"><label>Nama lengkap<input id="regName" minlength="2" maxlength="100" placeholder="Nama siswa" required></label><label>Email<input id="regEmail" type="email" autocomplete="email" placeholder="email@contoh.com" required></label><label>Password (minimal 8 karakter)<input id="regPassword" type="password" autocomplete="new-password" minlength="8" placeholder="Buat password baru" required></label><button type="submit">Daftar sebagai siswa →</button></form></article>
-</section>
-<section id="workspace" class="panel workspace" hidden>
- <div class="toolbar"><div><span class="eyebrow">AKUN AKTIF</span><h2 id="who">Pengguna</h2></div><div class="toolbar-actions"><a id="dashboardLink" class="dashboard-link" href="dashboard-siswa.html">Buka Dashboard</a><button type="button" id="logoutBtn" class="secondary">Keluar</button></div></div>
- <div id="studentArea" hidden><h3>Kelas saya</h3><p id="myClasses">Memuat kelas...</p><form id="joinClassForm" class="form-inline"><label>Kode kelas dari guru<input id="classCode" required maxlength="20" placeholder="Contoh: ABC123"></label><button type="submit">Gabung kelas</button></form>
- <hr><h3>Uji progres latihan</h3><p class="hint">Progres aktivitas pembelajaran tersimpan di Supabase. Skor kuis masih merupakan evaluasi latihan, bukan nilai resmi.</p><form id="saveProgressForm" class="form-inline"><label>Aktivitas<select id="activity"><option value="materi">Materi</option><option value="visualisasi">Visualisasi</option><option value="miniLab">Mini Lab</option><option value="troubleshooting">Troubleshooting</option><option value="evaluasi">Evaluasi</option><option value="cliLab">CLI Lab</option></select></label><label>Persentase<input id="percent" type="number" min="0" max="100" value="25" required></label><button type="submit">Simpan</button></form><p id="savedProgress"></p></div>
- <div id="teacherArea" hidden><h3>Kelola kelas guru</h3><form id="createClassForm" class="form-inline"><label>Nama kelas<input id="className" required maxlength="100" placeholder="X TJKT A"></label><button type="submit">Buat kode kelas</button></form><p id="classList">Memuat...</p></div>
- <p id="teacherNote" class="hint">Akun guru diberikan hak akses oleh administrator database.</p>
-</section>
-<footer class="account-footer">RoutingLab · Virtual Networking Laboratory</footer>
-</main>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script><script src="js/supabase-config.js"></script><script src="js/auth.js"></script><script src="js/supabase-portal.js"></script>
-</body></html>
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Akun & Kelas | RoutingLab</title>
+    <link rel="icon" href="assets/logo.svg" />
+    <link rel="stylesheet" href="css/supabase-portal.css" />
+    <link rel="stylesheet" href="css/portal-polish.css" />
+    <link rel="stylesheet" href="css/bootstrap-blue.css" />
+  </head>
+  <body class="account-page">
+    <main class="layout">
+      <header class="head">
+        <a class="back-link" href="index.html">← Kembali ke RoutingLab</a>
+        <div class="head-line">
+          <div>
+            <span class="eyebrow">ROUTINGLAB / AKUN</span>
+            <h1>Akun <span>& Kelas</span></h1>
+            <p>Kelola akun, kelas, dan progres pembelajaran di satu tempat.</p>
+          </div>
+          <span class="head-pill">SUPABASE CONNECTED</span>
+        </div>
+      </header>
+      <div
+        id="portalMessage"
+        class="portal-message"
+        role="status"
+        aria-live="polite"
+      ></div>
+      <section id="authArea" class="columns">
+        <article class="panel login-panel">
+          <span class="eyebrow">SUDAH MEMILIKI AKUN?</span>
+          <h2>Masuk</h2>
+          <p>Gunakan email yang terdaftar.</p>
+          <form id="loginForm">
+            <label
+              >Email<input
+                id="loginEmail"
+                type="email"
+                autocomplete="email"
+                placeholder="email@contoh.com"
+                required /></label
+            ><label
+              >Password<input
+                id="loginPassword"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Masukkan password"
+                required /></label
+            ><button type="submit">Masuk ke akun →</button>
+          </form>
+        </article>
+        <article class="panel register-panel" id="daftar">
+          <span class="eyebrow">BELUM PUNYA AKUN?</span>
+          <h2>Daftar Siswa</h2>
+          <p>Guru didaftarkan melalui proses khusus, bukan formulir publik.</p>
+          <form id="registerForm">
+            <label
+              >Nama lengkap<input
+                id="regName"
+                minlength="2"
+                maxlength="100"
+                placeholder="Nama siswa"
+                required /></label
+            ><label
+              >Email<input
+                id="regEmail"
+                type="email"
+                autocomplete="email"
+                placeholder="email@contoh.com"
+                required /></label
+            ><label
+              >Password (minimal 8 karakter)<input
+                id="regPassword"
+                type="password"
+                autocomplete="new-password"
+                minlength="8"
+                placeholder="Buat password baru"
+                required /></label
+            ><button type="submit">Daftar sebagai siswa →</button>
+          </form>
+        </article>
+      </section>
+      <section id="workspace" class="panel workspace" hidden>
+        <div class="toolbar">
+          <div>
+            <span class="eyebrow">AKUN AKTIF</span>
+            <h2 id="who">Pengguna</h2>
+          </div>
+          <div class="toolbar-actions">
+            <a
+              id="dashboardLink"
+              class="dashboard-link"
+              href="dashboard-siswa.html"
+              >Buka Dashboard</a
+            ><button type="button" id="logoutBtn" class="secondary">
+              Keluar
+            </button>
+          </div>
+        </div>
+        <div id="studentArea" hidden>
+          <h3>Kelas saya</h3>
+          <p id="myClasses">Memuat kelas...</p>
+          <form id="joinClassForm" class="form-inline">
+            <label
+              >Kode kelas dari guru<input
+                id="classCode"
+                required
+                maxlength="20"
+                placeholder="Contoh: ABC123" /></label
+            ><button type="submit">Gabung kelas</button>
+          </form>
+          <hr />
+          <h3>Uji progres latihan</h3>
+          <p class="hint">
+            Progres aktivitas pembelajaran tersimpan di Supabase. Skor kuis
+            masih merupakan evaluasi latihan, bukan nilai resmi.
+          </p>
+          <form id="saveProgressForm" class="form-inline">
+            <label
+              >Aktivitas<select id="activity">
+                <option value="materi">Materi</option>
+                <option value="visualisasi">Visualisasi</option>
+                <option value="miniLab">Mini Lab</option>
+                <option value="troubleshooting">Troubleshooting</option>
+                <option value="evaluasi">Evaluasi</option>
+                <option value="cliLab">CLI Lab</option>
+              </select></label
+            ><label
+              >Persentase<input
+                id="percent"
+                type="number"
+                min="0"
+                max="100"
+                value="25"
+                required /></label
+            ><button type="submit">Simpan</button>
+          </form>
+          <p id="savedProgress"></p>
+        </div>
+        <div id="teacherArea" hidden>
+          <h3>Kelola kelas guru</h3>
+          <form id="createClassForm" class="form-inline">
+            <label
+              >Nama kelas<input
+                id="className"
+                required
+                maxlength="100"
+                placeholder="X TJKT A" /></label
+            ><button type="submit">Buat kode kelas</button>
+          </form>
+          <p id="classList">Memuat...</p>
+        </div>
+        <p id="teacherNote" class="hint">
+          Akun guru diberikan hak akses oleh administrator database.
+        </p>
+      </section>
+      <footer class="account-footer">
+        RoutingLab · Virtual Networking Laboratory
+      </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/supabase-portal.js"></script>
+  </body>
+</html>

@@ -1,65 +1,101 @@
 <!doctype html>
 <html lang="id" class="auth-pending">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Tentang RoutingLab</title>
-    <link rel="icon" href="assets/logo.svg">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css"><link rel="stylesheet" href="css/sprint4a.css">
-<link rel="stylesheet" href="css/sprint6.css"><link rel="stylesheet" href="css/ui-polish.css">
-</head>
+    <link rel="icon" href="assets/logo.svg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/sprint4a.css" />
+    <link rel="stylesheet" href="css/sprint6.css" />
+    <link rel="stylesheet" href="css/ui-polish.css" />
+    <link rel="stylesheet" href="css/bootstrap-blue.css" />
+  </head>
 
-<body data-required-role="guru" data-page-script="none">
+  <body data-required-role="guru" data-page-script="none">
     <div class="shell">
-        <button class="mobile-menu-button" type="button" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="appSidebar">☰ <span>Menu RoutingLab</span></button><div class="sidebar-scrim" hidden></div><aside class="sidebar" id="appSidebar">
-            <div class="brand">
-                <div class="brand-mark">RL</div>
-                <div>
-                    <h1>RoutingLab</h1><small>Guru/Admin</small>
-                </div>
+      <button
+        class="mobile-menu-button"
+        type="button"
+        aria-label="Buka menu navigasi"
+        aria-expanded="false"
+        aria-controls="appSidebar"
+      >
+        ☰ <span>Menu RoutingLab</span>
+      </button>
+      <div class="sidebar-scrim" hidden></div>
+      <aside class="sidebar" id="appSidebar">
+        <div class="brand">
+          <div class="brand-mark">RL</div>
+          <div>
+            <h1>RoutingLab</h1>
+            <small>Guru/Admin</small>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="dashboard-guru.html">Dashboard Guru</a
+          ><a href="tentang-guru.html">Tentang RoutingLab</a
+          ><a href="akun.html">Akun & Kelas</a>
+        </nav>
+        <div class="sidebar-footer">
+          <div class="user-chip">
+            <strong data-user-name></strong><br /><span data-user-role></span> ·
+            <span data-class-code></span>
+          </div>
+          <button class="btn btn-light" data-logout>Keluar</button>
+        </div>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h2>Tentang RoutingLab</h2>
+            <div class="meta">Monitoring guru berbasis kelas dan Supabase</div>
+          </div>
+          <span class="badge">Supabase Connected</span>
+        </header>
+        <div class="content">
+          <div class="grid grid-2">
+            <div class="card">
+              <h3>Tujuan Dashboard Guru</h3>
+              <p>
+                Guru memantau anggota kelas dan ringkasan progres latihan siswa
+                dari Supabase.
+              </p>
             </div>
-            <nav class="nav"><a href="dashboard-guru.html">Dashboard Guru</a><a href="tentang-guru.html">Tentang RoutingLab</a><a href="akun.html">Akun & Kelas</a></nav>
-            <div class="sidebar-footer">
-                <div class="user-chip"><strong data-user-name></strong><br><span data-user-role></span> · <span
-                        data-class-code></span></div><button class="btn btn-light" data-logout>Keluar</button>
+            <div class="card">
+              <h3>Batasan</h3>
+              <p>
+                Data monitoring berasal dari database latihan kelas. Hasilnya
+                bukan nilai ujian resmi yang diverifikasi server.
+              </p>
             </div>
-        </aside>
-        <main class="main">
-            <header class="topbar">
-                <div>
-                    <h2>Tentang RoutingLab</h2>
-                    <div class="meta">Monitoring guru berbasis kelas dan Supabase</div>
-                </div><span class="badge">Supabase Connected</span>
-            </header>
-            <div class="content">
-                <div class="grid grid-2">
-                    <div class="card">
-                        <h3>Tujuan Dashboard Guru</h3>
-                        <p>Guru memantau anggota kelas dan ringkasan progres latihan siswa dari Supabase.
-                        </p>
-                    </div>
-                    <div class="card">
-                        <h3>Batasan</h3>
-                        <p>Data monitoring berasal dari database latihan kelas. Hasilnya bukan nilai ujian resmi yang diverifikasi server.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Arsitektur</h3>
-                        <p>Frontend HTML/CSS/JavaScript terhubung ke Supabase Auth dan PostgreSQL, dengan Cloudflare Pages sebagai hosting yang direncanakan.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Keamanan</h3>
-                        <p>Autentikasi Supabase dan RLS sudah digunakan. Data monitoring tersedia lewat fungsi database yang memeriksa identitas guru pemilik kelas.</p>
-                    </div>
-                </div>
-                <div class="footer-note">RoutingLab · Teknologi Pendidikan · Fatih Nur Faiq</div>
+            <div class="card">
+              <h3>Arsitektur</h3>
+              <p>
+                Frontend HTML/CSS/JavaScript terhubung ke Supabase Auth dan
+                PostgreSQL, dengan Cloudflare Pages sebagai hosting yang
+                direncanakan.
+              </p>
             </div>
-        </main>
+            <div class="card">
+              <h3>Keamanan</h3>
+              <p>
+                Autentikasi Supabase dan RLS sudah digunakan. Data monitoring
+                tersedia lewat fungsi database yang memeriksa identitas guru
+                pemilik kelas.
+              </p>
+            </div>
+          </div>
+          <div class="footer-note">
+            RoutingLab · Teknologi Pendidikan · Fatih Nur Faiq
+          </div>
+        </div>
+      </main>
     </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js"></script>
-<script src="js/auth.js"></script><script src="js/bootstrap.js"></script>
-</body>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/bootstrap.js"></script>
+  </body>
 </html>

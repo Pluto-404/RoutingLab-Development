@@ -1,1 +1,99 @@
-.s4b-tools{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin:12px 0;padding:14px;background:#f1f7fc;border:1px solid #dbe7f2;border-radius:13px}.s4b-tools label{width:100%;font-size:13px}.s4b-tools select{flex:1 1 200px;min-width:0;padding:10px;border:1px solid #b8cadc;border-radius:9px;color:#123452;background:#fff;font:inherit}.s4b-tools button{flex:1 1 auto;margin-left:0}.packet-track{width:100%;display:flex;gap:6px;align-items:center;flex-wrap:wrap;min-height:36px}.packet-node{background:#dfeefe;border:1px solid #92b8d6;color:#173b5e;padding:7px 9px;border-radius:8px;font-size:12px;font-weight:750;animation:packetShow .32s both}.packet-arrow{color:#30759e;font-weight:bold}.packet-diagnosis{width:100%;margin:0;background:#fff;border-radius:9px;padding:10px 12px;font-size:13px;overflow-wrap:anywhere}.packet-ok{border-left:4px solid #1b9a68;color:#106747}.packet-fail{border-left:4px solid #d27a39;color:#8f4322}@keyframes packetShow{from{transform:translateY(7px);opacity:0}to{transform:translateY(0);opacity:1}}@media(max-width:700px){.s4b-tools{padding:12px}.s4b-tools button{flex-basis:100%;min-height:43px}.packet-track{gap:4px}.packet-node{font-size:11px;padding:6px}}@media(prefers-reduced-motion:reduce){.packet-node{animation:none}}
+.s4b-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px;
+  margin: 12px 0;
+  padding: 14px;
+  background: #f1f7fc;
+  border: 1px solid #dbe7f2;
+  border-radius: 13px;
+}
+.s4b-tools label {
+  width: 100%;
+  font-size: 13px;
+}
+.s4b-tools select {
+  flex: 1 1 200px;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid #b8cadc;
+  border-radius: 9px;
+  color: #123452;
+  background: #fff;
+  font: inherit;
+}
+.s4b-tools button {
+  flex: 1 1 auto;
+  margin-left: 0;
+}
+.packet-track {
+  width: 100%;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+  min-height: 36px;
+}
+.packet-node {
+  background: #dfeefe;
+  border: 1px solid #92b8d6;
+  color: #173b5e;
+  padding: 7px 9px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 750;
+  animation: packetShow 0.32s both;
+}
+.packet-arrow {
+  color: #30759e;
+  font-weight: bold;
+}
+.packet-diagnosis {
+  width: 100%;
+  margin: 0;
+  background: #fff;
+  border-radius: 9px;
+  padding: 10px 12px;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.packet-ok {
+  border-left: 4px solid #1b9a68;
+  color: #106747;
+}
+.packet-fail {
+  border-left: 4px solid #d27a39;
+  color: #8f4322;
+}
+@keyframes packetShow {
+  from {
+    transform: translateY(7px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@media (max-width: 700px) {
+  .s4b-tools {
+    padding: 12px;
+  }
+  .s4b-tools button {
+    flex-basis: 100%;
+    min-height: 43px;
+  }
+  .packet-track {
+    gap: 4px;
+  }
+  .packet-node {
+    font-size: 11px;
+    padding: 6px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .packet-node {
+    animation: none;
+  }
+}

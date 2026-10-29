@@ -1,142 +1,194 @@
 <!doctype html>
 <html lang="id" class="auth-pending">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Materi Routing Statis | RoutingLab</title>
-    <link rel="icon" href="assets/logo.svg">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css"><link rel="stylesheet" href="css/sprint4a.css">
-<link rel="stylesheet" href="css/sprint6.css"><link rel="stylesheet" href="css/ui-polish.css">
-</head>
+    <link rel="icon" href="assets/logo.svg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/sprint4a.css" />
+    <link rel="stylesheet" href="css/sprint6.css" />
+    <link rel="stylesheet" href="css/ui-polish.css" />
+    <link rel="stylesheet" href="css/bootstrap-blue.css" />
+  </head>
 
-<body data-required-role="siswa" data-page-script="materi">
+  <body data-required-role="siswa" data-page-script="materi">
     <div class="shell">
-        <button class="mobile-menu-button" type="button" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="appSidebar">☰ <span>Menu RoutingLab</span></button><div class="sidebar-scrim" hidden></div><aside class="sidebar" id="appSidebar">
-            <div class="brand">
-                <div class="brand-mark">RL</div>
-                <div>
-                    <h1>RoutingLab</h1><small>Interactive Learning</small>
-                </div>
+      <button
+        class="mobile-menu-button"
+        type="button"
+        aria-label="Buka menu navigasi"
+        aria-expanded="false"
+        aria-controls="appSidebar"
+      >
+        ☰ <span>Menu RoutingLab</span>
+      </button>
+      <div class="sidebar-scrim" hidden></div>
+      <aside class="sidebar" id="appSidebar">
+        <div class="brand">
+          <div class="brand-mark">RL</div>
+          <div>
+            <h1>RoutingLab</h1>
+            <small>Interactive Learning</small>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="dashboard-siswa.html">Dashboard</a
+          ><a href="materi.html">Materi</a
+          ><a href="visualisasi.html">Visualisasi</a
+          ><a href="mini-lab.html">Mini Lab</a
+          ><a href="cli-lab.html" class="nav-lab">⌘ CLI Lab </a
+          ><a href="troubleshooting.html">Troubleshooting</a
+          ><a href="evaluasi.html">Evaluasi</a
+          ><a href="progress.html">Progress</a
+          ><a href="akun.html">Akun & Kelas</a
+          ><a href="tentang.html">Tentang</a>
+        </nav>
+        <div class="sidebar-footer">
+          <div class="user-chip">
+            <strong data-user-name></strong><br /><span data-user-role></span> ·
+            <span data-class-code></span>
+          </div>
+          <button class="btn btn-light" data-logout>Keluar</button>
+        </div>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h2>Materi Routing Statis</h2>
+            <div class="meta">
+              Konsep inti sebelum praktik Cisco Packet Tracer
             </div>
-            <nav class="nav"><a href="dashboard-siswa.html">Dashboard</a><a href="materi.html">Materi</a><a
-                    href="visualisasi.html">Visualisasi</a><a href="mini-lab.html">Mini Lab</a><a href="cli-lab.html" class="nav-lab">⌘ CLI Lab </a><a
-                    href="troubleshooting.html">Troubleshooting</a><a href="evaluasi.html">Evaluasi</a><a
-                    href="progress.html">Progress</a><a href="akun.html">Akun & Kelas</a><a href="tentang.html">Tentang</a></nav>
-            <div class="sidebar-footer">
-                <div class="user-chip"><strong data-user-name></strong><br><span data-user-role></span> · <span
-                        data-class-code></span></div><button class="btn btn-light" data-logout>Keluar</button>
+          </div>
+          <span class="badge">Supabase Connected</span>
+        </header>
+        <div class="content">
+          <section class="hero">
+            <span class="badge">Materi Inti</span>
+            <h2>Bagaimana router memilih jalur?</h2>
+            <p>
+              Router membaca alamat IP tujuan dan mencocokkannya dengan tabel
+              routing. Jika tidak ada rute yang cocok, paket tidak dapat
+              diteruskan.
+            </p>
+          </section>
+          <div class="section-title">
+            <h3>Konsep Kunci</h3>
+          </div>
+          <div class="grid grid-2">
+            <div class="card">
+              <h3>Router</h3>
+              <p>
+                Perangkat Layer 3 yang meneruskan paket antarjaringan
+                berdasarkan alamat IP tujuan.
+              </p>
             </div>
-        </aside>
-        <main class="main">
-            <header class="topbar">
-                <div>
-                    <h2>Materi Routing Statis</h2>
-                    <div class="meta">Konsep inti sebelum praktik Cisco Packet Tracer</div>
-                </div><span class="badge">Supabase Connected</span>
-            </header>
-            <div class="content">
-                <section class="hero"><span class="badge">Materi Inti</span>
-                    <h2>Bagaimana router memilih jalur?</h2>
-                    <p>Router membaca alamat IP tujuan dan mencocokkannya dengan tabel routing. Jika tidak ada rute yang
-                        cocok, paket tidak dapat diteruskan.</p>
-                </section>
-                <div class="section-title">
-                    <h3>Konsep Kunci</h3>
-                </div>
-                <div class="grid grid-2">
-                    <div class="card">
-                        <h3>Router</h3>
-                        <p>Perangkat Layer 3 yang meneruskan paket antarjaringan berdasarkan alamat IP tujuan.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Routing Table</h3>
-                        <p>Daftar jaringan tujuan beserta next hop atau interface keluar yang digunakan router.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Static Routing</h3>
-                        <p>Rute dikonfigurasi secara manual oleh administrator. Cocok untuk jaringan kecil dan stabil.
-                        </p>
-                    </div>
-                    <div class="card">
-                        <h3>Next Hop</h3>
-                        <p>Alamat IP router berikutnya yang harus menerima paket agar bergerak menuju jaringan tujuan.
-                        </p>
-                    </div>
-                </div>
-                <div class="section-title">
-                    <h3>Topologi Praktik</h3>
-                </div>
-                <div class="card">
-                    <div class="topology">
-                        <div class="link"></div>
-                        <div class="node">
-                            <div class="node-icon">🖥️</div><strong>PC0</strong><small>192.168.1.10/24</small>
-                        </div>
-                        <div class="node">
-                            <div class="node-icon">🔀</div><strong>Switch0</strong><small>LAN 1</small>
-                        </div>
-                        <div class="node">
-                            <div class="node-icon">📡</div><strong>R1</strong><small>10.10.10.1/30</small>
-                        </div>
-                        <div class="node">
-                            <div class="node-icon">📡</div><strong>R2</strong><small>10.10.10.2/30</small>
-                        </div>
-                        <div class="node">
-                            <div class="node-icon">🔀</div><strong>Switch1</strong><small>LAN 2</small>
-                        </div>
-                        <div class="node">
-                            <div class="node-icon">🖥️</div><strong>PC1</strong><small>192.168.2.10/24</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="section-title">
-                    <h3>Perintah Cisco IOS</h3>
-                </div>
-                <div class="terminal">R1(config)# interface g0/0
-                    R1(config-if)# ip address 192.168.1.1 255.255.255.0
-                    R1(config-if)# no shutdown
-
-                    R1(config)# interface g0/1
-                    R1(config-if)# ip address 10.10.10.1 255.255.255.252
-                    R1(config-if)# no shutdown
-
-                    R1(config)# ip route 192.168.2.0 255.255.255.0 10.10.10.2
-
-                    R1# show ip route
-                    R1# ping 192.168.2.10</div>
-                <div class="section-title">
-                    <h3>Urutan Belajar</h3>
-                </div>
-                <div class="card lesson-block">
-                    <div class="lesson-step">
-                        <h4>1. Konfigurasi interface</h4>
-                        <p>Pastikan IP dan subnet mask benar, lalu aktifkan interface dengan <span class="code-chip">no
-                                shutdown</span>.</p>
-                    </div>
-                    <div class="lesson-step">
-                        <h4>2. Tambahkan static route</h4>
-                        <p>Tentukan destination network, subnet mask, dan next hop.</p>
-                    </div>
-                    <div class="lesson-step">
-                        <h4>3. Verifikasi</h4>
-                        <p>Gunakan <span class="code-chip">show ip interface brief</span>, <span class="code-chip">show
-                                ip route</span>, <span class="code-chip">ping</span>, dan <span
-                                class="code-chip">tracert</span>.</p>
-                    </div>
-                    <div class="lesson-step">
-                        <h4>4. Troubleshooting</h4>
-                        <p>Jika ping gagal, periksa interface, IP, gateway, route, lalu route balik.</p>
-                    </div>
-                </div>
-                <div class="footer-note">RoutingLab · Teknologi Pendidikan · Fatih Nur Faiq</div>
+            <div class="card">
+              <h3>Routing Table</h3>
+              <p>
+                Daftar jaringan tujuan beserta next hop atau interface keluar
+                yang digunakan router.
+              </p>
             </div>
-        </main>
+            <div class="card">
+              <h3>Static Routing</h3>
+              <p>
+                Rute dikonfigurasi secara manual oleh administrator. Cocok untuk
+                jaringan kecil dan stabil.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Next Hop</h3>
+              <p>
+                Alamat IP router berikutnya yang harus menerima paket agar
+                bergerak menuju jaringan tujuan.
+              </p>
+            </div>
+          </div>
+          <div class="section-title">
+            <h3>Topologi Praktik</h3>
+          </div>
+          <div class="card">
+            <div class="topology">
+              <div class="link"></div>
+              <div class="node">
+                <div class="node-icon">🖥️</div>
+                <strong>PC0</strong><small>192.168.1.10/24</small>
+              </div>
+              <div class="node">
+                <div class="node-icon">🔀</div>
+                <strong>Switch0</strong><small>LAN 1</small>
+              </div>
+              <div class="node">
+                <div class="node-icon">📡</div>
+                <strong>R1</strong><small>10.10.10.1/30</small>
+              </div>
+              <div class="node">
+                <div class="node-icon">📡</div>
+                <strong>R2</strong><small>10.10.10.2/30</small>
+              </div>
+              <div class="node">
+                <div class="node-icon">🔀</div>
+                <strong>Switch1</strong><small>LAN 2</small>
+              </div>
+              <div class="node">
+                <div class="node-icon">🖥️</div>
+                <strong>PC1</strong><small>192.168.2.10/24</small>
+              </div>
+            </div>
+          </div>
+          <div class="section-title">
+            <h3>Perintah Cisco IOS</h3>
+          </div>
+          <div class="terminal">
+            R1(config)# interface g0/0 R1(config-if)# ip address 192.168.1.1
+            255.255.255.0 R1(config-if)# no shutdown R1(config)# interface g0/1
+            R1(config-if)# ip address 10.10.10.1 255.255.255.252 R1(config-if)#
+            no shutdown R1(config)# ip route 192.168.2.0 255.255.255.0
+            10.10.10.2 R1# show ip route R1# ping 192.168.2.10
+          </div>
+          <div class="section-title">
+            <h3>Urutan Belajar</h3>
+          </div>
+          <div class="card lesson-block">
+            <div class="lesson-step">
+              <h4>1. Konfigurasi interface</h4>
+              <p>
+                Pastikan IP dan subnet mask benar, lalu aktifkan interface
+                dengan <span class="code-chip">no shutdown</span>.
+              </p>
+            </div>
+            <div class="lesson-step">
+              <h4>2. Tambahkan static route</h4>
+              <p>Tentukan destination network, subnet mask, dan next hop.</p>
+            </div>
+            <div class="lesson-step">
+              <h4>3. Verifikasi</h4>
+              <p>
+                Gunakan <span class="code-chip">show ip interface brief</span>,
+                <span class="code-chip">show ip route</span>,
+                <span class="code-chip">ping</span>, dan
+                <span class="code-chip">tracert</span>.
+              </p>
+            </div>
+            <div class="lesson-step">
+              <h4>4. Troubleshooting</h4>
+              <p>
+                Jika ping gagal, periksa interface, IP, gateway, route, lalu
+                route balik.
+              </p>
+            </div>
+          </div>
+          <div class="footer-note">
+            RoutingLab · Teknologi Pendidikan · Fatih Nur Faiq
+          </div>
+        </div>
+      </main>
     </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/supabase-config.js"></script>
-<script src="js/auth.js"></script><script src="js/bootstrap.js"></script>
-</body>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/bootstrap.js"></script>
+  </body>
 </html>
