@@ -27,8 +27,12 @@
     }
     const page=document.body.dataset.pageScript;
     if(page==='cli-lab'){
-      await addScript('js/cli-engine.js');await addScript('js/cli-lab.js');
-    } else if(page && page!=='none') await addScript('js/'+page+'.js');
+      await addScript('js/cli-engine.js');await addScript('js/cli-lab.js');await addScript('js/cli-mission.js');
+    } else if(page && page!=='none') {
+      await addScript('js/'+page+'.js');
+      if(page==='guru') await addScript('js/guru-missions.js');
+      if(page==='dashboard' && role==='siswa') await addScript('js/student-missions.js');
+    }
     else initCommon(role);
     if(page!=='cli-lab') await addScript('js/sprint4a.js');
     document.documentElement.classList.remove('auth-pending');

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/sprint7.css" />
     <link rel="stylesheet" href="css/ui-polish.css" />
     <link rel="stylesheet" href="css/bootstrap-blue.css" />
+    <link rel="stylesheet" href="css/sprint8.css" />
   </head>
 
   <body data-required-role="guru" data-page-script="guru">
@@ -165,6 +166,35 @@
               </tbody>
             </table>
           </div>
+          <div class="section-title" id="missionManagement">
+            <h3>Sprint 8 · Penugasan Misi</h3>
+            <p>Kelola latihan CLI Lab untuk masing-masing kelas</p>
+          </div>
+          <section class="card rl8-board" aria-labelledby="teacherMissionsHeading">
+            <div class="rl8-board-header">
+              <div>
+                <h3 id="teacherMissionsHeading">Beri Misi ke Kelas</h3>
+                <p class="rl8-muted">Pilih kelas dan skenario. Siswa akan melihatnya di Dashboard Siswa.</p>
+              </div>
+              <span class="badge"><span id="missionAssignmentCount">0</span> tugas aktif</span>
+            </div>
+            <form id="assignMissionForm" class="rl8-assign-form">
+              <div class="rl8-field"><label for="missionClassSelect">Kelas tujuan</label><select id="missionClassSelect" required><option value="">Memuat kelas…</option></select></div>
+              <div class="rl8-field"><label for="missionSelect">Misi CLI Lab</label><select id="missionSelect" required><option value="">Memuat misi…</option></select></div>
+              <button id="assignMissionBtn" class="btn btn-primary" type="submit" disabled>+ Tugaskan Misi</button>
+            </form>
+            <div class="rl8-board-header rl8-management-header">
+              <h3>Monitoring Penugasan</h3>
+              <button id="refreshTeacherMissions" class="btn btn-outline" type="button">↻ Perbarui</button>
+            </div>
+            <p id="teacherMissionStatus" class="rl8-status" role="status" aria-live="polite">Memuat penugasan…</p>
+            <div class="rl8-table-wrap"><table class="rl8-table"><thead><tr><th>Misi</th><th>Kelas</th><th>Status</th><th>Selesai</th><th>Memulai</th><th>Percobaan</th><th>Aksi</th></tr></thead>
+              <tbody id="teacherMissionRows"><tr><td colspan="7">Memuat data…</td></tr></tbody></table></div>
+            <p class="rl8-muted">Angka “selesai” berdasarkan hasil yang dikirim simulator browser siswa, bukan nilai ujian terverifikasi. Menonaktifkan penugasan tidak menghapus riwayat.</p>
+          </section>
+          <div class="section-title"><h3>Riwayat Pengerjaan Misi</h3><p>30 percobaan terbaru pada filter kelas monitoring di atas</p></div>
+          <div class="card rl8-table-wrap"><table class="rl8-table"><thead><tr><th>Waktu</th><th>Siswa</th><th>Misi</th><th>Hasil</th><th>Durasi</th></tr></thead>
+            <tbody id="teacherMissionAttempts"><tr><td colspan="5">Memuat riwayat…</td></tr></tbody></table></div>
           <div class="section-title">
             <h3>Arsitektur Pembelajaran</h3>
           </div>

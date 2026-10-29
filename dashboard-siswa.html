@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/sprint6.css" />
     <link rel="stylesheet" href="css/ui-polish.css" />
     <link rel="stylesheet" href="css/bootstrap-blue.css" />
+    <link rel="stylesheet" href="css/sprint8.css" />
   </head>
 
   <body data-required-role="siswa" data-page-script="dashboard">
@@ -90,6 +91,21 @@
               </p>
             </div>
             <a class="feature-action" href="cli-lab.html">Buka CLI Lab →</a>
+          </section>
+          <div class="section-title" id="misiKelas">
+            <h3>Misi dari Guru</h3>
+            <p><span id="studentMissionCount">—</span> misi yang ditugaskan ke kelasmu</p>
+          </div>
+          <section class="card rl8-board" aria-labelledby="studentMissionHeading">
+            <div class="rl8-board-header">
+              <div>
+                <h3 id="studentMissionHeading">Penugasan CLI Lab</h3>
+                <p class="rl8-muted">Kerjakan misi berdasarkan instruksi guru. Setiap percobaan tersimpan ke kelas terkait.</p>
+              </div>
+              <button type="button" id="refreshStudentMissions" class="btn btn-outline">↻ Perbarui</button>
+            </div>
+            <p id="studentMissionStatus" class="rl8-status" role="status" aria-live="polite">Memuat penugasan…</p>
+            <div id="studentMissionList" class="rl8-mission-grid"></div>
           </section>
           <div class="section-title">
             <h3>Ringkasan Progress</h3>

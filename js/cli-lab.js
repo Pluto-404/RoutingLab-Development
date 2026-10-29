@@ -139,6 +139,7 @@
       status.className = "network error";
     }
     if (typeof RoutingActivity !== 'undefined') RoutingActivity.record('cliLab', r.ok?'passed':'retry', null, r.ok?'Jalur dua arah berhasil':'Validasi misi belum berhasil');
+    if (window.RoutingCLIMission?.recordValidation) window.RoutingCLIMission.recordValidation(r.ok);
     renderStatus();
   });
   document.getElementById("resetLab").addEventListener("click", () => {
@@ -169,16 +170,17 @@
   }
   document.getElementById("sendPacket").addEventListener("click",()=>showTrace("PC0","192.168.2.10"));
   document.getElementById("sendReverse").addEventListener("click",()=>showTrace("PC1","192.168.1.10"));
-  document.getElementById("loadScenario").addEventListener("click",()=>{
-    const kind=document.getElementById("scenarioSelect").value;
-    if(!confirm("Memuat skenario akan mereset konfigurasi lab. Lanjutkan?"))return;
+  function loadScenario(kind,confirmUser=false){
+    if(confirmUser&&!confirm("Memuat skenario akan mereset konfigurasi lab. Lanjutkan?"))return;
     app.preset(kind);out.textContent="";track.textContent="";
     diagnosis.textContent="Skenario siap. Periksa interface, routing table, lalu uji paket.";
     diagnosis.className="packet-diagnosis";
     document.getElementById("feedback").textContent="Skenario baru dimuat. Silakan lakukan diagnosis.";
     document.getElementById("feedback").className="";
     sync();renderStatus();write("Skenario dimuat: "+kind,"system");
-  });
+  }
+  document.getElementById("loadScenario").addEventListener("click",()=>loadScenario(document.getElementById("scenarioSelect").value,true));
+  window.RoutingCLILab = Object.freeze({loadScenario});
   sync();
   renderStatus();
   applyViewport();
