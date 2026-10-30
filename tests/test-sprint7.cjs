@@ -25,7 +25,7 @@ vm.runInContext(source,ctx,{filename:'activity.js'});
  assert.equal(calls.length,1,'teacher cannot submit student events from UI');
  const sql=fs.readFileSync(path.join(root,'supabase/migrations/20261027_sprint7.sql'),'utf8');
  for(const section of ['ENABLE ROW LEVEL SECURITY','practice_events_self_insert','auth.uid()','c.teacher_id=auth.uid()','SECURITY DEFINER SET search_path=\'\'','REVOKE ALL ON FUNCTION public.teacher_progress_report','REVOKE ALL ON FUNCTION public.teacher_recent_events','updated_at := now()'])assert.ok(sql.includes(section),`missing database security constraint: ${section}`);
- for(const file of ['dashboard-guru.html','progress.html'])assert.ok(fs.readFileSync(path.join(root,file),'utf8').includes('css/sprint7.css'));
+ for(const file of ['dashboard-guru.html','progress.html'])assert.ok(fs.readFileSync(path.join(root,file),'utf8').includes('data-rl-css=') && fs.readFileSync(path.join(root,file),'utf8').includes('progress-layout'));
  const boot=fs.readFileSync(path.join(root,'js/bootstrap.js'),'utf8');assert.ok(boot.includes("await addScript('js/activity.js')"));
  const guru=fs.readFileSync(path.join(root,'js/guru.js'),'utf8');assert.ok(guru.includes("api.rpc('teacher_progress_report'"));assert.ok(guru.includes("api.rpc('teacher_recent_events'"));
  assert.ok(guru.includes('function csvValue'));
