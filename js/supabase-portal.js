@@ -16,7 +16,6 @@
       $('teacherNote').hidden=profile.role==='guru';
       $('dashboardLink').href=RoutingAuth.home(profile.role);
       await loadClasses(profile.role);
-      if(profile.role==='siswa')await loadProgress();
     }catch(e){message(e.message,true);}
   }
   async function loadClasses(role){
@@ -27,10 +26,6 @@
       const {data,error}=await api.from('class_memberships').select('class_id,classes(name,code)');
       $('myClasses').textContent=error?error.message:data?.length?data.map(c=>`${c.classes?.name||'Kelas'} (${c.classes?.code||'-'})`).join(' · '):'Belum bergabung kelas.';
     }
-  }
-  async function loadProgress(){
-    const {data,error}=await api.from('user_progress').select('activity,percent').eq('user_id',userId);
-    $('savedProgress').textContent=error?error.message:data?.length?data.map(r=>`${r.activity}: ${r.percent}%`).join(' · '):'Belum ada progres tersimpan.';
   }
   $('registerForm').addEventListener('submit',async e=>{
     e.preventDefault();const name=$('regName').value.trim(),email=$('regEmail').value.trim(),password=$('regPassword').value;
@@ -54,10 +49,6 @@
   $('joinClassForm').addEventListener('submit',async e=>{
     e.preventDefault();const {error}=await api.rpc('join_class',{p_code:$('classCode').value.trim().toUpperCase()});
     message(error?error.message:'Berhasil bergabung dengan kelas.',!!error);if(!error)await loadClasses('siswa');
-  });
-  $('saveProgressForm').addEventListener('submit',async e=>{
-    e.preventDefault();const {error}=await api.from('user_progress').upsert({user_id:userId,activity:$('activity').value,percent:Number($('percent').value)},{onConflict:'user_id,activity'});
-    message(error?error.message:'Progres latihan tersimpan di Supabase.',!!error);if(!error)await loadProgress();
   });
   refresh();
 })();

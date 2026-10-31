@@ -3190,3 +3190,99 @@ body > main, .lab-context main, main {
 .brand-mark:has(.brand-logo) { background: rgba(255,255,255,.96); overflow:hidden; display:flex; align-items:center; justify-content:center; padding:6px; }
 .brand-mark .brand-logo { display:block; width:100%; height:100%; object-fit:contain; }
 @media (prefers-reduced-motion: reduce) { .brand-mark .brand-logo { transition:none; } }
+
+/* Sprint 11: contoh perintah, topologi mobile, evaluasi kelas, dan UI ringkas. */
+html[data-rl-css~="base"] .terminal-code {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 18px 20px;
+  white-space: pre;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overflow-wrap: normal;
+  word-break: normal;
+  font: 500 13px/1.8 "Cascadia Code", Consolas, "Liberation Mono", monospace;
+  text-align: left;
+  box-shadow: none;
+}
+html[data-rl-css~="base"] .terminal-code.mt-2 { margin-top: 14px; }
+html[data-rl-css~="base"] .terminal-code code {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+  white-space: inherit;
+  font: inherit;
+}
+/* A genuine connected path, scrolled horizontally on small screens. */
+html[data-rl-css~="base"] .topology-viewport { max-width: 100%; overflow-x: auto; border-radius: 13px; }
+html[data-rl-css~="base"] .topology-viewport .topology {
+  min-width: 910px;
+  grid-template-columns: repeat(6, minmax(130px, 1fr));
+  min-height: 190px;
+}
+html[data-rl-css~="base"] .topology-viewport .link { display: block; }
+html[data-rl-css~="base"] .topology-hint { display: none; color: #587391; font-size: 12px; margin: 0 0 10px; }
+@media (max-width: 960px) {
+  html[data-rl-css~="base"] .topology-hint { display: block; }
+  html[data-rl-css~="base"] .topology-viewport .node { padding: 13px 8px; }
+  html[data-rl-css~="base"] .terminal-code { font-size: 12px; padding: 14px; }
+}
+/* Sync successes no longer cover the bottom-right controls. Errors stay visible. */
+.sync-indicator:not(.sync-error) { display: none !important; }
+/* Evaluation UI, intentionally compact and consistent with the Bootstrap-blue palette. */
+.rl11-intro { margin-bottom: 18px; }
+.rl11-intro > h3 { margin: 0 0 8px; color: #173a63; }
+.rl11-intro > p { margin: 0 0 12px; }
+.rl11-status { font-size: 13px; margin: 10px 0; color: #476986; }
+.rl11-status.rl11-error { color: #9b3030; }
+.rl11-eval-list { display: grid; gap: 10px; }
+.rl11-eval-item { display: flex; align-items: center; justify-content: space-between; gap: 16px; border: 1px solid #d8e5f4; background: #f7faff; border-radius: 13px; padding: 13px 16px; }
+.rl11-eval-item strong { color: #123b67; }
+.rl11-eval-item p { font-size: 13px; color: #57718b; margin: 5px 0 0; }
+.rl11-eval-item .btn { flex-shrink: 0; }
+.rl11-runner { margin-top: 20px; border-top: 1px solid #d9e6f4; padding-top: 18px; }
+.rl11-runner-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+.rl11-runner-heading h3 { margin: 0; }
+.rl11-eval-form { display: grid; gap: 12px; margin-bottom: 14px; }
+.rl11-question { border: 1px solid #d9e6f4; border-radius: 12px; padding: 16px; background: white; min-width: 0; }
+.rl11-question h4 { font-size: 15px; line-height: 1.6; color: #173a63; margin: 0 0 12px; overflow-wrap: anywhere; }
+.rl11-option { display: flex; align-items: flex-start; gap: 11px; padding: 9px 11px; border-radius: 9px; cursor: pointer; margin: 4px 0; color: #254868; line-height: 1.5; overflow-wrap: anywhere; }
+.rl11-option:hover { background: #eef5ff; }
+.rl11-option input { width: 17px; height: 17px; margin: 3px 0 0; flex: 0 0 17px; accent-color: #2468d5; }
+.rl11-form-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.rl11-field { display: grid; gap: 5px; min-width: 0; }
+.rl11-field label { font-weight: 700; font-size: 13px; color: #173a63; }
+.rl11-field input, .rl11-field textarea, .rl11-field select { width: 100%; box-sizing: border-box; min-width: 0; border: 1px solid #d3e1f1; background: white; border-radius: 9px; padding: 11px 12px; font: inherit; color: #14385e; }
+.rl11-field textarea { resize: vertical; min-height: 75px; }
+.rl11-manage { display: grid; gap: 16px; }
+.rl11-manage h3 { margin: 0 0 8px; }
+.rl11-question-row { display: flex; gap: 10px; justify-content: space-between; align-items: start; padding: 12px 0; border-bottom: 1px solid #e4edf5; }
+.rl11-question-row p { margin: 4px 0; font-size: 13px; color: #57718b; }
+.rl11-action-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.rl11-manage small, .rl11-muted { color: #617e99; font-size: 12px; }
+.rl11-score { font-weight: 800; color: #1655a8; }
+.rl11-table-wrap { overflow-x: auto; }
+.rl11-table-wrap table { min-width: 600px; }
+@media (max-width: 700px) {
+  .rl11-eval-item { align-items: stretch; flex-direction: column; }
+  .rl11-form-grid { grid-template-columns: 1fr; }
+  .rl11-runner-heading { align-items: flex-start; }
+  .rl11-question { padding: 12px; }
+}
+
+.rl11-teacher-cta { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+.rl11-teacher-cta h3 { margin: 0 0 5px; color: #173a63; }
+.rl11-teacher-cta p { margin: 0; font-size: 13px; }
+.rl11-teacher-cta .btn { white-space: nowrap; }
+@media (max-width: 700px) { .rl11-teacher-cta { flex-direction: column; align-items: stretch; } }
+/* Prevent one-line CLI examples from widening their grid column on phones. */
+html[data-rl-css~="base"] .grid > * { min-width: 0; }
+@media (max-width: 700px) {
+  html[data-rl-css~="base"] .grid.grid-2,
+  html[data-rl-css~="base"] .grid.grid-3,
+  html[data-rl-css~="base"] .grid.grid-4 { grid-template-columns: minmax(0, 1fr); }
+}

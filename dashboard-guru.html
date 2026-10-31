@@ -30,7 +30,8 @@
         </div>
         <nav class="nav">
           <a href="dashboard-guru.html">Dashboard Guru</a
-          ><a href="tentang-guru.html">Tentang RoutingLab</a
+          ><a href="evaluasi-guru.html">Evaluasi Kelas</a
+          ><a href="tentang-guru.html">Tentang</a
           ><a href="akun.html">Akun & Kelas</a>
         </nav>
         <div class="sidebar-footer">
@@ -49,17 +50,10 @@
               Monitoring kegiatan belajar dari database kelas
             </div>
           </div>
-          <span class="badge">Supabase Connected</span>
+
         </header>
         <div class="content">
-          <section class="hero">
-            <span class="badge">Data kelas aktif</span>
-            <h2>Dashboard Guru/Admin</h2>
-            <p>
-              Data kelas dan progres latihan berasal dari Supabase. Data progres
-              merupakan aktivitas latihan siswa, bukan nilai ujian resmi.
-            </p>
-          </section>
+
           <div class="section-title">
             <h3>Monitoring Kelas</h3>
             <p>Hanya kelas yang kamu kelola</p>
@@ -159,8 +153,15 @@
               </tbody>
             </table>
           </div>
+          <section class="card rl11-teacher-cta">
+            <div>
+              <h3>Evaluasi Kelas</h3>
+              <p>Buat soal, bagikan ke kelas, dan lihat hasil siswa.</p>
+            </div>
+            <a class="btn btn-primary" href="evaluasi-guru.html">Kelola Evaluasi</a>
+          </section>
           <div class="section-title" id="missionManagement">
-            <h3>Sprint 8 · Penugasan Misi</h3>
+            <h3>Penugasan Misi</h3>
             <p>Kelola latihan CLI Lab untuk masing-masing kelas</p>
           </div>
           <section class="card rl8-board" aria-labelledby="teacherMissionsHeading">
@@ -188,32 +189,6 @@
           <div class="section-title"><h3>Riwayat Pengerjaan Misi</h3><p>30 percobaan terbaru pada filter kelas monitoring di atas</p></div>
           <div class="card rl8-table-wrap"><table class="rl8-table"><thead><tr><th>Waktu</th><th>Siswa</th><th>Misi</th><th>Hasil</th><th>Durasi</th></tr></thead>
             <tbody id="teacherMissionAttempts"><tr><td colspan="5">Memuat riwayat…</td></tr></tbody></table></div>
-          <div class="section-title">
-            <h3>Arsitektur Pembelajaran</h3>
-          </div>
-          <div class="grid grid-3">
-            <div class="card">
-              <h3>Manajemen Kelas</h3>
-              <p>Guru membuat kelas dan kode kelas tersimpan di database.</p>
-            </div>
-            <div class="card">
-              <h3>Progress Terpusat</h3>
-              <p>
-                Progres latihan siswa disimpan di PostgreSQL melalui Supabase
-                dengan perlindungan RLS.
-              </p>
-            </div>
-            <div class="card">
-              <h3>Konten Media</h3>
-              <p>
-                Aset statis dapat dihosting di Cloudflare Pages, sementara data
-                pengguna berada di Supabase.
-              </p>
-            </div>
-          </div>
-          <div class="footer-note">
-            RoutingLab · Teknologi Pendidikan · Fatih Nur Faiq
-          </div>
         </div>
       </main>
     </div>

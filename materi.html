@@ -56,7 +56,7 @@
               Konsep inti sebelum praktik Cisco Packet Tracer
             </div>
           </div>
-          <span class="badge">Supabase Connected</span>
+
         </header>
         <div class="content">
           <section class="hero">
@@ -104,7 +104,9 @@
           <div class="section-title">
             <h3>Topologi Praktik</h3>
           </div>
-          <div class="card">
+          <div class="card topology-card">
+            <p class="topology-hint">Geser ke samping untuk melihat jalur jaringan.</p>
+            <div class="topology-viewport" tabindex="0" role="region" aria-label="Topologi PC0 ke PC1, geser horizontal">
             <div class="topology">
               <div class="link"></div>
               <div class="node">
@@ -131,18 +133,26 @@
                 <div class="node-icon">🖥️</div>
                 <strong>PC1</strong><small>192.168.2.10/24</small>
               </div>
+              </div>
             </div>
           </div>
           <div class="section-title">
             <h3>Perintah Cisco IOS</h3>
           </div>
-          <div class="terminal">
-            R1(config)# interface g0/0 R1(config-if)# ip address 192.168.1.1
-            255.255.255.0 R1(config-if)# no shutdown R1(config)# interface g0/1
-            R1(config-if)# ip address 10.10.10.1 255.255.255.252 R1(config-if)#
-            no shutdown R1(config)# ip route 192.168.2.0 255.255.255.0
-            10.10.10.2 R1# show ip route R1# ping 192.168.2.10
-          </div>
+          <pre class="terminal terminal-code" aria-label="Contoh perintah Cisco IOS"><code>R1> enable
+R1# configure terminal
+R1(config)# interface g0/0
+R1(config-if)# ip address 192.168.1.1 255.255.255.0
+R1(config-if)# no shutdown
+R1(config-if)# exit
+R1(config)# interface g0/1
+R1(config-if)# ip address 10.10.10.1 255.255.255.252
+R1(config-if)# no shutdown
+R1(config-if)# exit
+R1(config)# ip route 192.168.2.0 255.255.255.0 10.10.10.2
+R1(config)# end
+R1# show ip route
+R1# ping 192.168.2.10</code></pre>
           <div class="section-title">
             <h3>Urutan Belajar</h3>
           </div>
@@ -174,9 +184,6 @@
                 route balik.
               </p>
             </div>
-          </div>
-          <div class="footer-note">
-            RoutingLab · Teknologi Pendidikan · Fatih Nur Faiq
           </div>
         </div>
       </main>

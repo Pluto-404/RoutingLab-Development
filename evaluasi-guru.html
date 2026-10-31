@@ -1,0 +1,121 @@
+<!doctype html>
+<html data-rl-css="base responsive layouts auth-layout ui-polish blue-theme missions" lang="id" class="auth-pending">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Evaluasi Kelas | RoutingLab</title>
+<link rel="icon" href="assets/logo.svg"/><link rel="stylesheet" href="css/style.css"/></head>
+  <body data-required-role="guru" data-page-script="guru-evaluations">
+    <div class="shell">
+      <button
+        class="mobile-menu-button"
+        type="button"
+        aria-label="Buka menu navigasi"
+        aria-expanded="false"
+        aria-controls="appSidebar"
+      >
+        ☰ <span>Menu RoutingLab</span>
+      </button>
+      <div class="sidebar-scrim" hidden></div>
+      <aside class="sidebar" id="appSidebar">
+        <div class="brand">
+          <div class="brand-mark"><img class="brand-logo" src="assets/logoo.png" alt="Logo RoutingLab" /></div>
+          <div>
+            <h1>RoutingLab</h1>
+            <small>Guru/Admin</small>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="dashboard-guru.html">Dashboard Guru</a
+          ><a href="evaluasi-guru.html">Evaluasi Kelas</a
+          ><a href="tentang-guru.html">Tentang</a
+          ><a href="akun.html">Akun & Kelas</a>
+        </nav>
+        <div class="sidebar-footer">
+          <div class="user-chip">
+            <strong data-user-name></strong><br /><span data-user-role></span> ·
+            <span data-class-code></span>
+          </div>
+          <button class="btn btn-light" data-logout>Keluar</button>
+        </div>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h2>Evaluasi Kelas</h2>
+            <div class="meta">
+              Kelola soal dan penugasan kelas
+            </div>
+          </div>
+
+        </header>
+        <div class="content">
+          <section class="card rl11-manage" aria-label="Pengelolaan evaluasi guru">
+            <div class="rl11-action-row">
+              <div class="rl11-field" style="flex:1;min-width:200px">
+                <label for="evalPicker">Pilih evaluasi</label>
+                <select id="evalPicker"><option value="">+ Evaluasi baru</option></select>
+              </div>
+              <button id="evalRefresh" type="button" class="btn btn-outline">Perbarui</button>
+            </div>
+            <p id="teacherEvaluationStatus" class="rl11-status" role="status" aria-live="polite">Memuat evaluasi…</p>
+            <form id="evalSaveForm">
+              <div class="rl11-form-grid">
+                <div class="rl11-field"><label for="evalTitle">Judul evaluasi</label>
+                  <input id="evalTitle" required minlength="3" maxlength="120" placeholder="Contoh: Evaluasi Static Routing" /></div>
+                <div class="rl11-field"><label for="evalDescription">Deskripsi singkat (opsional)</label>
+                  <input id="evalDescription" maxlength="500" placeholder="Materi atau petunjuk untuk siswa" /></div>
+              </div>
+              <div class="rl11-action-row" style="margin-top:12px">
+                <button id="evalSaveBtn" type="submit" class="btn btn-primary">Simpan evaluasi</button>
+                <button id="evalDeleteBtn" type="button" class="btn btn-outline" disabled>Hapus draft</button>
+              </div>
+            </form>
+            <div class="rl11-manage">
+              <h3>Soal pilihan ganda</h3>
+              <div id="evalQuestionRows"></div>
+              <form id="evalQuestionForm" hidden>
+                <input id="evalQuestionId" type="hidden" />
+                <div class="rl11-field"><label for="evalQuestionText">Pertanyaan</label>
+                  <textarea id="evalQuestionText" required minlength="5" maxlength="1000" placeholder="Tuliskan pertanyaan yang jelas"></textarea></div>
+                <div class="rl11-form-grid" style="margin-top:12px">
+                  <div class="rl11-field"><label for="evalOption0">Pilihan A</label><input id="evalOption0" required maxlength="300" /></div>
+                  <div class="rl11-field"><label for="evalOption1">Pilihan B</label><input id="evalOption1" required maxlength="300" /></div>
+                  <div class="rl11-field"><label for="evalOption2">Pilihan C</label><input id="evalOption2" required maxlength="300" /></div>
+                  <div class="rl11-field"><label for="evalOption3">Pilihan D</label><input id="evalOption3" required maxlength="300" /></div>
+                  <div class="rl11-field"><label for="evalCorrectIndex">Jawaban benar</label>
+                    <select id="evalCorrectIndex"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select></div>
+                  <div class="rl11-field"><label for="evalExplanation">Pembahasan (opsional)</label>
+                    <input id="evalExplanation" maxlength="1000" placeholder="Mengapa jawaban itu tepat" /></div>
+                </div>
+                <div class="rl11-action-row" style="margin-top:12px">
+                  <button id="evalQuestionSave" type="submit" class="btn btn-primary">Tambah soal</button>
+                  <button id="evalQuestionCancel" type="button" class="btn btn-outline">Bersihkan form</button>
+                </div>
+              </form>
+            </div>
+            <form id="evalAssignForm">
+              <h3>Tugaskan evaluasi</h3>
+              <div class="rl11-action-row">
+                <div class="rl11-field" style="flex:1;min-width:190px"><label for="evalAssignClass">Kelas</label>
+                  <select id="evalAssignClass" required></select></div>
+                <button id="evalAssignBtn" type="submit" class="btn btn-primary" disabled>Tugaskan</button>
+              </div>
+              <p class="rl11-muted">Soal terkunci setelah ditugaskan agar penilaian tetap konsisten. Evaluasi ini untuk latihan formatif.</p>
+            </form>
+            <h3>Penugasan evaluasi</h3>
+            <div class="rl11-table-wrap"><table><thead><tr><th>Evaluasi</th><th>Kelas</th><th>Status</th><th>Percobaan</th><th>Aksi</th></tr></thead>
+              <tbody id="evalAssignmentRows"><tr><td colspan="5">Memuat…</td></tr></tbody></table></div>
+            <div class="rl11-action-row"><h3 style="margin:0">Hasil evaluasi siswa</h3>
+              <div class="rl11-field" style="min-width:180px;flex:1"><label for="classFilter">Filter kelas</label>
+                <select id="classFilter"><option value="">Semua kelas</option></select></div></div>
+            <div class="rl11-table-wrap"><table><thead><tr><th>Siswa</th><th>Kelas</th><th>Evaluasi</th><th>Nilai</th><th>Waktu</th></tr></thead>
+              <tbody id="evalResultRows"><tr><td colspan="5">Memuat…</td></tr></tbody></table></div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/bootstrap.js"></script>
+  </body>
+</html>

@@ -32,6 +32,7 @@
       await addScript('js/'+page+'.js');
       if(page==='guru') await addScript('js/guru-missions.js');
       if(page==='dashboard' && role==='siswa') await addScript('js/student-missions.js');
+      if(page==='evaluasi' && role==='siswa') await addScript('js/student-evaluations.js');
     }
     else initCommon(role);
     if(page!=='cli-lab') await addScript('js/sprint4a.js');

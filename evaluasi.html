@@ -53,29 +53,34 @@
           <div>
             <h2>Evaluasi</h2>
             <div class="meta">
-              Kuis prototype dengan feedback dan skor otomatis
+              Kuis latihan dan evaluasi dari guru
             </div>
           </div>
-          <span class="badge">Supabase Connected</span>
+
         </header>
         <div class="content">
-          <section class="hero">
-            <span class="badge">5 Soal</span>
-            <h2>Evaluasi Routing Statis</h2>
-            <p>
-              Jawab seluruh soal. Skor terbaik akan tersimpan lokal dan tampil
-              pada progress.
-            </p>
+          <section class="card rl11-intro">
+            <h3>Evaluasi dari Guru</h3>
+            <p>Pilih tugas evaluasi dari kelasmu. Nilai dihitung dan disimpan oleh Supabase.</p>
+            <p id="assignedEvaluationStatus" class="rl11-status" role="status" aria-live="polite">Memuat evaluasi…</p>
+            <div id="assignedEvaluationList" class="rl11-eval-list"></div>
+            <section id="assignedEvaluationRunner" class="rl11-runner" hidden>
+              <div class="rl11-runner-heading">
+                <h3 id="assignedEvaluationTitle">Evaluasi</h3>
+                <button id="cancelAssignedEvaluation" class="btn btn-outline" type="button">Tutup</button>
+              </div>
+              <form id="assignedEvaluationForm" class="rl11-eval-form"></form>
+              <button id="submitAssignedEvaluation" class="btn btn-primary" type="button">Kumpulkan jawaban</button>
+              <div id="assignedEvaluationResult" class="alert mt-2" aria-live="polite" hidden></div>
+            </section>
           </section>
+          <div class="section-title"><h3>Latihan Mandiri</h3></div>
           <form id="quizForm" class="grid mt-3"></form>
           <div class="card mt-2">
             <button id="submitQuiz" type="button" class="btn btn-primary">
               Hitung Skor
             </button>
             <div id="quizResult" class="alert mt-2">Skor belum dihitung.</div>
-          </div>
-          <div class="footer-note">
-            RoutingLab · Teknologi Pendidikan · Fatih Nur Faiq
           </div>
         </div>
       </main>

@@ -17,7 +17,7 @@ for(const page of pages){
     assert.ok(!html.includes('class="brand-mark">RL<'),page+' stale RL');
   }
 }
-assert.equal(sidebars,10);
+assert.equal(sidebars,11);
 assert.ok(fs.statSync(path.join(root,'assets/logoo.png')).size>500);
 const cli=fs.readFileSync(path.join(root,'css/cli-lab.css'),'utf8');
 assert.match(cli,/\.terminal \.output[\s\S]*?overflow-y:\s*auto/);
