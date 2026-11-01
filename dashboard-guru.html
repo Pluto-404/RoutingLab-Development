@@ -47,7 +47,7 @@
           <div>
             <h2>Dashboard Guru/Admin</h2>
             <div class="meta">
-              Monitoring kegiatan belajar dari database kelas
+              Progres dan evaluasi kelas
             </div>
           </div>
 
@@ -56,7 +56,7 @@
 
           <div class="section-title">
             <h3>Monitoring Kelas</h3>
-            <p>Hanya kelas yang kamu kelola</p>
+
           </div>
           <section class="card" aria-label="Filter laporan kelas">
             <div class="rl7-toolbar">
@@ -100,16 +100,26 @@
                 ><span id="avgProgress" class="value">—</span>
               </div>
             </div>
-            <p class="rl7-note" style="margin-top: 14px">
-              Progres dihitung dari lima aktivitas utama: materi, visualisasi,
-              Mini Lab, troubleshooting, dan evaluasi. CLI Lab dipantau
-              terpisah. Nilai latihan belum diverifikasi oleh server sebagai
-              nilai ujian resmi.
-            </p>
+            <p class="rl12-note">Progres latihan dilaporkan siswa; nilai evaluasi kelas diperiksa oleh Supabase.</p>
           </section>
+          <section class="rl12-evaluation-overview" aria-label="Ringkasan evaluasi kelas">
+            <div class="rl12-metric"><span>Rata-rata nilai evaluasi</span><strong id="evalAverage">—</strong></div>
+            <div class="rl12-metric"><span>Sudah mengerjakan</span><strong id="evalSubmitted">—</strong></div>
+            <div class="rl12-metric"><span>Belum mengerjakan</span><strong id="evalPending">—</strong></div>
+          </section>
+          <details class="card rl12-details" id="evaluationDetailPanel">
+            <summary>Rincian evaluasi per kelas <span>Nilai terbaik siswa per tugas</span></summary>
+            <div class="table-wrap"><table class="rl12-table"><thead><tr><th>Evaluasi</th><th>Kelas</th><th>Siswa</th><th>Sudah</th><th>Belum</th><th>Rata-rata nilai</th></tr></thead>
+            <tbody id="teacherEvaluationSummary"><tr><td colspan="6">Memuat evaluasi…</td></tr></tbody></table></div>
+          </details>
+          <details class="card rl12-details" id="activityDetailPanel">
+            <summary>Rincian aktivitas siswa <span>Materi sampai CLI Lab</span></summary>
+            <div class="table-wrap"><table class="rl12-table"><thead><tr><th>Nama siswa</th><th>Kelas</th><th>Materi</th><th>Visualisasi</th><th>Mini Lab</th><th>Troubleshooting</th><th>Evaluasi latihan</th><th>CLI Lab</th></tr></thead>
+            <tbody id="teacherActivityBreakdown"><tr><td colspan="8">Memuat aktivitas…</td></tr></tbody></table></div>
+          </details>
           <div class="section-title">
             <h3>Progres Setiap Siswa</h3>
-            <p>Berdasarkan kelas yang dipilih</p>
+
           </div>
           <div class="card table-wrap rl7-table">
             <table>
@@ -133,7 +143,7 @@
           </div>
           <div class="section-title">
             <h3>Aktivitas Latihan Terbaru</h3>
-            <p>Riwayat aktivitas formatif dari akun siswa</p>
+
           </div>
           <div class="card table-wrap rl7-table">
             <table class="rl7-activity-list">
@@ -162,15 +172,15 @@
           </section>
           <div class="section-title" id="missionManagement">
             <h3>Penugasan Misi</h3>
-            <p>Kelola latihan CLI Lab untuk masing-masing kelas</p>
+
           </div>
           <section class="card rl8-board" aria-labelledby="teacherMissionsHeading">
             <div class="rl8-board-header">
               <div>
                 <h3 id="teacherMissionsHeading">Beri Misi ke Kelas</h3>
-                <p class="rl8-muted">Pilih kelas dan skenario. Siswa akan melihatnya di Dashboard Siswa.</p>
+
               </div>
-              <span class="badge"><span id="missionAssignmentCount">0</span> tugas aktif</span>
+              <span class="badge"><span id="missionAssignmentCount">0</span> aktif</span>
             </div>
             <form id="assignMissionForm" class="rl8-assign-form">
               <div class="rl8-field"><label for="missionClassSelect">Kelas tujuan</label><select id="missionClassSelect" required><option value="">Memuat kelas…</option></select></div>
@@ -184,7 +194,7 @@
             <p id="teacherMissionStatus" class="rl8-status" role="status" aria-live="polite">Memuat penugasan…</p>
             <div class="rl8-table-wrap"><table class="rl8-table"><thead><tr><th>Misi</th><th>Kelas</th><th>Status</th><th>Selesai</th><th>Memulai</th><th>Percobaan</th><th>Aksi</th></tr></thead>
               <tbody id="teacherMissionRows"><tr><td colspan="7">Memuat data…</td></tr></tbody></table></div>
-            <p class="rl8-muted">Angka “selesai” berdasarkan hasil yang dikirim simulator browser siswa, bukan nilai ujian terverifikasi. Menonaktifkan penugasan tidak menghapus riwayat.</p>
+            <p class="rl12-note">Status misi adalah hasil latihan simulator, bukan nilai evaluasi resmi.</p>
           </section>
           <div class="section-title"><h3>Riwayat Pengerjaan Misi</h3><p>30 percobaan terbaru pada filter kelas monitoring di atas</p></div>
           <div class="card rl8-table-wrap"><table class="rl8-table"><thead><tr><th>Waktu</th><th>Siswa</th><th>Misi</th><th>Hasil</th><th>Durasi</th></tr></thead>

@@ -23,9 +23,14 @@ function initCommon(expectedRole) {
   document
     .querySelectorAll("[data-logout]")
     .forEach((btn) => btn.addEventListener("click", RoutingAuth.logout));
-  const page = location.pathname.split("/").pop() || "index.html";
-  document.querySelectorAll(".nav a").forEach((a) => {
-    if (a.getAttribute("href") === page) a.classList.add("active");
+  // URL is the single source of truth; browser focus/hover is NOT an active page.
+  const page = decodeURIComponent(location.pathname.split('/').pop() || 'index.html');
+  document.querySelectorAll('.sidebar .nav a[href]').forEach((link) => {
+    const target = new URL(link.getAttribute('href'), location.href).pathname.split('/').pop();
+    const active = target === page;
+    link.classList.toggle('active', active);
+    if (active) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
   });
   return session;
 }

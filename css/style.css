@@ -3286,3 +3286,55 @@ html[data-rl-css~="base"] .grid > * { min-width: 0; }
   html[data-rl-css~="base"] .grid.grid-3,
   html[data-rl-css~="base"] .grid.grid-4 { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* Sprint 12 — navigation state and focused monitoring; keeps the tiny status squares. */
+@scope (html[data-rl-css~="base"]) {
+  .sidebar .nav a { background: transparent; border-color: transparent; color: #e2eeff; transition: background-color .16s, border-color .16s; }
+  .sidebar .nav a.nav-lab:not(.active):not(:hover):not(:focus-visible) {
+    background: transparent; border-color: transparent !important; color: #e2eeff !important;
+  }
+  .sidebar .nav a:not(.active)::before { background: #6887a7; box-shadow: 0 0 0 3px rgba(166,196,237,.08); }
+  .sidebar .nav a.active,
+  .sidebar .nav a[aria-current="page"],
+  .sidebar .nav a.nav-lab.active {
+    background: rgba(37,99,235,.56) !important;
+    border: 1px solid rgba(158,198,255,.55) !important;
+    color: #fff !important;
+    font-weight: 750;
+  }
+  .sidebar .nav a.active::before { background: #52e1cb; box-shadow:0 0 0 3px rgba(82,225,203,.15); }
+  @media (hover:hover) and (pointer:fine) {
+    .sidebar .nav a:not(.active):hover { background: rgba(255,255,255,.095); border-color:rgba(255,255,255,.10); }
+    .sidebar .nav a:not(.active):hover::before { background: #a4c5eb; }
+  }
+  @media (hover:none) {
+    .sidebar .nav a:not(.active):hover { background: transparent; border-color: transparent; }
+    .sidebar .nav a.nav-lab:not(.active):hover { background: transparent; border-color: transparent !important; }
+  }
+  .sidebar .nav a:focus-visible { outline: 2px solid #c7e0ff; outline-offset: 2px; }
+  .sidebar { scrollbar-width: thin; scrollbar-color: rgba(172,208,255,.34) transparent; }
+  .nav { gap: 3px; }
+  .nav a { min-height: 39px; }
+  .rl12-note { font-size:12px; line-height:1.55; color:#667f98; margin:12px 0 0; }
+  .rl12-evaluation-overview { display:grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap:12px; margin:16px 0; }
+  .rl12-metric { min-width:0; background:#fff; border:1px solid #d9e6f5; border-radius:15px; padding:16px 18px; display:flex; flex-direction:column; gap:5px; box-shadow:0 4px 16px rgba(37,99,235,.03); }
+  .rl12-metric span { font-size:12px; color:#617991; font-weight:650; }
+  .rl12-metric strong { font-size:24px; line-height:1.2; color:#194a90; font-weight:800; font-variant-numeric:tabular-nums; }
+  .rl12-details { margin:12px 0; padding:0 !important; overflow:hidden; }
+  .rl12-details > summary { cursor:pointer; display:flex; align-items:center; gap:12px; justify-content:space-between; color:#173a63; font-size:14px; font-weight:750; padding:17px 19px; }
+  .rl12-details > summary span { color:#7a8fa6; font-size:11px; font-weight:500; }
+  .rl12-details[open] > summary { border-bottom:1px solid #e1eafa; }
+  .rl12-details .table-wrap { padding:0 12px 12px; overflow-x:auto; }
+  .rl12-table { width:100%; min-width:680px; border-collapse:collapse; }
+  .rl12-table th, .rl12-table td { padding:10px 12px; text-align:left; font-size:12px; border-bottom:1px solid #e5eef8; }
+  .rl12-table th { color:#345b82; background:#f4f8ff; font-weight:750; white-space:nowrap; }
+  .rl12-table td { color:#37536e; }
+  @media (max-width:680px) { .rl12-evaluation-overview { gap:8px; } .rl12-metric { padding:12px 9px; border-radius:12px; } .rl12-metric strong { font-size:18px; } .rl12-metric span { font-size:11px; } .rl12-details > summary { padding:14px; flex-wrap:wrap; } }
+}
+/* Student quick link follows the blue identity without adding extra decoration. */
+@scope (html[data-rl-css~="base"]) {
+  .feature-banner { background:#edf5ff; border-color:#d6e5fa; }
+  .feature-kicker { color:#2563eb; }
+  .feature-action { background:#2563eb; color:#fff; }
+  .feature-action:hover { background:#1d4ed8; }
+}

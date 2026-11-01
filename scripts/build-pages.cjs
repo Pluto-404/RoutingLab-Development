@@ -11,15 +11,21 @@ const key = (process.env.SUPABASE_PUBLISHABLE_KEY || "").trim();
 if (!/^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/.test(url)) {
   throw new Error("SUPABASE_URL harus berupa https://PROJECT_REF.supabase.co");
 }
-if (
-  !key ||
-  /YOUR_|PLACEHOLDER/i.test(key) ||
-  /^(sb_secret_|eyJ.*service_role)/i.test(key)
-) {
-  throw new Error(
-    "SUPABASE_PUBLISHABLE_KEY harus publishable/anon key, bukan secret/service_role.",
-  );
+// A browser can safely receive only a Supabase publishable key or legacy anon JWT.
+// Reject opaque values and JWTs with service_role or other privileged roles.
+function isPublicSupabaseKey(value) {
+  if (/^sb_publishable_[A-Za-z0-9_-]+$/.test(value)) return true;
+  const parts = value.split('.');
+  if (parts.length !== 3) return false;
+  try {
+    const payload = JSON.parse(Buffer.from(parts[1], 'base64url').toString('utf8'));
+    return payload.role === 'anon';
+  } catch { return false; }
 }
+if (!isPublicSupabaseKey(key)) {
+  throw new Error('SUPABASE_PUBLISHABLE_KEY harus sb_publishable_... atau legacy anon JWT. Jangan gunakan secret/service_role.');
+}
+
 fs.rmSync(output, { recursive: true, force: true });
 fs.mkdirSync(output, { recursive: true });
 const htmlFiles = fs
@@ -30,13 +36,16 @@ const htmlFiles = fs
   );
 for (const file of htmlFiles)
   fs.copyFileSync(path.join(root, file), path.join(output, file));
+// Cloudflare Pages reads _headers from the output root.
+if (fs.existsSync(path.join(root, '_headers')))
+  fs.copyFileSync(path.join(root, '_headers'), path.join(output, '_headers'));
 for (const folder of ["assets", "css", "js"]) {
   const source = path.join(root, folder);
   if (!fs.existsSync(source)) continue;
   fs.cpSync(source, path.join(output, folder), {
     recursive: true,
     filter: (item) =>
-      path.basename(item) !== "supabase-config.js" &&
+      !["supabase-config.js", "supabase-config.example.js"].includes(path.basename(item)) &&
       !path.basename(item).startsWith(".env"),
   });
 }

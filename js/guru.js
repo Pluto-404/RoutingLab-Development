@@ -37,6 +37,34 @@ initCommon('guru');
       for(const value of values){const td=document.createElement('td');td.textContent=value;tr.append(td);}recentBody.append(tr);
     });
   }
+  function renderEvaluationSummary(rows){
+    const target=$('teacherEvaluationSummary');
+    target.replaceChildren();
+    if(!rows.length){messageRow(target,6,'Belum ada evaluasi aktif untuk kelas yang dipilih.');}
+    for(const r of rows){
+      const tr=document.createElement('tr');
+      [r.evaluation_title,r.class_name,r.total_students,r.submitted_students,r.pending_students,
+       r.average_score==null?'—':`${Number(r.average_score).toLocaleString('id-ID',{maximumFractionDigits:1})}/100`].forEach(v=>{
+         const td=document.createElement('td');td.textContent=String(v??'—');tr.append(td);
+       });target.append(tr);
+    }
+    const submitted=rows.reduce((a,r)=>a+(Number(r.submitted_students)||0),0);
+    const pending=rows.reduce((a,r)=>a+(Number(r.pending_students)||0),0);
+    const scored=rows.reduce((a,r)=>a+(Number(r.submitted_students)||0)*(Number(r.average_score)||0),0);
+    text('evalAverage',submitted?(scored/submitted).toLocaleString('id-ID',{maximumFractionDigits:1})+'/100':'—');
+    text('evalSubmitted',submitted);
+    text('evalPending',pending);
+  }
+  function renderActivityBreakdown(rows){
+    const target=$('teacherActivityBreakdown');target.replaceChildren();
+    if(!rows.length){messageRow(target,8,'Belum ada data aktivitas siswa.');return;}
+    rows.forEach(r=>{
+      const tr=document.createElement('tr');
+      [r.student_name,r.class_name,r.materi,r.visualisasi,r.mini_lab,r.troubleshooting,r.evaluasi,r.cli_lab]
+       .forEach((v,i)=>{const td=document.createElement('td');td.textContent=i<2?String(v||'—'):`${Number(v)||0}%`;tr.append(td);});
+      target.append(tr);
+    });
+  }
   async function loadClasses(){
     const {data,error}=await api.from('classes').select('id,name,code').order('name');
     if(error)throw Error(error.message);
@@ -49,13 +77,19 @@ initCommon('guru');
     setStatus('Memuat data latihan dari Supabase…');
     $('exportClassCsv').disabled=true;
     const params={p_class_id:id};
-    const [a,b]=await Promise.all([api.rpc('teacher_progress_report',params),api.rpc('teacher_recent_events',{p_class_id:id,p_limit:20})]);
+    const [a,b,c,d]=await Promise.all([
+      api.rpc('teacher_progress_report',params),
+      api.rpc('teacher_recent_events',{p_class_id:id,p_limit:20}),
+      api.rpc('teacher_evaluation_summary',params),
+      api.rpc('teacher_activity_breakdown',params)
+    ]);
     if(seq!==requestId)return;
     if(a.error||b.error){
       const error=a.error||b.error;
       report=[];messageRow(tbody,7,'Belum dapat memuat laporan. Jalankan migrasi Sprint 7 terlebih dahulu.');
       messageRow(recentBody,5,'Riwayat tidak dapat dimuat.');
       text('studentCount','–');text('avgProgress','–');text('totalAttempts','–');
+      text('evalAverage','—');text('evalSubmitted','—');text('evalPending','—');
       setStatus('Gagal membaca data: '+error.message,true);return;
     }
     report=a.data||[];
@@ -64,8 +98,13 @@ initCommon('guru');
     text('avgProgress',(report.length?Math.round(report.reduce((total,r)=>total+(Number(r.progress_percent)||0),0)/report.length):0)+'%');
     text('totalAttempts',report.reduce((sum,r)=>sum+(Number(r.activity_count)||0),0));
     renderProgress(report);renderRecent(b.data||[]);
+    if(c.error){messageRow($('teacherEvaluationSummary'),6,'Statistik evaluasi belum tersedia. Jalankan SQL Sprint 12.');
+      text('evalAverage','—');text('evalSubmitted','—');text('evalPending','—');}
+    else renderEvaluationSummary(c.data||[]);
+    if(d.error)messageRow($('teacherActivityBreakdown'),8,'Rincian aktivitas belum tersedia. Jalankan SQL Sprint 12.');
+    else renderActivityBreakdown(d.data||[]);
     $('exportClassCsv').disabled=!report.length;
-    setStatus(`Diperbarui ${formatDate(new Date().toISOString())} · Persentase dan skor latihan berasal dari aktivitas siswa, belum diverifikasi sebagai nilai resmi.`);
+    setStatus(`Diperbarui ${formatDate(new Date().toISOString())}`+(c.error||d.error?' · Lengkapi migrasi SQL Sprint 12 untuk statistik baru.':''),!!(c.error||d.error));
   }
   function csvValue(value){
     let s=String(value??'').replace(/\r|\n/g,' ');

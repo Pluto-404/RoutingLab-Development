@@ -2437,3 +2437,34 @@ body > main, .lab-context main, main {
     min-height: 420px;
   }
 }
+
+/* Sprint 12 — blue UI, dark terminal and semantic connectivity dots unchanged. */
+:root { --cli-primary:#2563eb; --cli-teal:#2563eb; }
+body { background:#f3f7ff; }
+body .top { background:linear-gradient(110deg,#10325b,#1a5db8); }
+.top .back { color:#e2ecff; }
+.top .tag { background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);color:#e8f2ff; }
+body .lab-context { background:#ecf3ff; border-color:#d8e6fb; color:#365c87; }
+.lab-dot { background:#3b82f6; }
+.lab-context a { color:#1d59b8; }
+#labLayout .panel, #labLayout .topology-panel { border-color:#dae6f6; }
+#labLayout .mission-summary, #labLayout .rl8-lab-context { border-left-color:#3b82f6; }
+#labLayout .mission-label, #labLayout .eyebrow { color:#1e5fb9; }
+#labLayout .cli-main-actions button:not(.secondary),
+#labLayout .promptline button,
+#labLayout .s4b-tools button:not(.secondary) { background:#2563eb; color:#fff; border-color:#2563eb; }
+#labLayout .cli-main-actions button:not(.secondary):hover,
+#labLayout .promptline button:hover,
+#labLayout .s4b-tools button:not(.secondary):hover { background:#1d4ed8; }
+#labLayout .cli-main-actions .secondary, #labLayout .s4b-tools button.secondary { background:#e9f1fd; color:#214d8d; border-color:#d7e5f9; }
+#labLayout svg.cli-map .node.selected rect, #labLayout svg.cli-map .node.router:hover rect { fill:#2563eb; stroke:#b6d0ff; }
+#labLayout .termhead { background:#10365f; }
+#labLayout .switch button.active { background:#2563eb; }
+#labLayout .terminal { border-color:#143b65; }
+#labLayout .terminal-help > summary, #labLayout .guide-panel > summary, #labLayout .ip-panel > summary { color:#194979; }
+.mobile-tabs .tab.active { background:#2563eb; border-color:#2563eb; color:#fff; }
+/* Quiet blue reference panels, without recoloring connection indicators. */
+#labLayout .rl8-lab-context { background:#eff5ff; border-color:#d5e5fd; border-left-color:#3b82f6; }
+#labLayout .mission-summary { background:#f1f6ff; border-color:#dae8ff; border-left-color:#3b82f6; }
+#labLayout .terminal-help { background:#f7faff; border-color:#d9e6f6; }
+#labLayout .terminal-help > summary { background:#f1f6ff; }
