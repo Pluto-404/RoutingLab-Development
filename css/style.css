@@ -3338,3 +3338,312 @@ html[data-rl-css~="base"] .grid > * { min-width: 0; }
   .feature-action { background:#2563eb; color:#fff; }
   .feature-action:hover { background:#1d4ed8; }
 }
+
+
+/* RoutingLab 2026 — clean login / subtle motion (no auth behavior changed) */
+body.login-only, body.login-only .login-page { background:#f4f7fc; }
+body.login-only .login-page { grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+body.login-only .login-visual {
+  position:relative;isolation:isolate;overflow:hidden;
+  background:radial-gradient(ellipse at 72% 33%,#246ee0 0%,transparent 52%),linear-gradient(135deg,#0e2b59 0%,#124a9c 100%);
+  padding:clamp(36px,5.5vw,92px); display:flex; justify-content:center;
+}
+body.login-only .login-visual::before {content:'';position:absolute;inset:0;opacity:.09;pointer-events:none;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:28px 28px;}
+body.login-only .login-intro {position:relative;z-index:1;max-width:500px;animation:rlFadeUp .65s ease both;}
+body.login-only .rl-login-brand {display:flex;align-items:center;gap:12px;color:#fff;font-size:18px;font-weight:800;letter-spacing:-.04em;margin-bottom:clamp(46px,9vh,100px);}
+body.login-only .rl-login-brand img {width:46px;height:46px;border-radius:14px;background:white;object-fit:contain;padding:5px;}
+body.login-only .login-kicker {display:inline-block;font-size:10px;letter-spacing:.16em;font-weight:700;color:#b3d3ff;}
+body.login-only .login-visual h1 {font-size:clamp(39px,4.1vw,65px);line-height:1.13;letter-spacing:-.055em;margin:20px 0;}
+body.login-only .login-visual h1 em {color:#c3dbff;}
+body.login-only .login-visual p {font-size:clamp(13px,1.15vw,16px);max-width:380px;line-height:1.7;color:#d7e6ff;}
+body.login-only .rl-login-feature {display:flex;flex-wrap:wrap;gap:8px;margin-top:27px;}
+body.login-only .rl-login-feature span {border:1px solid #ffffff33;border-radius:999px;padding:7px 12px;color:#e7f0ff;background:#ffffff0c;font-size:11px;}
+body.login-only .rl-login-orbit {position:absolute;width:340px;height:340px;right:-155px;bottom:-130px;border:1px solid #ffffff25;border-radius:50%;pointer-events:none;}
+body.login-only .rl-login-orbit::after {content:'';position:absolute;inset:42px;border:1px solid #ffffff1e;border-radius:50%;}
+body.login-only .rl-login-orbit i {position:absolute;inset:85px;border:1px solid #ffffff29;border-radius:50%;}
+body.login-only .rl-login-orbit i:nth-child(2),body.login-only .rl-login-orbit i:nth-child(3) {display:none;}
+body.login-only .login-form-wrap {display:flex;align-items:center;justify-content:center;padding:clamp(22px,5vw,78px);}
+body.login-only .login-card {width:min(425px,100%);padding:clamp(27px,3vw,43px);background:#fff;border:1px solid #e3ebf5;border-radius:22px;box-shadow:0 24px 70px #0c35630b;animation:rlFadeUp .65s .09s ease both;}
+body.login-only .login-card h2 {font-size:clamp(26px,2.4vw,34px);letter-spacing:-.05em;color:#152c4a;margin:0 0 7px;}
+body.login-only .login-card > p {font-size:13px;color:#71839c;line-height:1.5;margin-bottom:25px;}
+body.login-only .login-card .form-group {margin-bottom:17px;}
+body.login-only .login-card label {font-size:12px;font-weight:650;color:#344861;margin-bottom:8px;}
+body.login-only .login-card input {height:49px;min-height:49px;border:1px solid #dbe5f0;border-radius:12px;background:#fafcff;padding:12px 14px;transition:border-color .2s,box-shadow .2s,background .2s;}
+body.login-only .login-card input:hover {border-color:#afc6e8;}
+body.login-only .login-card input:focus-visible {outline:none;border-color:#3478e6;background:#fff;box-shadow:0 0 0 4px #3478e623;}
+body.login-only .login-submit {background:#2563eb;color:white;border-radius:12px;min-height:49px;font-size:13px;font-weight:750;padding:12px 15px;transition:transform .2s ease,box-shadow .2s ease,background .2s;}
+body.login-only .login-submit:hover {background:#1d4ed8;transform:translateY(-2px);box-shadow:0 12px 25px #2563eb33;}
+body.login-only .login-note {border:0;background:transparent;padding:0;margin-top:13px!important;font-size:11px;color:#71839c;}
+body.login-only .login-note.error {color:#b42338;background:#fff1f1;padding:9px 11px;border-radius:8px;}
+body.login-only .login-register {border-top:1px solid #edf1f6;padding-top:19px;margin-top:21px;color:#64748b;font-size:12px;}
+body.login-only .login-register a {text-decoration:none;color:#2563eb;}
+body.login-only .login-register a:hover {text-decoration:underline;}
+@keyframes rlFadeUp {from {opacity:0;transform:translateY(17px)} to {opacity:1;transform:translateY(0)}}
+@media (max-width:900px) {
+ body.login-only .login-page {display:flex;flex-direction:column;min-height:100dvh;height:auto;}
+ body.login-only .login-visual {padding:27px 23px 28px;justify-content:flex-start;}
+ body.login-only .rl-login-brand {margin:0 0 18px;font-size:15px;}
+ body.login-only .rl-login-brand img {width:36px;height:36px;border-radius:10px;}
+ body.login-only .login-visual h1 {font-size:clamp(27px,6vw,37px);margin:9px 0 4px;}
+ body.login-only .login-visual p {margin:9px 0 0;font-size:12px;max-width:530px;}
+ body.login-only .rl-login-feature,body.login-only .rl-login-orbit,body.login-only .login-mobile-brand {display:none;}
+ body.login-only .login-form-wrap {padding:16px 15px 26px;flex:1;}
+ body.login-only .login-card {max-width:440px;padding:clamp(23px,5vw,34px);}
+}
+@media(max-width:470px){body.login-only .login-visual{padding:22px 20px;}body.login-only .login-visual p{display:none;}body.login-only .login-card h2{font-size:26px;}body.login-only .login-visual h1{font-size:28px;}}
+@media(prefers-reduced-motion:reduce){body.login-only .login-intro,body.login-only .login-card{animation:none;}body.login-only .login-submit,body.login-only .login-card input{transition:none;}}
+
+/* Unified micro-interactions for existing navigation and cards; no JS dependencies. */
+@media(hover:hover) and (pointer:fine) {
+ .sidebar .nav a, .btn, .rl11-teacher-cta {transition:background-color .18s ease,color .18s ease,border-color .18s ease,transform .18s ease,box-shadow .18s ease;}
+ .content > .card, .content .rl8-mission-card {transition:border-color .2s ease,box-shadow .2s ease;}
+ .content > .card:hover, .content .rl8-mission-card:hover {border-color:#c9dafa;box-shadow:0 12px 28px #173c690a;}
+}
+
+/* Real-device topology for Materi & Visualisasi */
+html[data-rl-css~="base"] .real-topology-card {
+  overflow: hidden;
+}
+html[data-rl-css~="base"] .real-topology-hint {
+  display: none;
+  color: #5f7893;
+  font-size: 12px;
+  margin: 0 0 10px;
+}
+html[data-rl-css~="base"] .real-topology-viewport {
+  max-width: 100%;
+  overflow-x: hidden;
+  border-radius: 16px;
+  border: 1px solid #deebf8;
+  background: radial-gradient(#d6e5f4 1px, transparent 1px) 0 0 / 24px 24px, #fbfdff;
+}
+html[data-rl-css~="base"] .real-topology {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(86px, 1fr));
+  gap: 14px;
+  align-items: center;
+  min-height: 198px;
+  padding: 20px 16px 18px;
+}
+html[data-rl-css~="base"] .real-line,
+html[data-rl-css~="base"] .real-topology > .link {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 50%;
+  height: 6px;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: linear-gradient(90deg, #b8cde6, #96b8de 45%, #b8cde6);
+  box-shadow: 0 0 0 2px rgba(255,255,255,.55);
+}
+html[data-rl-css~="base"] .real-node {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  min-height: 126px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 12px 8px 10px;
+  background: rgba(255,255,255,.95);
+  border: 1px solid #dce7f3;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(18, 52, 88, 0.05);
+  text-align: center;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, background-color .25s ease;
+}
+html[data-rl-css~="base"] .real-node:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 22px rgba(28, 85, 145, 0.1);
+}
+html[data-rl-css~="base"] .real-node-art {
+  width: 100%;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+html[data-rl-css~="base"] .real-node-art img {
+  width: auto;
+  max-width: 100%;
+  max-height: 58px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 5px rgba(15, 43, 72, .12));
+}
+html[data-rl-css~="base"] .real-node strong {
+  display: block;
+  font-size: 13px;
+  color: #14345a;
+}
+html[data-rl-css~="base"] .real-node small {
+  display: block;
+  font-size: 11px;
+  color: #69819c;
+  white-space: nowrap;
+}
+html[data-rl-css~="base"] .real-node-router {
+  background: linear-gradient(180deg, rgba(245,250,255,.98), rgba(237,245,255,.98));
+}
+html[data-rl-css~="base"] .real-topology-legend {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #617c98;
+}
+html[data-rl-css~="base"] .real-topology-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+html[data-rl-css~="base"] .real-topology-legend img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+/* Visualisasi packet animation */
+html[data-rl-css~="base"] .visual-card .real-topology-viewport { overflow-x: auto; }
+html[data-rl-css~="base"] .visual-topology {
+  min-width: 860px;
+}
+html[data-rl-css~="base"] .visual-wires {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+html[data-rl-css~="base"] .visual-wire {
+  fill: none;
+  stroke: #b4c9e0;
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+html[data-rl-css~="base"] .visual-wire-glow {
+  stroke: #1f79ff;
+  stroke-width: 7;
+  opacity: 0;
+  filter: drop-shadow(0 0 8px rgba(31,121,255,.55));
+}
+html[data-rl-css~="base"] .visual-wire-glow.is-active {
+  opacity: .95;
+  stroke-dasharray: 12 11;
+  animation: routinglabPacketLine 1s linear infinite;
+}
+html[data-rl-css~="base"] .visual-packet {
+  position: absolute;
+  z-index: 3;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff7d7 0, #ffd45c 34%, #f59e0b 74%, #da7d05 100%);
+  box-shadow: 0 0 0 6px rgba(255, 201, 84, .18), 0 0 28px rgba(255, 183, 0, .7);
+  opacity: 0;
+  pointer-events: none;
+}
+html[data-rl-css~="base"] .visual-packet::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.82);
+}
+html[data-rl-css~="base"] .visual-packet.is-running,
+html[data-rl-css~="base"] .visual-packet.is-success {
+  opacity: 1;
+}
+html[data-rl-css~="base"] .visual-packet.is-running {
+  animation: routinglabPacketPulse .8s ease-in-out infinite;
+}
+html[data-rl-css~="base"] .visual-packet.is-success {
+  animation: routinglabPacketPulse .65s ease-in-out 3;
+}
+html[data-rl-css~="base"] .visual-topology .real-node.is-active {
+  border-color: #4f90ff;
+  background: linear-gradient(180deg, #fefefe, #eef5ff);
+  box-shadow: 0 0 0 1px rgba(79,144,255,.2), 0 0 0 8px rgba(79,144,255,.08), 0 14px 24px rgba(30,83,140,.12);
+}
+html[data-rl-css~="base"] .visual-topology .real-node.is-done {
+  border-color: #8db8f5;
+}
+@keyframes routinglabPacketPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+@keyframes routinglabPacketLine {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -23; }
+}
+
+@media (max-width: 960px) {
+  html[data-rl-css~="base"] .real-topology-hint { display: block; }
+  html[data-rl-css~="base"] .real-topology-viewport { overflow-x: auto; }
+  html[data-rl-css~="base"] .real-topology { min-width: 860px; }
+}
+@media (max-width: 700px) {
+  html[data-rl-css~="base"] .real-topology { padding: 18px 14px 16px; }
+  html[data-rl-css~="base"] .real-node { min-height: 118px; }
+  html[data-rl-css~="base"] .real-node-art { height: 54px; }
+  html[data-rl-css~="base"] .real-node-art img { max-height: 54px; }
+  html[data-rl-css~="base"] .real-topology-legend { font-size: 11px; }
+}
+
+/* v3: clearer device visuals and visible packet travel */
+html[data-rl-css~="base"] .real-topology .real-node-art img[src*="router-enterprise"] {max-height:54px;max-width:100%;}
+html[data-rl-css~="base"] .real-topology-card .real-topology {gap:clamp(6px,1vw,14px);grid-template-columns:repeat(6,minmax(0,1fr));min-height:188px;padding:19px 13px;}
+html[data-rl-css~="base"] .real-node {padding:9px 5px;min-height:113px;}
+html[data-rl-css~="base"] .real-node-art {height:52px;}
+html[data-rl-css~="base"] .real-node-art img {max-height:52px;}
+html[data-rl-css~="base"] .visual-packet {width:58px;height:58px;border-radius:0;background:transparent;box-shadow:none;z-index:6;filter:drop-shadow(0 0 12px #03a7ff) drop-shadow(0 0 20px #009cff);}
+html[data-rl-css~="base"] .visual-packet::after {display:none;}
+html[data-rl-css~="base"] .visual-packet img {display:block;object-fit:contain;width:100%;height:100%;}
+html[data-rl-css~="base"] .visual-wire-glow {stroke:#00aaff;stroke-width:9;filter:drop-shadow(0 0 5px #149aff);}
+html[data-rl-css~="base"] .visual-card .hero-actions {margin-top:14px;}
+html[data-rl-css~="base"] .visual-card #sendPacket:disabled {opacity:.55;cursor:wait;}
+html[data-rl-css~="base"] .visual-card .real-node.is-active {transform:translateY(-3px);}
+@media(min-width:1100px){html[data-rl-css~="base"] .real-topology-viewport,html[data-rl-css~="base"] .topology-viewport {overflow-x:hidden!important;}html[data-rl-css~="base"] .visual-topology{min-width:0;}}
+@media(max-width:1099px){html[data-rl-css~="base"] .real-topology-card .real-topology {min-width:820px;}}
+@media(prefers-reduced-motion:reduce){html[data-rl-css~="base"] .visual-wire-glow.is-active{animation:none;}}
+
+html[data-rl-css~="base"] .real-topology-legend img[src*="ethernet-plug"]{width:28px;height:18px;}
+
+/* v4: guided packet simulation and read-only Cisco explanations */
+html[data-rl-css~="base"] .rl4-steps,
+html[data-rl-css~="base"] .rl4-command-guide {
+  background: #f6faff;
+  border: 1px solid #d9e7f9;
+  border-radius: 14px;
+  padding: 15px 18px;
+}
+html[data-rl-css~="base"] .rl4-steps {margin-top: 15px;}
+html[data-rl-css~="base"] .rl4-steps-heading {display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;color:#173a63;}
+html[data-rl-css~="base"] .rl4-steps progress {height:9px;width:min(195px,100%);accent-color:#2563eb;}
+html[data-rl-css~="base"] .rl4-steps p {margin:9px 0 0;font-size:13px;line-height:1.6;color:#476583;}
+html[data-rl-css~="base"] .visual-card .hero-actions {gap:7px;}
+html[data-rl-css~="base"] .visual-card .hero-actions button,
+html[data-rl-css~="base"] .visual-card .hero-actions a {min-height:38px;padding:9px 13px;font-size:12px;}
+html[data-rl-css~="base"] .visual-card .hero-actions button:disabled {opacity:.48;cursor:not-allowed;}
+html[data-rl-css~="base"] .rl4-command-guide {margin-top:14px;}
+html[data-rl-css~="base"] .rl4-guide-head {display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;}
+html[data-rl-css~="base"] .rl4-guide-head h3 {margin:0;color:#173a63;font-size:17px;}
+html[data-rl-css~="base"] .rl4-guide-head p {margin:4px 0 0;font-size:12px;color:#627b96;}
+html[data-rl-css~="base"] .rl4-command-tabs {display:flex;gap:7px;flex-wrap:wrap;margin:13px 0;}
+html[data-rl-css~="base"] .rl4-command-choice {border:1px solid #d3e4f9;background:#fff;border-radius:9px;padding:8px 12px;font-size:12px;font-weight:700;color:#315b86;transition:background .17s,border-color .17s,transform .17s;}
+html[data-rl-css~="base"] .rl4-command-choice:hover {border-color:#7bacf5;transform:translateY(-1px);}
+html[data-rl-css~="base"] .rl4-command-choice.is-current {background:#2563eb;color:white;border-color:#2563eb;}
+html[data-rl-css~="base"] .rl4-command-code {display:block;background:#10243a;color:#a7f3d0;padding:13px 15px;border-radius:10px;font-size:13px;overflow-x:auto;white-space:pre;}
+html[data-rl-css~="base"] .rl4-command-description {font-size:13px;color:#476583;line-height:1.6;margin:11px 0 0;}
+html[data-rl-css~="base"] .rl4-command-feedback {font-size:12px;color:#21734a;margin:5px 0 0;min-height:0;}
+@media (prefers-reduced-motion: reduce) {
+  html[data-rl-css~="base"] .visual-packet.is-running {animation:none;}
+  html[data-rl-css~="base"] .rl4-command-choice {transition:none;}
+}

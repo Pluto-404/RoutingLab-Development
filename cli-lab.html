@@ -13,7 +13,6 @@
         <a class="back" href="dashboard-siswa.html">← Dashboard</a
         ><strong> RoutingLab / CLI Lab</strong>
       </div>
-      <span class="tag">CLI Lab</span>
     </header>
     <nav aria-label="Panel CLI Lab" class="mobile-tabs">
       <button
@@ -32,77 +31,53 @@
         Terminal CLI
       </button>
     </nav>
-    <div class="lab-context">
-      <span class="lab-dot"></span> Pilih router · ketik perintah · periksa hasil
-      <a href="mini-lab.html">← Mini Lab</a>
-    </div>
+
     <main id="labLayout">
       <section class="left" id="instructionsPanel">
         <div class="panel topology-panel" id="topologyPanel">
           <div class="heading">
-            <h2>Topologi Interaktif</h2>
-            <small>Klik router untuk berpindah console</small>
+            <h2>Topologi Jaringan</h2>
+            <small>Pilih R1 atau R2 untuk konfigurasi</small>
           </div>
           <div class="rl8-lab-context" aria-live="polite">
             <strong id="assignmentMissionLabel">Mode latihan mandiri</strong>
             <span id="assignmentMissionInfo">Latihan bebas. Buka misi dari Dashboard Siswa untuk menyimpan pengerjaan berdasarkan kelas.</span>
           </div>
           <div class="mission-summary">
-            <span class="mission-label">MISI 01 · GUIDED CLI LAB</span
+            <span class="mission-label">LATIHAN DASAR</span
             ><strong>Hubungkan Dua Jaringan</strong>
             <p>Atur static route R1 dan R2, lalu uji jalur paket dua arah.</p>
           </div>
-          <svg
-            aria-label="Topologi PC0 Switch0 R1 R2 Switch1 PC1"
-            class="cli-map"
-            role="img"
-            viewbox="0 0 690 205"
-          >
-            <path d="M62 91H629" stroke="#87a9c9" stroke-width="4"></path>
-            <g class="node">
-              <rect height="48" rx="10" width="84" x="18" y="67"></rect>
-              <text x="60" y="97">PC0</text>
-            </g>
-            <g class="node">
-              <rect height="48" rx="10" width="84" x="120" y="67"></rect>
-              <text x="162" y="97">SW0</text>
-            </g>
-            <g
-              aria-label="Pilih router R1"
-              class="node router selected"
-              id="svgR1"
-              role="button"
-              tabindex="0"
-            >
-              <rect height="66" rx="12" width="84" x="225" y="58"></rect>
-              <text x="267" y="96">R1</text>
-            </g>
-            <g
-              aria-label="Pilih router R2"
-              class="node router"
-              id="svgR2"
-              role="button"
-              tabindex="0"
-            >
-              <rect height="66" rx="12" width="84" x="381" y="58"></rect>
-              <text x="423" y="96">R2</text>
-            </g>
-            <g class="node">
-              <rect height="48" rx="10" width="84" x="486" y="67"></rect>
-              <text x="528" y="97">SW1</text>
-            </g>
-            <g class="node">
-              <rect height="48" rx="10" width="84" x="590" y="67"></rect>
-              <text x="632" y="97">PC1</text>
-            </g>
-            <g class="sub">
-              <text x="65" y="155">192.168.1.0/24</text>
-              <text text-anchor="middle" x="345" y="29">10.10.10.0/30</text>
-              <text text-anchor="end" x="624" y="155">192.168.2.0/24</text>
-              <text x="267" y="151">.1</text>
-              <text x="423" y="151">.2</text>
-            </g>
-          </svg>
+          <div class="rl-topology-scroll" role="region" aria-label="Topologi jaringan interaktif, geser ke samping untuk melihat semua perangkat" tabindex="0">
+            <div class="rl-real-topology" id="rlTopology" aria-label="PC0 terhubung ke Switch0, Router R1, Router R2, Switch1, lalu PC1">
+              <svg class="rl-wires" id="rlWires" aria-hidden="true" preserveAspectRatio="none"></svg><div class="rl-packet-indicator" id="rlPacketIndicator" aria-hidden="true"><img src="assets/topology-data-packet.webp" alt="" draggable="false"></div>
+              <div class="rl-device" data-device="pc0">
+                <div class="rl-device-art"><img src="assets/topology-laptop.webp" alt="" draggable="false" /></div>
+                <strong>PC0</strong><span>192.168.1.10</span>
+              </div>
+              <div class="rl-device" data-device="sw0">
+                <div class="rl-device-art"><img src="assets/topology-switch.webp" alt="" draggable="false" /></div>
+                <strong>Switch0</strong><span>LAN 1</span>
+              </div>
+              <button type="button" class="rl-device rl-device-router selected" id="svgR1" data-device="r1" aria-label="Pilih console router R1" aria-pressed="true">
+                <div class="rl-device-art"><img src="assets/topology-router-enterprise.webp" alt="" draggable="false" /></div>
+                <strong>R1</strong><span>10.10.10.1</span>
+              </button>
+              <button type="button" class="rl-device rl-device-router" id="svgR2" data-device="r2" aria-label="Pilih console router R2" aria-pressed="false">
+                <div class="rl-device-art"><img src="assets/topology-router-enterprise.webp" alt="" draggable="false" /></div>
+                <strong>R2</strong><span>10.10.10.2</span>
+              </button>
+              <div class="rl-device" data-device="sw1">
+                <div class="rl-device-art"><img src="assets/topology-switch.webp" alt="" draggable="false" /></div>
+                <strong>Switch1</strong><span>LAN 2</span>
+              </div>
+              <div class="rl-device" data-device="pc1">
+                <div class="rl-device-art"><img src="assets/topology-laptop.webp" alt="" draggable="false" /></div>
+                <strong>PC1</strong><span>192.168.2.10</span>
+              </div>
+            </div>
+          </div>
+          <div class="rl-topology-caption"><span><img src="assets/topology-ethernet-plug.webp" alt="" /> Kabel Ethernet / RJ45</span><span id="rlLinkSummary">Kabel terpasang · rute belum lengkap</span></div>
           <div aria-live="polite" class="network" id="networkState">
             Koneksi belum diuji
           </div>
@@ -121,11 +96,10 @@
             <button id="checkMission">Periksa Misi</button
             ><button class="secondary" id="resetLab">Reset Lab</button>
           </div>
-          <p aria-live="polite" id="feedback">Belum ada penilaian.</p>
+          <p aria-live="polite" id="feedback" class="rl-quiet-feedback"></p>
           <details class="trace-disclosure">
             <summary>
               Simulasi paket &amp; skenario
-              <span>4 skenario / lacak jalur</span>
             </summary>
             <section aria-label="Simulasi paket dan skenario" class="s4b-tools">
               <label for="scenarioSelect"
@@ -286,7 +260,7 @@ R1# show ip route</pre
         </details>
       </section>
     </main>
-    <footer>Simulator pembelajaran Cisco IOS (fitur terbatas).</footer>
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script src="js/supabase-config.js"></script>
     <script src="js/auth.js"></script>

@@ -57,43 +57,47 @@
 
         </header>
         <div class="content">
-          <div class="card">
+          <div class="card real-topology-card visual-card">
             <h3>PC0 mengirim paket ke PC1</h3>
-            <p>Klik tombol untuk melihat paket bergerak melewati dua router.</p>
-            <div class="topology mt-2">
-              <div class="link"></div>
-              <div id="packet" class="packet" title="Paket data"></div>
-              <div class="node">
-                <div class="node-icon">🖥️</div>
-                <strong>PC0</strong><small>192.168.1.10</small>
+            <p>Klik tombol untuk melihat paket bergerak jelas melewati switch dan dua router.</p>
+            <div class="topology-viewport"><div class="real-topology-viewport" tabindex="0" role="region" aria-label="Visualisasi perjalanan paket dari PC0 ke PC1">
+              <div class="real-topology visual-topology" id="visualTopology">
+                <svg class="visual-wires" id="visualWires" aria-hidden="true" preserveAspectRatio="none"></svg>
+                <div id="packet" class="visual-packet" title="Paket data" aria-hidden="true"><img src="assets/topology-data-packet.webp" alt="" draggable="false"></div>
+                <article class="real-node" data-node="pc0">
+                  <div class="real-node-art"><img src="assets/topology-laptop.webp" alt="" draggable="false" /></div>
+                  <strong>PC0</strong><small>192.168.1.10</small>
+                </article>
+                <article class="real-node" data-node="sw0">
+                  <div class="real-node-art"><img src="assets/topology-switch.webp" alt="" draggable="false" /></div>
+                  <strong>Switch0</strong><small>LAN 1</small>
+                </article>
+                <article class="real-node real-node-router" data-node="r1">
+                  <div class="real-node-art"><img src="assets/topology-router-enterprise.webp" alt="" draggable="false" /></div>
+                  <strong>R1</strong><small>cek route</small>
+                </article>
+                <article class="real-node real-node-router" data-node="r2">
+                  <div class="real-node-art"><img src="assets/topology-router-enterprise.webp" alt="" draggable="false" /></div>
+                  <strong>R2</strong><small>cek route</small>
+                </article>
+                <article class="real-node" data-node="sw1">
+                  <div class="real-node-art"><img src="assets/topology-switch.webp" alt="" draggable="false" /></div>
+                  <strong>Switch1</strong><small>LAN 2</small>
+                </article>
+                <article class="real-node" data-node="pc1">
+                  <div class="real-node-art"><img src="assets/topology-laptop.webp" alt="" draggable="false" /></div>
+                  <strong>PC1</strong><small>192.168.2.10</small>
+                </article>
               </div>
-              <div class="node">
-                <div class="node-icon">🔀</div>
-                <strong>Switch0</strong><small>LAN 1</small>
-              </div>
-              <div class="node">
-                <div class="node-icon">📡</div>
-                <strong>R1</strong><small>cek route</small>
-              </div>
-              <div class="node">
-                <div class="node-icon">📡</div>
-                <strong>R2</strong><small>cek route</small>
-              </div>
-              <div class="node">
-                <div class="node-icon">🔀</div>
-                <strong>Switch1</strong><small>LAN 2</small>
-              </div>
-              <div class="node">
-                <div class="node-icon">🖥️</div>
-                <strong>PC1</strong><small>192.168.2.10</small>
-              </div>
-            </div>
+            </div></div>
+            <div class="real-topology-legend"><span><img src="assets/topology-ethernet-plug.webp" alt="" /> Kabel Ethernet / RJ45</span><span id="packetPathText">Jalur siap divisualisasikan</span></div>
             <div class="hero-actions">
-              <button id="sendPacket" class="btn btn-primary" type="button">
-                Kirim Paket</button
-              ><a class="btn btn-outline" href="mini-lab.html"
-                >Lanjut Mini Lab</a
-              >
+              <button id="sendPacket" class="btn btn-primary" type="button">Putar Otomatis</button><button id="pausePacket" class="btn btn-outline" type="button" disabled>Jeda</button><button id="previousPacket" class="btn btn-outline" type="button">Sebelumnya</button><button id="nextPacket" class="btn btn-outline" type="button">Langkah Berikutnya</button><button id="resetPacket" class="btn btn-outline" type="button">Reset</button
+              ><a class="btn btn-outline" href="mini-lab.html">Lanjut Mini Lab</a>
+            </div>
+            <div class="rl4-steps" aria-live="polite" aria-atomic="true">
+              <div class="rl4-steps-heading"><strong id="packetStage">Langkah 1 dari 6: PC0</strong><progress id="packetStageProgress" value="1" max="6" aria-label="Progres simulasi"></progress></div>
+              <p id="packetExplanation">PC0 menyiapkan paket data untuk dikirim.</p>
             </div>
             <div id="packetStatus" class="alert mt-2">Paket belum dikirim.</div>
           </div>

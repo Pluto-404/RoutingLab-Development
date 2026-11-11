@@ -6,7 +6,7 @@
   const summary=document.querySelector('.mission-summary');
   if(!label||!detail||!summary||!window.RoutingCLILab)return;
   const params=new URLSearchParams(location.search),id=params.get('assignment');
-  if(!id)return; // Free CLI practice works exactly as before.
+  if(!id){document.querySelector('.rl8-lab-context')?.setAttribute('hidden','');return;} // Free mode does not need the classroom status panel.
   const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   const notice=(text,bad=false)=>{detail.textContent=text;detail.classList.toggle('rl8-error',bad);};
   const checkButton=document.getElementById('checkMission');

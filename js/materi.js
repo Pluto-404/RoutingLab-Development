@@ -60,3 +60,45 @@ if (document.readyState === "loading") {
 } else {
   setupMaterialCompletion();
 }
+
+
+/* Sprint v4: command explanations are read-only; no CLI or Supabase changes. */
+function setupRoutingCommandGuide() {
+  const code = document.getElementById('routingCommandText');
+  if (!code) return;
+  const description = document.getElementById('routingCommandExplanation');
+  const feedback = document.getElementById('routingCommandFeedback');
+  const examples = {
+    enable: {command:'enable', explanation:'Masuk ke privileged EXEC mode (R1#), sebelum mengatur konfigurasi.'},
+    config: {command:'configure terminal', explanation:'Masuk ke global configuration mode (R1(config)#) agar perintah konfigurasi dapat dimasukkan.'},
+    route: {command:'ip route 192.168.2.0 255.255.255.0 10.10.10.2', explanation:'192.168.2.0 adalah jaringan tujuan, 255.255.255.0 subnet mask, dan 10.10.10.2 alamat next hop di router R2.'},
+    verify: {command:'show ip route', explanation:'Menampilkan tabel routing. Pastikan ada rute statis (S) menuju LAN 2, lalu uji koneksi memakai ping 192.168.2.10.'},
+  };
+  const choices = [...document.querySelectorAll('[data-example]')];
+  choices.forEach(button => button.addEventListener('click', () => {
+    const selected = examples[button.dataset.example];
+    if (!selected) return;
+    code.textContent = selected.command;
+    description.textContent = selected.explanation;
+    feedback.textContent = '';
+    choices.forEach(choice => {
+      const active = choice === button;
+      choice.classList.toggle('is-current',active);
+      choice.setAttribute('aria-pressed',String(active));
+    });
+  }));
+  document.getElementById('copyRoutingCommand')?.addEventListener('click', async () => {
+    const value = code.textContent;
+    try {
+      await navigator.clipboard.writeText(value);
+      feedback.textContent = 'Perintah berhasil disalin.';
+    } catch {
+      feedback.textContent = 'Salin manual teks perintah di atas (akses clipboard tidak tersedia).';
+    }
+  });
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', setupRoutingCommandGuide);
+} else {
+  setupRoutingCommandGuide();
+}

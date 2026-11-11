@@ -104,37 +104,38 @@
           <div class="section-title">
             <h3>Topologi Praktik</h3>
           </div>
-          <div class="card topology-card">
-            <p class="topology-hint">Geser ke samping untuk melihat jalur jaringan.</p>
-            <div class="topology-viewport" tabindex="0" role="region" aria-label="Topologi PC0 ke PC1, geser horizontal">
-            <div class="topology">
-              <div class="link"></div>
-              <div class="node">
-                <div class="node-icon">🖥️</div>
-                <strong>PC0</strong><small>192.168.1.10/24</small>
+          <div class="card topology-card real-topology-card">
+            <p class="real-topology-hint">Geser ke samping pada layar kecil untuk melihat seluruh jalur perangkat.</p>
+            <div class="topology-viewport"><div class="real-topology-viewport" tabindex="0" role="region" aria-label="Topologi PC0 ke PC1 dengan perangkat asli">
+              <div class="real-topology static-topology">
+                <div class="link" aria-hidden="true"></div>
+                <article class="real-node">
+                  <div class="real-node-art"><img src="assets/topology-laptop.webp" alt="" draggable="false" /></div>
+                  <strong>PC0</strong><small>192.168.1.10/24</small>
+                </article>
+                <article class="real-node">
+                  <div class="real-node-art"><img src="assets/topology-switch.webp" alt="" draggable="false" /></div>
+                  <strong>Switch0</strong><small>LAN 1</small>
+                </article>
+                <article class="real-node real-node-router">
+                  <div class="real-node-art"><img src="assets/topology-router-enterprise.webp" alt="" draggable="false" /></div>
+                  <strong>R1</strong><small>10.10.10.1/30</small>
+                </article>
+                <article class="real-node real-node-router">
+                  <div class="real-node-art"><img src="assets/topology-router-enterprise.webp" alt="" draggable="false" /></div>
+                  <strong>R2</strong><small>10.10.10.2/30</small>
+                </article>
+                <article class="real-node">
+                  <div class="real-node-art"><img src="assets/topology-switch.webp" alt="" draggable="false" /></div>
+                  <strong>Switch1</strong><small>LAN 2</small>
+                </article>
+                <article class="real-node">
+                  <div class="real-node-art"><img src="assets/topology-laptop.webp" alt="" draggable="false" /></div>
+                  <strong>PC1</strong><small>192.168.2.10/24</small>
+                </article>
               </div>
-              <div class="node">
-                <div class="node-icon">🔀</div>
-                <strong>Switch0</strong><small>LAN 1</small>
-              </div>
-              <div class="node">
-                <div class="node-icon">📡</div>
-                <strong>R1</strong><small>10.10.10.1/30</small>
-              </div>
-              <div class="node">
-                <div class="node-icon">📡</div>
-                <strong>R2</strong><small>10.10.10.2/30</small>
-              </div>
-              <div class="node">
-                <div class="node-icon">🔀</div>
-                <strong>Switch1</strong><small>LAN 2</small>
-              </div>
-              <div class="node">
-                <div class="node-icon">🖥️</div>
-                <strong>PC1</strong><small>192.168.2.10/24</small>
-              </div>
-              </div>
-            </div>
+            </div></div>
+            <div class="real-topology-legend"><span><img src="assets/topology-ethernet-plug.webp" alt="" /> Kabel Ethernet / RJ45</span><span>Jalur praktik: PC0 → Switch0 → R1 → R2 → Switch1 → PC1</span></div>
           </div>
           <div class="section-title">
             <h3>Perintah Cisco IOS</h3>
@@ -153,6 +154,21 @@ R1(config)# ip route 192.168.2.0 255.255.255.0 10.10.10.2
 R1(config)# end
 R1# show ip route
 R1# ping 192.168.2.10</code></pre>
+          <section class="rl4-command-guide card" aria-label="Panduan perintah Cisco IOS interaktif">
+            <div class="rl4-guide-head">
+              <div><h3>Memahami perintah</h3><p>Pilih langkah untuk melihat fungsi tiap perintah.</p></div>
+              <button type="button" id="copyRoutingCommand" class="btn btn-outline">Salin Perintah</button>
+            </div>
+            <div class="rl4-command-tabs" role="group" aria-label="Pilih perintah Cisco">
+              <button type="button" class="rl4-command-choice is-current" data-example="enable" aria-pressed="true">Enable</button>
+              <button type="button" class="rl4-command-choice" data-example="config" aria-pressed="false">Configure</button>
+              <button type="button" class="rl4-command-choice" data-example="route" aria-pressed="false">Static Route</button>
+              <button type="button" class="rl4-command-choice" data-example="verify" aria-pressed="false">Verifikasi</button>
+            </div>
+            <code class="rl4-command-code" id="routingCommandText">enable</code>
+            <p class="rl4-command-description" id="routingCommandExplanation">Masuk ke privileged EXEC mode (R1#), sebelum mengatur konfigurasi.</p>
+            <p class="rl4-command-feedback" id="routingCommandFeedback" role="status" aria-live="polite"></p>
+          </section>
           <div class="section-title">
             <h3>Urutan Belajar</h3>
           </div>
