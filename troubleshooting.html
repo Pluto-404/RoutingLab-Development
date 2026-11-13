@@ -91,19 +91,27 @@ C 10.10.10.0/30 is directly connected
             <div class="card">
               <h3>Apa penyebab paling mungkin?</h3>
               <form id="tsForm">
-                <label class="quiz-option"
-                  ><input type="radio" name="cause" value="cable" /> Kabel PC0
-                  harus crossover.</label
-                ><label class="quiz-option"
-                  ><input type="radio" name="cause" value="ip-pc0" /> Nama PC0
-                  salah.</label
-                ><label class="quiz-option"
-                  ><input type="radio" name="cause" value="route-r2" /> R2 belum
-                  memiliki route kembali menuju LAN 1.</label
-                ><label class="quiz-option"
-                  ><input type="radio" name="cause" value="reload" /> Router
-                  harus di-reload sebelum routing bekerja.</label
-                ><button class="btn btn-primary" type="submit">
+                <label class="quiz-option" for="tsCauseCable">
+                  <input id="tsCauseCable" type="radio" name="cause" value="cable" />
+                  <span class="quiz-choice-badge" aria-hidden="true">A</span>
+                  <span class="quiz-option-text">Kabel PC0 harus crossover.</span>
+                </label>
+                <label class="quiz-option" for="tsCauseIp">
+                  <input id="tsCauseIp" type="radio" name="cause" value="ip-pc0" />
+                  <span class="quiz-choice-badge" aria-hidden="true">B</span>
+                  <span class="quiz-option-text">Nama PC0 salah.</span>
+                </label>
+                <label class="quiz-option" for="tsCauseRoute">
+                  <input id="tsCauseRoute" type="radio" name="cause" value="route-r2" />
+                  <span class="quiz-choice-badge" aria-hidden="true">C</span>
+                  <span class="quiz-option-text">R2 belum memiliki route kembali menuju LAN 1.</span>
+                </label>
+                <label class="quiz-option" for="tsCauseReload">
+                  <input id="tsCauseReload" type="radio" name="cause" value="reload" />
+                  <span class="quiz-choice-badge" aria-hidden="true">D</span>
+                  <span class="quiz-option-text">Router harus di-reload sebelum routing bekerja.</span>
+                </label>
+                <button class="btn btn-primary" type="submit">
                   Periksa Jawaban
                 </button>
               </form>

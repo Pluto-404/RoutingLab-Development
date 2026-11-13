@@ -31,11 +31,18 @@
     assignment=item.assignment_id;questions=data.questions;
     $('assignedEvaluationTitle').textContent=data.title;
     const form=$('assignedEvaluationForm');form.replaceChildren();resetResult();$('submitAssignedEvaluation').hidden=false;
+    // Gunakan komponen yang sama dengan kuis Latihan Mandiri agar pilihan
+    // dari guru memiliki grid radio, badge A-D, dan kartu yang konsisten.
     questions.forEach((q,i)=>{
-      const box=el('section',null,'rl11-question');box.append(el('h4',`${i+1}. ${q.question_text}`));
+      const box=el('fieldset',null,'card quiz-card');
+      const title=el('legend',`${i+1}. ${q.question_text}`,'quiz-legend');
+      box.append(title);
       q.options.forEach((option,index)=>{
-        const label=el('label',null,'rl11-option');const radio=el('input');radio.type='radio';radio.name='assigned_q'+i;radio.value=String(index);
-        const span=el('span',`${String.fromCharCode(65+index)}. ${option}`);label.append(radio,span);box.append(label);
+        const label=el('label',null,'quiz-option');
+        const radio=el('input');radio.type='radio';radio.name='assigned_q'+i;radio.value=String(index);
+        const badge=el('span',String.fromCharCode(65+index),'quiz-choice-badge');
+        const span=el('span',option,'quiz-option-text');
+        label.append(radio,badge,span);box.append(label);
       });form.append(box);
     });
     runner.hidden=false;runner.scrollIntoView({behavior:'smooth',block:'start'});
